@@ -8,7 +8,6 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.`fun`.Derp
-import net.ccbluex.liquidbounce.features.module.modules.combat.BowAimbot
 import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura
 import net.ccbluex.liquidbounce.features.module.modules.world.*
 import net.ccbluex.liquidbounce.utils.RotationUtils
@@ -51,8 +50,8 @@ class Rotations : Module() {
         val killAura = LiquidBounce.moduleManager.getModule(KillAura::class.java) as KillAura
         return getState(Scaffold::class.java) || getState(Tower::class.java) ||
                 (getState(KillAura::class.java) && killAura.target != null) ||
-                getState(Derp::class.java) || getState(BowAimbot::class.java) ||
-                getState(Fucker::class.java) || getState(CivBreak::class.java) || getState(Nuker::class.java) ||
-                getState(ChestAura::class.java)
+                getState(Derp::class.java) || getState(ChestAura::class.java)
+                getState(Fucker::class.java) || getState(CivBreak::class.java) || getState(Nuker::class.java)
+        }
     }
-}
+
