@@ -3,7 +3,6 @@ package net.minecraft.client.entity;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 import me.memorial.module.modules.combat.KillAura;
-import me.memorial.module.modules.exploit.AntiHunger;
 import me.memorial.module.modules.exploit.PortalMenu;
 import me.memorial.module.modules.fun.Derp;
 import me.memorial.module.modules.movement.InventoryMove;
@@ -150,7 +149,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
             final InventoryMove inventoryMove = InventoryMove.getInstance();
             final Sneak sneak = Sneak.getInstance();
-            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || AntiHunger.getInstance().getState() || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
+            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
 
             boolean sprinting = this.isSprinting() && !fakeSprint;
 
