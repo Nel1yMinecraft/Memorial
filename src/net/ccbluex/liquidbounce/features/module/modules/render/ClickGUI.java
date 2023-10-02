@@ -104,7 +104,6 @@ public class ClickGUI extends Module {
     public void onDisable() {
         if (styleValue.get().toLowerCase().contains("novoline")) {
             mc.displayGuiScreen(new ClickyUI());
-            this.setState(false);
         }
         if (styleValue.get().toLowerCase().contains("dropdown")) {
             mc.displayGuiScreen(getDropdownGUI());
