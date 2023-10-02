@@ -45,7 +45,12 @@ class GuiMainMenu : GuiScreen(), GuiYesNoCallback {
         val ymod2 = height / 2 - (translate!!.y / 2).toDouble()
         GlStateManager.translate(xmod2, ymod2, 0.0)
         GlStateManager.scale(translate!!.x / width, translate!!.y / height, 1f)
-        Fonts.font40.drawStringWithShadow("Changelog:", 5f, 5f, Color(255, 255, 255, 220).rgb)
+        Fonts.font40.drawStringWithShadow("Changelog:" +
+                "Add Health" +
+                "Del TeleportHit" +
+                "Del Trigger" +
+                "Optimize AutoArmor" +
+                "Optimize BackGround ", 5f, 5f, Color(255, 255, 255, 220).rgb)
         for (i in changes.indices) {
             Fonts.font35.drawStringWithShadow(changes[i], 5f, 16f + i * 12, Color(255, 255, 255, 220).rgb)
         }

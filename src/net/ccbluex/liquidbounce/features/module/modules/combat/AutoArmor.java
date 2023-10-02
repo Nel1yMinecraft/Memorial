@@ -62,17 +62,16 @@ public class AutoArmor extends Module {
             return;
 
         // Find best armor
+        final ArmorPiece[] bestArmor = new ArmorPiece[4];
         final Map<Integer, List<ArmorPiece>> armorPieces = IntStream.range(0, 36)
                 .filter(i -> {
                     final ItemStack itemStack = mc.thePlayer.inventory.getStackInSlot(i);
-
                     return itemStack != null && itemStack.getItem() instanceof ItemArmor
-                            && (i < 9 || System.currentTimeMillis() - itemStack.itemDelay >= itemDelayValue.get());
+                            && (i < 9 || System.currentTimeMillis() - itemStack.itemDelay >= itemDelayValue.get())
+                            && !isEnchantedLockSet(itemStack);
                 })
                 .mapToObj(i -> new ArmorPiece(mc.thePlayer.inventory.getStackInSlot(i), i))
                 .collect(Collectors.groupingBy(ArmorPiece::getArmorType));
-
-        final ArmorPiece[] bestArmor = new ArmorPiece[4];
 
         for (final Map.Entry<Integer, List<ArmorPiece>> armorEntry : armorPieces.entrySet()) {
             bestArmor[armorEntry.getKey()] = armorEntry.getValue().stream()
@@ -117,13 +116,15 @@ public class AutoArmor extends Module {
             delay = TimeUtils.randomDelay(minDelayValue.get(), maxDelayValue.get());
 
             return true;
-        } else if (!(noMoveValue.get() && MovementUtils.isMoving()) && (!invOpenValue.get() || mc.currentScreen instanceof GuiInventory) && item != -1) {
+        } else if (!(noMoveValue.get() && MovementUtils.isMoving())
+                && (!invOpenValue.get() || mc.currentScreen instanceof GuiInventory) && item != -1) {
             final boolean openInventory = simulateInventory.get() && !(mc.currentScreen instanceof GuiInventory);
 
             if (openInventory)
                 mc.getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT));
 
-            mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId, isArmorSlot ? item : (item < 9 ? item + 36 : item), 0, 1, mc.thePlayer);
+            mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId,
+                    isArmorSlot ? item : (item < 9 ? item + 36 : item), 0, 1, mc.thePlayer);
 
             delay = TimeUtils.randomDelay(minDelayValue.get(), maxDelayValue.get());
 
@@ -136,4 +137,7 @@ public class AutoArmor extends Module {
         return false;
     }
 
+    private boolean isEnchantedLockSet(ItemStack itemStack) {
+        return false;
+    }
 }

@@ -43,7 +43,6 @@ class ModuleManager : Listenable {
                 BowAimbot::class.java,
                 Criticals::class.java,
                 KillAura::class.java,
-                Trigger::class.java,
                 Velocity::class.java,
                 Fly::class.java,
                 ClickGUI::class.java,
@@ -150,7 +149,6 @@ class ModuleManager : Listenable {
                 AtAllProvider::class.java,
                 AirLadder::class.java,
                 GodMode::class.java,
-                TeleportHit::class.java,
                 ForceUnicodeChat::class.java,
                 ItemTeleport::class.java,
                 BufferSpeed::class.java,
@@ -174,7 +172,8 @@ class ModuleManager : Listenable {
                 ResourcePackSpoof::class.java,
                 NoSlowBreak::class.java,
                 PortalMenu::class.java,
-                ColorMixer::class.java
+                ColorMixer::class.java,
+                Health::class.java
         )
 
         registerModule(NoScoreboard)
