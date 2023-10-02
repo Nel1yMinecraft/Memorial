@@ -3,7 +3,6 @@ package net.minecraft.client.entity;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.AntiHunger;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.PortalMenu;
 import net.ccbluex.liquidbounce.features.module.modules.fun.Derp;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
@@ -150,7 +149,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
             final InventoryMove inventoryMove = InventoryMove.getInstance();
             final Sneak sneak = Sneak.getInstance();
-            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || AntiHunger.getInstance().getState() || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
+            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
 
             boolean sprinting = this.isSprinting() && !fakeSprint;
 
