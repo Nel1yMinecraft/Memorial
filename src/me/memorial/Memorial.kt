@@ -1,6 +1,5 @@
 package me.memorial
 
-//import net.ccbluex.liquidbounce.ui.client.lunar.ui.MainMenu
 import me.memorial.cape.CapeAPI.registerCapeService
 import me.memorial.events.ClientShutdownEvent
 import me.memorial.events.EventManager
@@ -35,29 +34,29 @@ object Memorial {
     const val IN_DEV = true
     const val CLIENT_CREATOR = "CCBlueX"
     const val MINECRAFT_VERSION = "1.8.9"
-    const val CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"//finish
+    const val CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
-    var isStarting = false//finish
+    var isStarting = false
 
     // Managers
-    lateinit var moduleManager: ModuleManager//finish
-    lateinit var commandManager: CommandManager//finish
-    lateinit var eventManager: EventManager//finish
-    lateinit var fileManager: FileManager//finish
-    lateinit var scriptManager: ScriptManager//finish
+    lateinit var moduleManager: ModuleManager
+    lateinit var commandManager: CommandManager
+    lateinit var eventManager: EventManager
+    lateinit var fileManager: FileManager
+    lateinit var scriptManager: ScriptManager
 
     // HUD & ClickGUI
-    lateinit var hud: HUD//finish
+    lateinit var hud: HUD
 
-    lateinit var clickGui: ClickGui//finish
+    lateinit var clickGui: ClickGui
 
     // Update information
-    var latestVersion = 0//finish
+    var latestVersion = 0
 
     // Menu Background
-    var background: ResourceLocation? = null//finish
+    var background: ResourceLocation? = null
 
-    lateinit var guiMain: GuiScreen//finish
+    lateinit var guiMain: GuiScreen
 
     /**
      * Execute if client will be started
