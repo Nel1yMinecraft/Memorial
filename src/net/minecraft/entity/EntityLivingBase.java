@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.JumpEvent;
-import net.ccbluex.liquidbounce.features.module.modules.movement.AirJump;
-import net.ccbluex.liquidbounce.features.module.modules.movement.LiquidWalk;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoJumpDelay;
+import me.memorial.Memorial;
+import me.memorial.events.JumpEvent;
+import me.memorial.module.modules.movement.AirJump;
+import me.memorial.module.modules.movement.LiquidWalk;
+import me.memorial.module.modules.movement.NoJumpDelay;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -1336,7 +1336,7 @@ EntityLivingBase extends Entity
     {
 
         final JumpEvent jumpEvent = new JumpEvent(this.getJumpUpwardsMotion());
-        LiquidBounce.eventManager.callEvent(jumpEvent);
+        Memorial.eventManager.callEvent(jumpEvent);
         if(jumpEvent.isCancelled())
             return;
 

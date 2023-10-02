@@ -7,12 +7,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.Render2DEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoScoreboard;
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
+import me.memorial.Memorial;
+import me.memorial.events.Render2DEvent;
+import me.memorial.module.modules.render.AntiBlind;
+import me.memorial.module.modules.render.HUD;
+import me.memorial.module.modules.render.NoScoreboard;
+import me.memorial.ui.font.AWTFontRenderer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -335,7 +335,7 @@ public class GuiIngame extends Gui
             this.overlayPlayerList.updatePlayerList(false);
         }
 
-        LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+        Memorial.eventManager.callEvent(new Render2DEvent(partialTicks));
         AWTFontRenderer.Companion.garbageCollectionTick();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

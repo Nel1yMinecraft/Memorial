@@ -3,13 +3,13 @@ package net.minecraft.block;
 import java.util.List;
 import java.util.Random;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.BlockBBEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.GhostHand;
-import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
-import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
-import net.ccbluex.liquidbounce.features.module.modules.world.NoSlowBreak;
+import me.memorial.Memorial;
+import me.memorial.events.BlockBBEvent;
+import me.memorial.module.modules.combat.Criticals;
+import me.memorial.module.modules.exploit.GhostHand;
+import me.memorial.module.modules.player.NoFall;
+import me.memorial.module.modules.render.XRay;
+import me.memorial.module.modules.world.NoSlowBreak;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -402,7 +402,7 @@ public class Block
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);
         BlockBBEvent blockBBEvent = new BlockBBEvent(pos, blockState.getBlock(), axisalignedbb);
-        LiquidBounce.eventManager.callEvent(blockBBEvent);
+        Memorial.eventManager.callEvent(blockBBEvent);
         axisalignedbb = blockBBEvent.getBoundingBox();
 
         if (axisalignedbb != null && mask.intersectsWith(axisalignedbb)) {

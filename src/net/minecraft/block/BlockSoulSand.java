@@ -1,6 +1,6 @@
 package net.minecraft.block;
 
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
+import me.memorial.module.modules.movement.NoSlow;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

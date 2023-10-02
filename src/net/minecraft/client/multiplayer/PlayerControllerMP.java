@@ -1,9 +1,9 @@
 package net.minecraft.client.multiplayer;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.AttackEvent;
-import net.ccbluex.liquidbounce.event.ClickWindowEvent;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.AbortBreaking;
+import me.memorial.Memorial;
+import me.memorial.events.AttackEvent;
+import me.memorial.events.ClickWindowEvent;
+import me.memorial.module.modules.exploit.AbortBreaking;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -451,7 +451,7 @@ public class PlayerControllerMP
         if (this.currentGameType != WorldSettings.GameType.SPECTATOR)
         {
             playerIn.attackTargetEntityWithCurrentItem(targetEntity);
-            LiquidBounce.eventManager.callEvent(new AttackEvent(targetEntity));
+            Memorial.eventManager.callEvent(new AttackEvent(targetEntity));
 
         }
     }
@@ -474,7 +474,7 @@ public class PlayerControllerMP
     public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn)
     {
         final ClickWindowEvent event = new ClickWindowEvent(windowId, slotId, mouseButtonClicked, mode);
-        LiquidBounce.eventManager.callEvent(event);
+        Memorial.eventManager.callEvent(event);
 
         // TODO: See if this crashes client
         if (event.isCancelled())

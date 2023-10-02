@@ -9,87 +9,55 @@ precision mediump float;
 uniform float iTime;
 uniform vec2 iResolution;
 
-mat3 rotX(float a) {
-float c = cos(a);
-float s = sin(a);
-return mat3(
-2, 0, 0,
-0, c, -s,
-0, s, c
-);
-}
-mat3 rotY(float a) {
-float c = cos(a);
-float s = sin(a);
-return mat3(
-c, 10, -s,
-0, 1, 0,
-s, 0, c
-);
+float hash(float n) {
+    return fract(sin(n) * 43758.5453);
 }
 
-float random(vec2 pos) {
-return fract(sin(dot(pos, vec2(12.8973, 76.58964))) * (sqrt(47.0)));
+// 2D noise function
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(mix(hash(i.x + hash(i.y)), hash(i.x + 1.0 + hash(i.y)), u.x),
+               mix(hash(i.x + hash(i.y + 1.0)), hash(i.x + 1.0 + hash(i.y + 1.0)), u.x), u.y);
+}
+// Aurora layer function
+vec3 auroraLayer(vec2 uv, float speed, float intensity, vec3 color) {
+    float t = iTime * speed;
+    vec2 scaleXY = vec2(2.0, 2.0);
+    vec2 movement = vec2(2.0, -2.0);
+    vec2 p = uv * scaleXY + t * movement;
+    float n = noise(p + noise(color.xy + p + t));
+    float aurora = smoothstep(0.0, 0.2, n - uv.y) * (1.0 - smoothstep(0.0, 0.6, n - uv.y));
+
+    return aurora * intensity * color;
 }
 
-float noise(vec2 pos) {
-vec2 i = floor(pos);
-vec2 f = fract(pos);
-float a = random(i + vec2(0.0, 0.0));
-float b = random(i + vec2(1.0, 0.0));
-float c = random(i + vec2(0.0, 1.0));
-float d = random(i + vec2(1.0, 1.0));
-vec2 u = f * f * (3.0 - 2.0 * f);
-return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+
+// Main image function
+void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    vec2 uv = fragCoord / iResolution.xy;
+    uv.x *= iResolution.x / iResolution.y;
+
+    // Create multiple aurora layers with varying colors, speeds, and intensities
+    vec3 color = vec3(0.0);
+    color += auroraLayer(uv, 0.05, 0.3, vec3(0.0, 0.2, 0.3));
+    color += auroraLayer(uv, 0.1, 0.4, vec3(0.1, 0.5, 0.9));
+    color += auroraLayer(uv, 0.15, 0.3, vec3(0.2, 0.1, 0.8));
+    color += auroraLayer(uv, 0.07, 0.2, vec3(0.2, 0.1, 0.6));
+
+    vec3 skyColor1 = vec3(0.2, 0.0, 0.4);
+    vec3 skyColor2 = vec3(0.15, 0.2, 0.35);
+    // Add a gradient to simulate the night sky
+    color += skyColor2 * (1.0 - smoothstep(0.0, 2.0, uv.y));
+    color += skyColor1 * (1.0 - smoothstep(0.0, 1.0, uv.y));
+
+    fragColor = vec4(color, 1.0);
 }
+// --------[ Original ShaderToy ends here ]---------- //
 
-float fbm(vec2 pos) {
-float v = 0.0;
-float a = 0.5;
-vec2 shift = vec2(100.0);
-mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
-for (int i=0; i<NUM_OCTAVES; i++) {
-v += a * noise(pos);
-pos = rot * pos * 2.0 + shift;
-a *= 0.5;
-}
-return v;
-}
-
-void main(void) {
-vec2 p = (gl_FragCoord.xy * 1.0 - iResolution.xy) / min(iResolution.x, iResolution.y);
-
-float t = 0.0, d;
-
-float iTime2 = 0.6 * iTime / 2.0;
-
-vec2 q = vec2(0.0);
-q.x = fbm(p + 0.30 * iTime2);
-q.y = fbm(p + vec2(1.0));
-vec2 r = vec2(0.0);
-r.x = fbm(p + 1.0 * q + vec2(1.2, 3.2) + 0.135 * iTime2);
-r.y = fbm(p + 1.0 * q + vec2(8.8, 2.8) + 0.126 * iTime2);
-float f = fbm(p + r);
-vec3 color = mix(
-vec3(0.0, 0.0, 0),
-vec3(1, 0, 0.7),
-clamp((f * f) * 8.0, 0.0, 5.0)
-);
-
-color = mix(
-color,
-vec3(0, 0, 1),
-clamp(length(q), 0.0, 1.0)
-);
-
-
-color = mix(
-color,
-vec3(1, 1, 1),
-clamp(length(r.x), 0.0, 1.0)
-);
-
-color = (f * f * f + 0.1 * f * f + 0.1 * f) * color;
-
-gl_FragColor = vec4(color, 1.0);
+void main(void)
+{
+    mainImage(gl_FragColor, gl_FragCoord.xy);
 }

@@ -33,8 +33,8 @@ import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.crypto.SecretKey;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.PacketEvent;
+import me.memorial.Memorial;
+import me.memorial.events.PacketEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -140,7 +140,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
     protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_) throws Exception {
         final PacketEvent event = new PacketEvent(p_channelRead0_2_);
-        LiquidBounce.eventManager.callEvent(event);
+        Memorial.eventManager.callEvent(event);
 
         if(event.isCancelled())
             return;
@@ -169,7 +169,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
     {
 
         final PacketEvent event = new PacketEvent(packetIn);
-        LiquidBounce.eventManager.callEvent(event);
+        Memorial.eventManager.callEvent(event);
 
         if(event.isCancelled())
             return;

@@ -1,6 +1,6 @@
 package net.minecraft.block;
 
-import net.ccbluex.liquidbounce.features.module.modules.movement.FastClimb;
+import me.memorial.module.modules.movement.FastClimb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;

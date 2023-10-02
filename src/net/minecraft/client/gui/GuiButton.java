@@ -1,8 +1,8 @@
 package net.minecraft.client.gui;
 
-import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.memorial.ui.font.AWTFontRenderer;
+import me.memorial.ui.font.Fonts;
+import me.memorial.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;

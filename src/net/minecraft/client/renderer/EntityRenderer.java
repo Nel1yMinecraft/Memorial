@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.Render3DEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
-import net.ccbluex.liquidbounce.features.module.modules.render.CameraClip;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoHurtCam;
+import me.memorial.Memorial;
+import me.memorial.events.Render3DEvent;
+import me.memorial.module.modules.render.AntiBlind;
+import me.memorial.module.modules.render.CameraClip;
+import me.memorial.module.modules.render.NoHurtCam;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -1820,7 +1820,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         this.mc.mcProfiler.endStartSection("render3DEvent");
 
-        LiquidBounce.eventManager.callEvent(new Render3DEvent(partialTicks));
+        Memorial.eventManager.callEvent(new Render3DEvent(partialTicks));
 
         this.mc.mcProfiler.endStartSection("hand");
 

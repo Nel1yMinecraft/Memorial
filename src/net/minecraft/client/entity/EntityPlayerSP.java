@@ -1,20 +1,19 @@
 package net.minecraft.client.entity;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.AntiHunger;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.PortalMenu;
-import net.ccbluex.liquidbounce.features.module.modules.fun.Derp;
-import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Sneak;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoSwing;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
-import net.ccbluex.liquidbounce.utils.MovementUtils;
-import net.ccbluex.liquidbounce.utils.Rotation;
-import net.ccbluex.liquidbounce.utils.RotationUtils;
+import me.memorial.events.*;
+import me.memorial.Memorial;
+import me.memorial.module.modules.combat.KillAura;
+import me.memorial.module.modules.exploit.PortalMenu;
+import me.memorial.module.modules.fun.Derp;
+import me.memorial.module.modules.movement.InventoryMove;
+import me.memorial.module.modules.movement.NoSlow;
+import me.memorial.module.modules.movement.Sneak;
+import me.memorial.module.modules.movement.Sprint;
+import me.memorial.module.modules.render.NoSwing;
+import me.memorial.module.modules.world.Scaffold;
+import me.memorial.utils.MovementUtils;
+import me.memorial.utils.Rotation;
+import me.memorial.utils.RotationUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -146,11 +145,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer() {
         try {
-            LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.PRE));
+            Memorial.eventManager.callEvent(new MotionEvent(EventState.PRE));
 
             final InventoryMove inventoryMove = InventoryMove.getInstance();
             final Sneak sneak = Sneak.getInstance();
-            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || AntiHunger.getInstance().getState() || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
+            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.aacAdditionProValue.get()) || (sneak.getState() && (!MovementUtils.isMoving() || !sneak.stopMoveValue.get()) && sneak.modeValue.get().equalsIgnoreCase("MineSecure"));
 
             boolean sprinting = this.isSprinting() && !fakeSprint;
 
@@ -230,7 +229,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 }
             }
 
-            LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.POST));
+            Memorial.eventManager.callEvent(new MotionEvent(EventState.POST));
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -376,7 +375,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
     protected boolean pushOutOfBlocks(double x, double y, double z) {
         PushOutEvent event = new PushOutEvent();
-        LiquidBounce.eventManager.callEvent(event);
+        Memorial.eventManager.callEvent(event);
 
         if (event.isCancelled() || this.noClip)
         {
@@ -622,7 +621,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
      * use this to react to sunlight and start to burn.
      */
     public void onLivingUpdate() {
-        LiquidBounce.eventManager.callEvent(new UpdateEvent());
+        Memorial.eventManager.callEvent(new UpdateEvent());
 
         if (this.sprintingTicksLeft > 0) {
             --this.sprintingTicksLeft;
@@ -685,7 +684,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         if (getHeldItem() != null && (this.isUsingItem() || (getHeldItem().getItem() instanceof ItemSword && killAura.getBlockingStatus())) && !this.isRiding()) {
             final SlowDownEvent slowDownEvent = new SlowDownEvent(0.2F, 0.2F);
-            LiquidBounce.eventManager.callEvent(slowDownEvent);//pass
+            Memorial.eventManager.callEvent(slowDownEvent);//pass
             this.movementInput.moveStrafe *= slowDownEvent.getStrafe();
             this.movementInput.moveForward *= slowDownEvent.getForward();
             this.sprintToggleTimer = 0;

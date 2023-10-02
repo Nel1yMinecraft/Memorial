@@ -12,8 +12,8 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.TextEvent;
+import me.memorial.Memorial;
+import me.memorial.events.TextEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -517,11 +517,11 @@ public class FontRenderer implements IResourceManagerReloadListener
     }
 
     public String getEventString(String string){
-        if (string == null || LiquidBounce.eventManager == null)
+        if (string == null || Memorial.eventManager == null)
             return string;
 
         final TextEvent textEvent = new TextEvent(string);
-        LiquidBounce.eventManager.callEvent(textEvent);
+        Memorial.eventManager.callEvent(textEvent);
         return textEvent.getText();
     }
 
