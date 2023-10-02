@@ -30,7 +30,9 @@ public class HUD extends Module {
 
     public final BoolValue blackHotbarValue = new BoolValue("BlackHotbar", true);
     public final BoolValue inventoryParticle = new BoolValue("InventoryParticle", false);
+    public final BoolValue inventoryPaiMon = new BoolValue("inventoryPaiMon", false);
     private final BoolValue blurValue = new BoolValue("Blur", false);
+    public int photoIndex = 0;
     public final FontValue fontChatValue = new FontValue("FontChat", Fonts.font35) {
         @Override
         protected void onChanged(FontRenderer oldValue, FontRenderer newValue) {
