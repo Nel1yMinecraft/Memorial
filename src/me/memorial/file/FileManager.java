@@ -179,7 +179,7 @@ public class FileManager extends MinecraftInstance {
                 if(bufferedImage == null)
                     return;
 
-                Memorial.INSTANCE.setBackground(new ResourceLocation(Memorial.CLIENT_NAME.toLowerCase() + "/background.png"));
+                Memorial.INSTANCE.setBackground(new ResourceLocation("liquidbounce" + "/background.png"));
                 mc.getTextureManager().loadTexture(Memorial.INSTANCE.getBackground(), new DynamicTexture(bufferedImage));
                 ClientUtils.getLogger().info("[FileManager] Loaded background.");
             }catch(final Exception e) {

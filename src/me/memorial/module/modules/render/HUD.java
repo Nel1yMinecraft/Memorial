@@ -68,7 +68,7 @@ public class HUD extends Module {
 
         if (getState() && blurValue.get() && !mc.entityRenderer.isShaderActive() && event.getGuiScreen() != null &&
                 !(event.getGuiScreen() instanceof GuiChat || event.getGuiScreen() instanceof GuiHudDesigner))
-            mc.entityRenderer.loadShader(new ResourceLocation(Memorial.CLIENT_NAME.toLowerCase() + "/blur.json"));
+            mc.entityRenderer.loadShader(new ResourceLocation("liquidbounce" + "/blur.json"));
         else if (mc.entityRenderer.getShaderGroup() != null &&
                 mc.entityRenderer.getShaderGroup().getShaderGroupName().contains("liquidbounce/blur.json"))
             mc.entityRenderer.stopUseShader();

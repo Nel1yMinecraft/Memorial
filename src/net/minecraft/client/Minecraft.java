@@ -568,7 +568,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle(Memorial.CLIENT_NAME+" "+ Memorial.CLIENT_VERSION + " | " + Memorial.MINECRAFT_VERSION + (Memorial.IN_DEV ? " | DEVELOPMENT BUILD" : "MADE BY YUXIANGLL")); //自定义标题
+        Display.setTitle("Memorial | DEVBUILD"); //自定义标题
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));

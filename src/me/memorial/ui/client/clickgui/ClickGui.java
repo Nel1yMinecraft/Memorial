@@ -28,7 +28,7 @@ import java.util.Objects;
 public class ClickGui extends GuiScreen {
 
     public final List<Panel> panels = new ArrayList<>();
-    private final ResourceLocation hudIcon = new ResourceLocation(Memorial.CLIENT_NAME.toLowerCase() + "/custom_hud_icon.png");
+    private final ResourceLocation hudIcon = new ResourceLocation("liquidbounce" + "/custom_hud_icon.png");
     public Style style = new SlowlyStyle();
     private Panel clickedPanel;
     private int mouseX;
