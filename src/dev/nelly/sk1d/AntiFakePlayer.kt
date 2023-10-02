@@ -5,21 +5,21 @@
  */
 package dev.nelly.sk1d
 
-import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.LiquidBounce.CLIENT_NAME
-import net.ccbluex.liquidbounce.event.EntityKilledEvent
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.PacketEvent
-import net.ccbluex.liquidbounce.event.UpdateEvent
-import net.ccbluex.liquidbounce.features.module.Module
-import net.ccbluex.liquidbounce.features.module.ModuleCategory
-import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.utils.ClientUtils.displayChatMessage
-import net.ccbluex.liquidbounce.utils.misc.RandomUtils
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
-import net.ccbluex.liquidbounce.value.BoolValue
-import net.ccbluex.liquidbounce.value.IntegerValue
-import net.ccbluex.liquidbounce.value.ListValue
+import me.memorial.Memorial
+import me.memorial.Memorial.CLIENT_NAME
+import me.memorial.events.EntityKilledEvent
+import me.memorial.events.EventTarget
+import me.memorial.events.PacketEvent
+import me.memorial.events.UpdateEvent
+import me.memorial.module.Module
+import me.memorial.module.ModuleCategory
+import me.memorial.module.ModuleInfo
+import me.memorial.utils.ClientUtils.displayChatMessage
+import me.memorial.utils.misc.RandomUtils
+import me.memorial.utils.timer.MSTimer
+import me.memorial.value.BoolValue
+import me.memorial.value.IntegerValue
+import me.memorial.value.ListValue
 import net.minecraft.network.play.server.S02PacketChat
 import java.util.regex.Pattern
 
@@ -443,7 +443,7 @@ class AntiFakePlayer : Module() {
     private fun playerDeathAction(name: String, cd: Long) {
         try {
             bots++
-            LiquidBounce.fileManager.friendsConfig.addFriend(name)
+            Memorial.fileManager.friendsConfig.addFriend(name)
         } catch (ex: Exception) {
             ex.printStackTrace()
             state = false
@@ -455,7 +455,7 @@ class AntiFakePlayer : Module() {
             try {
                 Thread.sleep(cd)
                 protectedname = if (fakeNameProtectValue.get()) "§7§k$name" else "§7$name"
-               LiquidBounce.fileManager.friendsConfig.removeFriend(name)
+               Memorial.fileManager.friendsConfig.removeFriend(name)
                 bots--
                 if (printLoggerValue.get()) printLogger(protectedname, "remove")
             } catch (ex: Exception) {
@@ -507,7 +507,7 @@ class AntiFakePlayer : Module() {
 
     // sb
     private fun clearAll() {
-        LiquidBounce.fileManager.friendsConfig.clearFriends()
+        Memorial.fileManager.friendsConfig.clearFriends()
         bots = 0
     }
 
