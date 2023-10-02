@@ -44,7 +44,7 @@ class CommandManager {
         registerCommand(RemoteViewCommand())
         registerCommand(PrefixCommand())
         registerCommand(ShortcutCommand())
-        registerCommand(IRC())
+      //  registerCommand(IRC())
         registerCommand(HideCommand())
     }
 
