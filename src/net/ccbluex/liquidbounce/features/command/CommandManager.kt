@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.command
 
+import dev.nelly.irc.IRC
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.command.commands.*
 import net.ccbluex.liquidbounce.features.command.shortcuts.Shortcut
@@ -43,6 +44,7 @@ class CommandManager {
         registerCommand(RemoteViewCommand())
         registerCommand(PrefixCommand())
         registerCommand(ShortcutCommand())
+        registerCommand(IRC())
         registerCommand(HideCommand())
     }
 

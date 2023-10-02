@@ -309,7 +309,7 @@ public class SoundManager
         {
             if (this.sndSystem.getMasterVolume() <= 0.0F)
             {
-                logger.debug(LOG_MARKER, "Skipped playing soundEvent: {}, master volume was zero", new Object[] {p_sound.getSoundLocation()});
+            //    logger.debug(LOG_MARKER, "Skipped playing soundEvent: {}, master volume was zero", new Object[] {p_sound.getSoundLocation()});
             }
             else
             {
@@ -317,7 +317,7 @@ public class SoundManager
 
                 if (soundeventaccessorcomposite == null)
                 {
-                    logger.warn(LOG_MARKER, "Unable to play unknown soundEvent: {}", new Object[] {p_sound.getSoundLocation()});
+               //     logger.warn(LOG_MARKER, "Unable to play unknown soundEvent: {}", new Object[] {p_sound.getSoundLocation()});
                 }
                 else
                 {
@@ -325,7 +325,7 @@ public class SoundManager
 
                     if (soundpoolentry == SoundHandler.missing_sound)
                     {
-                        logger.warn(LOG_MARKER, "Unable to play empty soundEvent: {}", new Object[] {soundeventaccessorcomposite.getSoundEventLocation()});
+                   //     logger.warn(LOG_MARKER, "Unable to play empty soundEvent: {}", new Object[] {soundeventaccessorcomposite.getSoundEventLocation()});
                     }
                     else
                     {
