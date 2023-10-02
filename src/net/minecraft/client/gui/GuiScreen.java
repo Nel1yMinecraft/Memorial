@@ -22,6 +22,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.ComponentOnHover;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.ui.client.GuiBackground;
 import net.ccbluex.liquidbounce.utils.render.ParticleUtils;
+import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.BackgroundShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
@@ -42,10 +43,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.Achievement;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -584,11 +582,17 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
         final HUD hud = HUD.getInstance();
 
-        if(hud.inventoryParticle.get() && mc.thePlayer != null) {
+        if (hud.inventoryParticle.get() && mc.thePlayer != null) {
             final ScaledResolution scaledResolution = new ScaledResolution(mc);
             final int width = scaledResolution.getScaledWidth();
             final int height = scaledResolution.getScaledHeight();
             ParticleUtils.drawParticles(Mouse.getX() * width / mc.displayWidth, height - Mouse.getY() * height / mc.displayHeight - 1);
+        }
+        if (hud.inventoryPaiMon.get() && mc.thePlayer != null) {
+            long currentTime = System.currentTimeMillis() / 30;
+            ResourceLocation resourceLocation = new ResourceLocation(String.format("liquidbounce/paimon/paimon_00%02d.png", (int) (currentTime % 53)));
+
+            RenderUtils.drawImage(resourceLocation, 420, new ScaledResolution(mc).getScaledHeight() - 434, 119, 119);
         }
     }
 

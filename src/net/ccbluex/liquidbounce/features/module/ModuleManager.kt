@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module
 
+import dev.nelly.sk1d.AntiFakePlayer
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.KeyEvent
@@ -172,7 +173,8 @@ class ModuleManager : Listenable {
             NoSlowBreak::class.java,
             PortalMenu::class.java,
             ColorMixer::class.java,
-            Health::class.java
+            Health::class.java,
+            AntiFakePlayer::class.java
         )
 
         registerModule(NoScoreboard)
