@@ -4,10 +4,10 @@ import com.mojang.authlib.GameProfile;
 import java.io.File;
 import java.util.Objects;
 
-import net.ccbluex.liquidbounce.cape.CapeAPI;
-import net.ccbluex.liquidbounce.cape.CapeInfo;
-import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoFOV;
+import me.memorial.cape.CapeAPI;
+import me.memorial.cape.CapeInfo;
+import me.memorial.module.modules.misc.NameProtect;
+import me.memorial.module.modules.render.NoFOV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.ImageBufferDownload;

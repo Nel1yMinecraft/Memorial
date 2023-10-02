@@ -6,9 +6,9 @@ import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
-import net.ccbluex.liquidbounce.ui.client.tools.GuiTools;
+import me.memorial.Memorial;
+import me.memorial.special.BungeeCordSpoof;
+import me.memorial.ui.client.tools.GuiTools;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
@@ -137,7 +137,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
                 case 998:
                     BungeeCordSpoof.enabled = !BungeeCordSpoof.enabled;
                     bungeeCordSpoofButton.displayString = "BungeeCord Spoof: " + (BungeeCordSpoof.enabled ? "On" : "Off");
-                    LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                    Memorial.fileManager.saveConfig(Memorial.fileManager.valuesConfig);
                     break;
                 case 999:
                     mc.displayGuiScreen(new GuiTools((GuiScreen) this));

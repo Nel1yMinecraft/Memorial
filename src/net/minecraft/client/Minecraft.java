@@ -36,18 +36,17 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.AbortBreaking;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.MultiActions;
-import net.ccbluex.liquidbounce.features.module.modules.world.FastPlace;
-import net.ccbluex.liquidbounce.ui.client.GuiUpdate;
-import net.ccbluex.liquidbounce.ui.client.GuiWelcome;
-import net.ccbluex.liquidbounce.utils.CPSCounter;
-import net.ccbluex.liquidbounce.utils.render.IconUtils;
-import net.ccbluex.liquidbounce.utils.render.MiniMapRegister;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.memorial.events.*;
+import me.memorial.Memorial;
+import me.memorial.module.modules.combat.AutoClicker;
+import me.memorial.module.modules.exploit.AbortBreaking;
+import me.memorial.module.modules.exploit.MultiActions;
+import me.memorial.module.modules.world.FastPlace;
+import me.memorial.ui.client.GuiWelcome;
+import me.memorial.utils.CPSCounter;
+import me.memorial.utils.render.IconUtils;
+import me.memorial.utils.render.MiniMapRegister;
+import me.memorial.utils.render.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -503,12 +502,12 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         this.ingameGUI = new GuiIngame(this);
 
         //加载
-        LiquidBounce.INSTANCE.startClient();
-        GuiScreen mainMenu = LiquidBounce.guiMain;
+        Memorial.INSTANCE.startClient();
+        GuiScreen mainMenu = Memorial.guiMain;
 
         //GuiMainMenu
         if(mainMenu instanceof net.minecraft.client.gui.GuiMainMenu) {
-            if(LiquidBounce.fileManager.firstStart){
+            if(Memorial.fileManager.firstStart){
                 mainMenu = new GuiWelcome();
             }else {
                 mainMenu = new GuiMainMenu();
@@ -569,7 +568,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle(LiquidBounce.CLIENT_NAME+" "+ LiquidBounce.CLIENT_VERSION + " | " + LiquidBounce.MINECRAFT_VERSION + (LiquidBounce.IN_DEV ? " | DEVELOPMENT BUILD" : "MADE BY YUXIANGLL")); //自定义标题
+        Display.setTitle(Memorial.CLIENT_NAME+" "+ Memorial.CLIENT_VERSION + " | " + Memorial.MINECRAFT_VERSION + (Memorial.IN_DEV ? " | DEVELOPMENT BUILD" : "MADE BY YUXIANGLL")); //自定义标题
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
@@ -909,7 +908,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         if (guiScreenIn == null && this.theWorld == null) {
-            guiScreenIn = LiquidBounce.guiMain;
+            guiScreenIn = Memorial.guiMain;
         } else if (guiScreenIn == null && this.thePlayer.getHealth() <= 0.0F) {
             guiScreenIn = new GuiGameOver();
         }
@@ -920,14 +919,14 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         if(currentScreen instanceof net.minecraft.client.gui.GuiMainMenu || (currentScreen != null && currentScreen.getClass().getName().startsWith("net.labymod") && currentScreen.getClass().getSimpleName().equals("ModGuiMainMenu"))) {
-            guiScreenIn = LiquidBounce.guiMain;
+            guiScreenIn = Memorial.guiMain;
 
             ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
             guiScreenIn.setWorldAndResolution(Minecraft.getMinecraft(), scaledResolution.getScaledWidth(), scaledResolution.getScaledHeight());
             skipRenderWorld = false;
         }
 
-        LiquidBounce.eventManager.callEvent(new ScreenEvent(currentScreen));
+        Memorial.eventManager.callEvent(new ScreenEvent(currentScreen));
 
         this.currentScreen = (GuiScreen)guiScreenIn;
 
@@ -1368,7 +1367,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     public void shutdown()
     {
         this.running = false;
-        LiquidBounce.INSTANCE.stopClient();
+        Memorial.INSTANCE.stopClient();
     }
 
     public void setIngameFocus()
@@ -1413,7 +1412,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             if (leftClick && this.objectMouseOver != null && this.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 BlockPos blockpos = this.objectMouseOver.getBlockPos();
                 if(this.leftClickCounter == 0) {
-                    LiquidBounce.eventManager.callEvent(new ClickBlockEvent(blockpos, this.objectMouseOver.sideHit));
+                    Memorial.eventManager.callEvent(new ClickBlockEvent(blockpos, this.objectMouseOver.sideHit));
                 }
 
                 if (this.theWorld.getBlockState(blockpos).getBlock().getMaterial() != Material.air && this.playerController.onPlayerDamageBlock(blockpos, this.objectMouseOver.sideHit)) {
@@ -1425,7 +1424,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             }
         }
         if(this.leftClickCounter == 0 && theWorld.getBlockState(objectMouseOver.getBlockPos()).getBlock().getMaterial() != Material.air) {
-            LiquidBounce.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
+            Memorial.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
         }
     }
 
@@ -1853,7 +1852,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                         this.currentScreen.handleKeyboardInput();
                     } else {
 
-                        LiquidBounce.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
+                        Memorial.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
 
                         if (k == 1) {
                             this.displayInGameMenu();
@@ -2083,7 +2082,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         {
             if (this.thePlayer != null)
             {
-                LiquidBounce.eventManager.callEvent(new TickEvent());
+                Memorial.eventManager.callEvent(new TickEvent());
                 ++this.joinPlayerCounter;
 
                 if (this.joinPlayerCounter == 30)
@@ -2280,7 +2279,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         if(theWorld != null){
             MiniMapRegister.INSTANCE.unloadAllChunks();
         }
-        LiquidBounce.eventManager.callEvent(new WorldEvent(worldClientIn));
+        Memorial.eventManager.callEvent(new WorldEvent(worldClientIn));
 
 
 

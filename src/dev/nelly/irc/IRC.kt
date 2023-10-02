@@ -1,7 +1,7 @@
 package dev.nelly.irc
 
-import net.ccbluex.liquidbounce.features.command.Command
-import net.ccbluex.liquidbounce.utils.misc.StringUtils
+import me.memorial.command.Command
+import me.memorial.utils.misc.StringUtils
 import java.io.*
 import java.net.Socket
 

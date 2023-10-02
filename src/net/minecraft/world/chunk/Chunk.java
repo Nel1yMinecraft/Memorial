@@ -10,8 +10,8 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.ProphuntESP;
-import net.ccbluex.liquidbounce.utils.render.MiniMapRegister;
+import me.memorial.module.modules.render.ProphuntESP;
+import me.memorial.utils.render.MiniMapRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

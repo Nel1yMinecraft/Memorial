@@ -17,12 +17,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.misc.ComponentOnHover;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.ui.client.GuiBackground;
-import net.ccbluex.liquidbounce.utils.render.ParticleUtils;
-import net.ccbluex.liquidbounce.utils.render.shader.shaders.BackgroundShader;
+import me.memorial.Memorial;
+import me.memorial.module.modules.misc.ComponentOnHover;
+import me.memorial.module.modules.render.HUD;
+import me.memorial.ui.client.GuiBackground;
+import me.memorial.utils.render.ParticleUtils;
+import me.memorial.utils.render.shader.shaders.BackgroundShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
 import net.minecraft.client.renderer.GlStateManager;
@@ -425,10 +425,10 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
     }
 
     public void sendChatMessage(String msg, boolean addToChat) {
-        if (msg.startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix())) && addToChat) {
+        if (msg.startsWith(String.valueOf(Memorial.commandManager.getPrefix())) && addToChat) {
             this.mc.ingameGUI.getChatGUI().addToSentMessages(msg);
 
-            LiquidBounce.commandManager.executeCommands(msg);
+            Memorial.commandManager.executeCommands(msg);
             return;
         }
 
@@ -598,7 +598,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
         GlStateManager.disableFog();
 
         if(GuiBackground.Companion.getEnabled()) {
-            if (LiquidBounce.INSTANCE.getBackground() == null) {
+            if (Memorial.INSTANCE.getBackground() == null) {
                 //System.out.println("Bakc");
                 BackgroundShader.BACKGROUND_SHADER.startShader();
 
@@ -618,7 +618,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
                 final int width = scaledResolution.getScaledWidth();
                 final int height = scaledResolution.getScaledHeight();
 
-                mc.getTextureManager().bindTexture(LiquidBounce.INSTANCE.getBackground());
+                mc.getTextureManager().bindTexture(Memorial.INSTANCE.getBackground());
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, width, height, width, height, width, height);
             }

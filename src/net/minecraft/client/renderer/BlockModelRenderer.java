@@ -3,7 +3,7 @@ package net.minecraft.client.renderer;
 import java.util.BitSet;
 import java.util.List;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
+import me.memorial.module.modules.render.XRay;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

@@ -2,7 +2,7 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.memorial.Memorial;
 import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.client.gui.achievement.GuiStats;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -52,12 +52,12 @@ public class GuiIngameMenu extends GuiScreen
                 this.mc.loadWorld((WorldClient)null);
 
                 if (flag) {
-                    this.mc.displayGuiScreen(LiquidBounce.guiMain);
+                    this.mc.displayGuiScreen(Memorial.guiMain);
                 } else if (flag1) {
                     RealmsBridge realmsbridge = new RealmsBridge();
-                    realmsbridge.switchToRealms(LiquidBounce.guiMain);
+                    realmsbridge.switchToRealms(Memorial.guiMain);
                 } else {
-                    this.mc.displayGuiScreen(new GuiMultiplayer(LiquidBounce.guiMain));
+                    this.mc.displayGuiScreen(new GuiMultiplayer(Memorial.guiMain));
                 }
 
             case 2:

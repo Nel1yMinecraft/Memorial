@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.tileentity;
 
 import java.util.Calendar;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
+import me.memorial.module.modules.render.Chams;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;

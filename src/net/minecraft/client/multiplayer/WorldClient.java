@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.TrueSight;
+import me.memorial.module.modules.render.TrueSight;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

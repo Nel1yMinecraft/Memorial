@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.memorial.Memorial;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -101,10 +101,10 @@ public class GuiChat extends GuiScreen
             this.mc.displayGuiScreen(null);
         }
 
-        if (!inputField.getText().startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix()))) return;
-        LiquidBounce.commandManager.autoComplete(inputField.getText());
+        if (!inputField.getText().startsWith(String.valueOf(Memorial.commandManager.getPrefix()))) return;
+        Memorial.commandManager.autoComplete(inputField.getText());
 
-        if (inputField.getText().startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix())) || inputField.getText().startsWith("/"))
+        if (inputField.getText().startsWith(String.valueOf(Memorial.commandManager.getPrefix())) || inputField.getText().startsWith("/"))
             inputField.setMaxStringLength(10000);
         else
             inputField.setMaxStringLength(100);
@@ -166,7 +166,7 @@ public class GuiChat extends GuiScreen
 
     public void autocompletePlayerNames()
     {
-        foundPlayerNames.sort(Comparator.comparing(s -> !LiquidBounce.fileManager.friendsConfig.isFriend(s)));
+        foundPlayerNames.sort(Comparator.comparing(s -> !Memorial.fileManager.friendsConfig.isFriend(s)));
 
         if (this.playerNamesFound)
         {
@@ -217,10 +217,10 @@ public class GuiChat extends GuiScreen
 
     private void sendAutocompleteRequest(String p_146405_1_, String p_146405_2_)
     {
-        if (LiquidBounce.commandManager.autoComplete(p_146405_1_)) {
+        if (Memorial.commandManager.autoComplete(p_146405_1_)) {
             waitingOnAutocomplete = true;
 
-            String[] latestAutoComplete = LiquidBounce.commandManager.getLatestAutoComplete();
+            String[] latestAutoComplete = Memorial.commandManager.getLatestAutoComplete();
 
             if (!p_146405_1_.toLowerCase().endsWith(latestAutoComplete[latestAutoComplete.length - 1].toLowerCase())){
                 this.onAutocompleteResponse(latestAutoComplete);
@@ -272,8 +272,8 @@ public class GuiChat extends GuiScreen
     {
         drawRect(2, this.height - 14, this.width - 2, this.height - 2, Integer.MIN_VALUE);
         this.inputField.drawTextBox();
-        if (LiquidBounce.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix()))) {
-            String[] latestAutoComplete = LiquidBounce.commandManager.getLatestAutoComplete();
+        if (Memorial.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(Memorial.commandManager.getPrefix()))) {
+            String[] latestAutoComplete = Memorial.commandManager.getLatestAutoComplete();
             String[] textArray = inputField.getText().split(" ");
             String trimmedString = latestAutoComplete[0].replaceFirst("(?i)" + textArray[textArray.length - 1], "");
 
@@ -317,7 +317,7 @@ public class GuiChat extends GuiScreen
             else if (this.foundPlayerNames.size() > 0)
             {
                 this.playerNamesFound = true;
-                if (LiquidBounce.commandManager.getLatestAutoComplete().length != 0) return;
+                if (Memorial.commandManager.getLatestAutoComplete().length != 0) return;
                 this.autocompletePlayerNames();
             }
         }

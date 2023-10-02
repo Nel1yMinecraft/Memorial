@@ -2,7 +2,7 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.memorial.Memorial;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -61,7 +61,7 @@ public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
             case 1:
                 if (this.mc.theWorld.getWorldInfo().isHardcoreModeEnabled())
                 {
-                    this.mc.displayGuiScreen(LiquidBounce.guiMain);
+                    this.mc.displayGuiScreen(Memorial.guiMain);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class GuiGameOver extends GuiScreen implements GuiYesNoCallback
         {
             this.mc.theWorld.sendQuittingDisconnectingPacket();
             this.mc.loadWorld((WorldClient)null);
-            this.mc.displayGuiScreen(LiquidBounce.guiMain);
+            this.mc.displayGuiScreen(Memorial.guiMain);
         }
         else
         {

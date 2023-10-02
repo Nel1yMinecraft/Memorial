@@ -1,8 +1,8 @@
 package net.minecraft.client.renderer;
 
-import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
-import net.ccbluex.liquidbounce.features.module.modules.render.SwingAnimation;
+import me.memorial.module.modules.combat.KillAura;
+import me.memorial.module.modules.render.AntiBlind;
+import me.memorial.module.modules.render.SwingAnimation;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

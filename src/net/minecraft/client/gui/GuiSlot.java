@@ -1,6 +1,6 @@
 package net.minecraft.client.gui;
 
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.memorial.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

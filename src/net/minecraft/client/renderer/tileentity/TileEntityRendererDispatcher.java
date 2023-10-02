@@ -3,7 +3,7 @@ package net.minecraft.client.renderer.tileentity;
 import com.google.common.collect.Maps;
 import java.util.Map;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
+import me.memorial.module.modules.render.XRay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;

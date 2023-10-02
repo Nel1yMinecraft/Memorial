@@ -5,13 +5,13 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.MoveEvent;
-import net.ccbluex.liquidbounce.event.StepConfirmEvent;
-import net.ccbluex.liquidbounce.event.StepEvent;
-import net.ccbluex.liquidbounce.event.StrafeEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.HitBox;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.NoPitchLimit;
+import me.memorial.Memorial;
+import me.memorial.events.MoveEvent;
+import me.memorial.events.StepConfirmEvent;
+import me.memorial.events.StepEvent;
+import me.memorial.events.StrafeEvent;
+import me.memorial.module.modules.combat.HitBox;
+import me.memorial.module.modules.exploit.NoPitchLimit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -450,7 +450,7 @@ public abstract class Entity implements ICommandSender
         MoveEvent moveEvent = null;
         if(isPlayer){
             moveEvent = new MoveEvent(x, y, z);
-            LiquidBounce.eventManager.callEvent(moveEvent);
+            Memorial.eventManager.callEvent(moveEvent);
 
             if(moveEvent.isCancelled()){
                 return;
@@ -585,7 +585,7 @@ public abstract class Entity implements ICommandSender
                 StepEvent stepEvent = null;
                 if(isPlayer){
                     stepEvent = new StepEvent(this.stepHeight);
-                    LiquidBounce.eventManager.callEvent(stepEvent);
+                    Memorial.eventManager.callEvent(stepEvent);
                 }
 
                 double d11 = x;
@@ -678,7 +678,7 @@ public abstract class Entity implements ICommandSender
                     z = d8;
                     this.setEntityBoundingBox(axisalignedbb3);
                 }else if(isPlayer){
-                    LiquidBounce.eventManager.callEvent(new StepConfirmEvent());
+                    Memorial.eventManager.callEvent(new StepConfirmEvent());
                 }
             }
 
@@ -1057,7 +1057,7 @@ public abstract class Entity implements ICommandSender
 
         if(this == Minecraft.getMinecraft().thePlayer){
             final StrafeEvent strafeEvent = new StrafeEvent(strafe, forward, friction);
-            LiquidBounce.eventManager.callEvent(strafeEvent);
+            Memorial.eventManager.callEvent(strafeEvent);
 
             if (strafeEvent.isCancelled())
                 return;
