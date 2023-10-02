@@ -3,7 +3,7 @@
  * A free half-open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
  * https://github.com/SkidderRyF/ColorByte/
  */
-package dev.nelly.sk1d
+package dev.nelly.sk1d.module
 
 import me.memorial.Memorial
 import me.memorial.Memorial.CLIENT_NAME

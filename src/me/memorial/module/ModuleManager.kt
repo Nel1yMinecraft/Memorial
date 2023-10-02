@@ -1,6 +1,7 @@
 package me.memorial.module
 
-import dev.nelly.sk1d.AntiFakePlayer
+import dev.nelly.sk1d.module.AntiFakePlayer
+import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.Memorial
@@ -159,7 +160,8 @@ class ModuleManager : Listenable {
             NoSlowBreak::class.java,
             PortalMenu::class.java,
             ColorMixer::class.java,
-            AntiFakePlayer::class.java
+            AntiFakePlayer::class.java,
+            JumpCircle::class.java
         )
 
         registerModule(NoScoreboard)

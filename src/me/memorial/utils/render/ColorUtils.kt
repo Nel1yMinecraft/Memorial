@@ -5,6 +5,7 @@ import java.awt.Color
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.math.abs
+import kotlin.math.ceil
 
 object ColorUtils {
 
@@ -23,6 +24,12 @@ object ColorUtils {
 
             hexColors[i] = red and 255 shl 16 or (green and 255 shl 8) or (blue and 255)
         }
+    }
+    @JvmStatic
+    fun astolfoRainbow(delay: Int, offset: Int, index: Int): Color {
+        var rainbowDelay = ceil((System.currentTimeMillis() + (delay * index).toLong()).toDouble()) / offset
+        return Color.getHSBColor(if ((360.0.also { rainbowDelay %= it } / 360.0).toFloat()
+                .toDouble() < 0.5) -(rainbowDelay / 360.0).toFloat() else (rainbowDelay / 360.0).toFloat(), 0.5f, 1.0f)
     }
 
     @JvmStatic
