@@ -14,6 +14,7 @@ import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.block.BlockAir;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C00PacketKeepAlive;
 import net.minecraft.network.play.client.C03PacketPlayer;
@@ -97,6 +98,7 @@ public class Fly extends Module {
 
     private final FloatValue mineplexSpeedValue = new FloatValue("MineplexSpeed", 1F, 0.5F, 10F);
     private final IntegerValue neruxVaceTicks = new IntegerValue("NeruxVace-Ticks", 6, 0, 20);
+    private final BoolValue dragon = new BoolValue("Dragon", true);
 
     // Visuals
     private final BoolValue markValue = new BoolValue("Mark", true);
@@ -131,12 +133,12 @@ public class Fly extends Module {
     private double moveSpeed, lastDistance;
     private boolean failedStart = false;
 
-    private final TickTimer cubecraft2TickTimer = new TickTimer();
     private final TickTimer cubecraftTeleportTickTimer = new TickTimer();
 
     private final TickTimer freeHypixelTimer = new TickTimer();
     private float freeHypixelYaw;
     private float freeHypixelPitch;
+    private EntityDragon entityDragon;
 
     @Override
     public void onEnable() {
@@ -238,6 +240,11 @@ public class Fly extends Module {
 
     @Override
     public void onDisable() {
+        if (entityDragon != null) {
+            mc.theWorld.removeEntity(entityDragon);
+            entityDragon = null;
+        }
+
         wasDead = false;
 
         if (mc.thePlayer == null)
@@ -261,6 +268,22 @@ public class Fly extends Module {
 
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
+
+        if (dragon.get()) {
+            if (entityDragon == null) {
+                entityDragon = new EntityDragon(mc.theWorld);
+                mc.theWorld.addEntityToWorld(-1, entityDragon);
+            }
+
+            final Vector3d position = new Vector3d(
+                    mc.thePlayer.lastTickPosX + (mc.thePlayer.posX - mc.thePlayer.lastTickPosX) * mc.timer.renderPartialTicks,
+                    mc.thePlayer.lastTickPosY + (mc.thePlayer.posY - mc.thePlayer.lastTickPosY) * mc.timer.renderPartialTicks,
+                    mc.thePlayer.lastTickPosZ + (mc.thePlayer.posZ - mc.thePlayer.lastTickPosZ) * mc.timer.renderPartialTicks
+            );
+
+            entityDragon.setPositionAndRotation(position.x, position.y - 3, position.z,
+                    mc.thePlayer.rotationYaw - 180, mc.thePlayer.rotationPitch);
+        }
         final float vanillaSpeed = vanillaSpeedValue.get();
 
         switch (modeValue.get().toLowerCase()) {
