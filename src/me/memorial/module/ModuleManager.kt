@@ -1,5 +1,11 @@
 package me.memorial.module
 
+import me.memorial.Memorial
+import me.memorial.events.EventTarget
+import me.memorial.events.Listenable
+import me.memorial.events.impl.misc.KeyEvent
+import me.memorial.utils.ClientUtils
+import java.util.*
 import dev.dudu.ViaVersionFix
 import dev.nelly.hyt.HytPacketManager
 import dev.nelly.sk1d.module.AntiFakePlayer
@@ -7,11 +13,7 @@ import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
-import me.memorial.Memorial
-import me.memorial.events.EventTarget
 import me.memorial.module.modules.exploit.*
-import me.memorial.events.Listenable
-import me.memorial.events.impl.misc.KeyEvent
 import me.memorial.module.modules.client.HUD
 import me.memorial.module.modules.client.Rotations
 import me.memorial.module.modules.misc.*
@@ -19,9 +21,6 @@ import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
 import me.memorial.module.modules.world.*
 import me.memorial.module.modules.world.Timer
-import me.memorial.utils.ClientUtils
-import java.util.*
-
 
 class ModuleManager : Listenable {
 
