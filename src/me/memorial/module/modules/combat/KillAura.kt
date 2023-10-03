@@ -38,9 +38,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemSword
 import net.minecraft.network.play.client.*
 import net.minecraft.potion.Potion
-import net.minecraft.util.BlockPos
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.MathHelper
+import net.minecraft.util.*
 import net.minecraft.world.WorldSettings
 import org.lwjgl.input.Keyboard
 import java.awt.Color
@@ -124,7 +122,8 @@ class KillAura : Module() {
             if (v < newValue) set(v)
         }
     }
-
+    private val rotationMode = ListValue("RotationMode", arrayOf("Off", "Normal", "GrimAC"), "Normal")
+    private val shakeValue = BoolValue("Shake", true)
     private val silentRotationValue = BoolValue("SilentRotation", true)
     private val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "Strict", "Silent"), "Off")
     private val randomCenterValue = BoolValue("RandomCenter", true)
@@ -593,11 +592,51 @@ class KillAura : Module() {
                 (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
 
         if (silentRotationValue.get())
-            RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
+        when(rotationMode.get()){
+            "Normal"-> {
+                RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
+            }
+            "GrimAC"-> {
+                val bb : AxisAlignedBB = entity.entityBoundingBox
+                val thePlayer = mc.thePlayer
+                val random = Random()
+                var lastHitVec = Vec3(0.0, 0.0, 0.0)
+                RotationUtils.setTargetRotation( RotationUtils.limitAngleChange(
+                    RotationUtils.serverRotation,
+                    RotationUtils.OtherRotation(
+                        boundingBox,
+                        if (shakeValue.get()) {
+                            if (RotationUtils.targetRotation == null || (random.nextBoolean() && !attackTimer.hasTimePassed(attackDelay / 2))) {
+                                lastHitVec = Vec3(
+                                    MathHelper.clamp_double(thePlayer.posX, bb.minX, bb.maxX) + RandomUtils.nextDouble(-0.2, 0.2),
+                                    MathHelper.clamp_double(thePlayer.posY + 1.62F, bb.minY, bb.maxY) + RandomUtils.nextDouble(-0.2, 0.2),
+                                    MathHelper.clamp_double(thePlayer.posZ, bb.minZ, bb.maxZ) + RandomUtils.nextDouble(-0.2, 0.2)
+                                )
+                            }
+                            lastHitVec
+                        } else getNearestPointBB(mc.thePlayer.getPositionEyes(1f), entity.entityBoundingBox),
+                        predictValue.get(),
+                        mc.thePlayer!!.getDistanceToEntityBox(entity) < throughWallsRangeValue.get(),
+                        maxRange
+                    ),
+                    (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat(),
+                    (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat()
+                ),if (aacValue.get()) 15 else 0)
+            }
+        }
         else
             limitedRotation.toPlayer(mc.thePlayer)
 
         return true
+    }
+    fun getNearestPointBB(eye: Vec3, box: AxisAlignedBB): Vec3 {
+        val origin = doubleArrayOf(eye.xCoord, eye.yCoord, eye.zCoord)
+        val destMins = doubleArrayOf(box.minX, box.minY, box.minZ)
+        val destMaxs = doubleArrayOf(box.maxX, box.maxY, box.maxZ)
+        for (i in 0..2) {
+            if (origin[i] > destMaxs[i]) origin[i] = destMaxs[i] else if (origin[i] < destMins[i]) origin[i] = destMins[i]
+        }
+        return Vec3(origin[0], origin[1], origin[2])
     }
 
     /**

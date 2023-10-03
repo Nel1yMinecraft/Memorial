@@ -164,7 +164,10 @@ class ModuleManager : Listenable {
         registerModule(ChestAura)
 
         ClientUtils.getLogger().info("[ModuleManager] Loaded ${modules.size} modules.")
+
     }
+
+
 
     fun getModuleInCategory(category: ModuleCategory) = modules.filter { it.category == category }
 

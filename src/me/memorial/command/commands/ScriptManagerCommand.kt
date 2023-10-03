@@ -63,7 +63,6 @@ class ScriptManagerCommand : Command("scriptmanager", arrayOf("scripts")) {
 
                             Memorial.clickGui = ClickGui()
                             Memorial.fileManager.loadConfig(Memorial.fileManager.clickGuiConfig)
-                            Memorial.fileManager.loadConfig(Memorial.fileManager.hudConfig)
 
                             chat("Successfully imported script.")
                             return
@@ -97,7 +96,7 @@ class ScriptManagerCommand : Command("scriptmanager", arrayOf("scripts")) {
 
                         Memorial.clickGui = ClickGui()
                         Memorial.fileManager.loadConfig(Memorial.fileManager.clickGuiConfig)
-                        Memorial.fileManager.loadConfig(Memorial.fileManager.hudConfig)
+
                         chat("Successfully deleted script.")
                     } catch (numberFormat: NumberFormatException) {
                         chatSyntaxError()

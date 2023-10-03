@@ -5,9 +5,7 @@
  */
 package me.memorial.ui.client.clickgui.style.styles.dropdown;
 
-import me.memorial.Memorial;
 import me.memorial.module.ModuleCategory;
-import me.memorial.ui.client.hud.designer.GuiHudDesigner;
 import me.memorial.utils.render.RenderUtils;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -25,7 +23,6 @@ public class DropdownGUI extends GuiScreen {
     private final List<Tab> tabs = new CopyOnWriteArrayList<>();
     private int dragX;
     private int dragY;
-    private final ResourceLocation hudIcon = new ResourceLocation("liquidbounce" + "/custom_hud_icon.png");
 
     public DropdownGUI() {
 
@@ -80,9 +77,6 @@ public class DropdownGUI extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Mouse.isButtonDown(0) && mouseX >= 5 && mouseX <= 50 && mouseY <= height - 5 && mouseY >= height - 50)
-            mc.displayGuiScreen(new GuiHudDesigner());
-        RenderUtils.drawImage(hudIcon, 9, height - 41, 32, 32);
         GL11.glPushMatrix();
         ScaledResolution scaledResolution = new ScaledResolution(mc);
         int x = ScaleUtils.getScaledMouseCoordinates(mc, mouseX, mouseY)[0];

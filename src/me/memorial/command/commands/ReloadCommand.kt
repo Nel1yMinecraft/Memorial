@@ -36,8 +36,6 @@ class ReloadCommand : Command("reload", arrayOf("configreload")) {
         Memorial.fileManager.loadConfig(Memorial.fileManager.friendsConfig)
         chat("§c§lReloading xray...")
         Memorial.fileManager.loadConfig(Memorial.fileManager.xrayConfig)
-        chat("§c§lReloading HUD...")
-        Memorial.fileManager.loadConfig(Memorial.fileManager.hudConfig)
         chat("§c§lReloading ClickGUI...")
         Memorial.clickGui = ClickGui()
         Memorial.fileManager.loadConfig(Memorial.fileManager.clickGuiConfig)

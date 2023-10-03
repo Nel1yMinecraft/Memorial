@@ -2,7 +2,7 @@ package me.memorial.command.commands
 
 import me.memorial.Memorial
 import me.memorial.command.Command
-import me.memorial.ui.client.hud.element.elements.Notification
+
 import org.lwjgl.input.Keyboard
 
 class BindCommand : Command("bind", emptyArray()) {
@@ -24,7 +24,6 @@ class BindCommand : Command("bind", emptyArray()) {
 
             // Response to user
             chat("Bound module §a§l${module.name}§3 to key §a§l${Keyboard.getKeyName(key)}§3.")
-            Memorial.hud.addNotification(Notification("Bound ${module.name} to ${Keyboard.getKeyName(key)}"))
             playEdit()
             return
         }
