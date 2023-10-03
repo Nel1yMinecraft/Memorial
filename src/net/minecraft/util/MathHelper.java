@@ -10,6 +10,14 @@ public class MathHelper
     private static final int SIN_BITS = 12;
     private static final int SIN_MASK = 4095;
     private static final int SIN_COUNT = 4096;
+
+    public static float sqrt(float p_sqrt_0_) {
+        return (float)Math.sqrt((double)p_sqrt_0_);
+    }
+
+    public static float sqrt(double p_sqrt_0_) {
+        return (float)Math.sqrt(p_sqrt_0_);
+    }
     private static final int SIN_COUNT_D4 = 1024;
     public static final float PI = MathUtils.roundToFloat(Math.PI);
     public static final float PI2 = MathUtils.roundToFloat((Math.PI * 2D));
@@ -86,6 +94,44 @@ public class MathHelper
     {
         int i = (int)value;
         return value > (float)i ? i + 1 : i;
+    }
+    public static float wrapDegrees(float p_wrapDegrees_0_) {
+        p_wrapDegrees_0_ %= 360.0F;
+        if (p_wrapDegrees_0_ >= 180.0F) {
+            p_wrapDegrees_0_ -= 360.0F;
+        }
+
+        if (p_wrapDegrees_0_ < -180.0F) {
+            p_wrapDegrees_0_ += 360.0F;
+        }
+
+        return p_wrapDegrees_0_;
+    }
+
+    public static double wrapDegrees(double p_wrapDegrees_0_) {
+        p_wrapDegrees_0_ %= 360.0;
+        if (p_wrapDegrees_0_ >= 180.0) {
+            p_wrapDegrees_0_ -= 360.0;
+        }
+
+        if (p_wrapDegrees_0_ < -180.0) {
+            p_wrapDegrees_0_ += 360.0;
+        }
+
+        return p_wrapDegrees_0_;
+    }
+
+    public static int wrapDegrees(int p_wrapDegrees_0_) {
+        p_wrapDegrees_0_ %= 360;
+        if (p_wrapDegrees_0_ >= 180) {
+            p_wrapDegrees_0_ -= 360;
+        }
+
+        if (p_wrapDegrees_0_ < -180) {
+            p_wrapDegrees_0_ += 360;
+        }
+
+        return p_wrapDegrees_0_;
     }
 
     public static int ceiling_double_int(double value)
