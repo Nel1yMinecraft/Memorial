@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
 import me.memorial.Memorial;
-import me.memorial.events.RenderEntityEvent;
+import me.memorial.events.impl.render.RenderEntityEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

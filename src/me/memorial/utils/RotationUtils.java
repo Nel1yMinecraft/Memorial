@@ -2,8 +2,8 @@ package me.memorial.utils;
 
 import me.memorial.events.EventTarget;
 import me.memorial.events.Listenable;
-import me.memorial.events.PacketEvent;
-import me.memorial.events.TickEvent;
+import me.memorial.events.impl.misc.PacketEvent;
+import me.memorial.events.impl.misc.TickEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

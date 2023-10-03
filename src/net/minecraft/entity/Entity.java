@@ -7,10 +7,10 @@ import java.util.concurrent.Callable;
 
 import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
-import me.memorial.events.MoveEvent;
-import me.memorial.events.StepConfirmEvent;
-import me.memorial.events.StepEvent;
-import me.memorial.events.StrafeEvent;
+import me.memorial.events.impl.move.MoveEvent;
+import me.memorial.events.impl.move.StepConfirmEvent;
+import me.memorial.events.impl.move.StepEvent;
+import me.memorial.events.impl.move.StrafeEvent;
 import me.memorial.module.modules.combat.HitBox;
 import me.memorial.module.modules.exploit.NoPitchLimit;
 import net.minecraft.block.Block;

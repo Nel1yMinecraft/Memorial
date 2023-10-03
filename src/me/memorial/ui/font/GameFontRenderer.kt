@@ -1,7 +1,7 @@
 package me.memorial.ui.font
 
 import me.memorial.Memorial
-import me.memorial.events.TextEvent
+import me.memorial.events.impl.misc.TextEvent
 import me.memorial.utils.ClassUtils
 import me.memorial.utils.render.ColorUtils
 import me.memorial.utils.render.RenderUtils

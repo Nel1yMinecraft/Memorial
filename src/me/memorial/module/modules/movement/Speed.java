@@ -1,7 +1,10 @@
 package me.memorial.module.modules.movement;
 
 import me.memorial.events.*;
-import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.misc.TickEvent;
+import me.memorial.events.impl.move.MotionEvent;
+import me.memorial.events.impl.move.MoveEvent;
+import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.module.modules.movement.speeds.aac.*;
 import me.memorial.module.modules.movement.speeds.ncp.*;
 import me.memorial.module.modules.movement.speeds.other.*;

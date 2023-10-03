@@ -1,6 +1,6 @@
 package me.memorial.module.modules.movement.speeds.other;
 
-import me.memorial.events.MoveEvent;
+import me.memorial.events.impl.move.MoveEvent;
 import me.memorial.module.modules.movement.speeds.SpeedMode;
 import me.memorial.utils.MovementUtils;
 import net.minecraft.potion.Potion;

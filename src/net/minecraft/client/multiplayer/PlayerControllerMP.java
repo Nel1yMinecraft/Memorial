@@ -1,8 +1,8 @@
 package net.minecraft.client.multiplayer;
 
 import me.memorial.Memorial;
-import me.memorial.events.AttackEvent;
-import me.memorial.events.ClickWindowEvent;
+import me.memorial.events.impl.player.AttackEvent;
+import me.memorial.events.impl.misc.ClickWindowEvent;
 import me.memorial.module.modules.exploit.AbortBreaking;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

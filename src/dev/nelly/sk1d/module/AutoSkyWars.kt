@@ -2,8 +2,8 @@ package dev.nelly.sk1d.module
 
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
-import me.memorial.events.StrafeEvent
-import me.memorial.events.UpdateEvent
+import me.memorial.events.impl.move.StrafeEvent
+import me.memorial.events.impl.player.UpdateEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo

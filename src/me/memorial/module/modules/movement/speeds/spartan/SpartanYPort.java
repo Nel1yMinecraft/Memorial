@@ -1,6 +1,6 @@
 package me.memorial.module.modules.movement.speeds.spartan;
 
-import me.memorial.events.MoveEvent;
+import me.memorial.events.impl.move.MoveEvent;
 import me.memorial.module.modules.movement.speeds.SpeedMode;
 
 public class SpartanYPort extends SpeedMode {

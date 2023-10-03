@@ -2,7 +2,7 @@ package me.memorial.special;
 
 import me.memorial.events.EventTarget;
 import me.memorial.events.Listenable;
-import me.memorial.events.PacketEvent;
+import me.memorial.events.impl.misc.PacketEvent;
 import me.memorial.utils.MinecraftInstance;
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.Packet;

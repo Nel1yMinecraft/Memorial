@@ -12,10 +12,7 @@ import java.util.UUID;
 
 import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
-import me.memorial.events.JumpEvent;
-import me.memorial.module.modules.movement.AirJump;
-import me.memorial.module.modules.movement.LiquidWalk;
-import me.memorial.module.modules.movement.NoJumpDelay;
+import me.memorial.events.impl.move.JumpEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

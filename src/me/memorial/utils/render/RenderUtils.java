@@ -82,7 +82,10 @@ public final class RenderUtils extends MinecraftInstance {
     public static void bindTexture(int texture) {
         glBindTexture(GL_TEXTURE_2D, texture);
     }
-
+    public static void setAlphaLimit(float limit) {
+        GlStateManager.enableAlpha();
+        GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
+    }
     public static Framebuffer createFrameBuffer(Framebuffer framebuffer, boolean depth) {
         if (needsNewFramebuffer(framebuffer)) {
             if (framebuffer != null) {
@@ -763,12 +766,6 @@ public final class RenderUtils extends MinecraftInstance {
         double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
         return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright).getRGB();
     }
-
-    public static void setAlphaLimit(float limit) {
-        GlStateManager.enableAlpha();
-        GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
-    }
-
     public static int getRainbowOpaque(int seconds, float saturation, float brightness, int index) {
         float hue = ((System.currentTimeMillis() + index) % (int) (seconds * 1000)) / (float) (seconds * 1000);
         int color = Color.HSBtoRGB(hue, saturation, brightness);

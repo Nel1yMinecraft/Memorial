@@ -1,6 +1,6 @@
 package me.memorial.module.modules.combat
 
-import me.memorial.events.AttackEvent
+import me.memorial.events.impl.player.AttackEvent
 import me.memorial.events.EventTarget
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
@@ -17,7 +17,7 @@ class SuperKnockback : Module() {
     @EventTarget
     fun onAttack(event: AttackEvent) {
         if (event.targetEntity is EntityLivingBase) {
-            if (event.targetEntity.hurtTime > hurtTimeValue.get())
+            if ((event.targetEntity as EntityLivingBase).hurtTime > hurtTimeValue.get())
                 return
 
             if (mc.thePlayer.isSprinting)

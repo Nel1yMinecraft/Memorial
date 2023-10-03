@@ -1,6 +1,6 @@
 package me.memorial.module.modules.player
 
-import me.memorial.events.ClickBlockEvent
+import me.memorial.events.impl.world.ClickBlockEvent
 import me.memorial.events.EventTarget
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory

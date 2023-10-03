@@ -2,6 +2,11 @@ package me.memorial.module.modules.movement
 
 import me.memorial.events.*
 import me.memorial.Memorial
+import me.memorial.events.impl.misc.PacketEvent
+import me.memorial.events.impl.move.MoveEvent
+import me.memorial.events.impl.move.StepConfirmEvent
+import me.memorial.events.impl.move.StepEvent
+import me.memorial.events.impl.player.UpdateEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo

@@ -3,7 +3,11 @@ package me.memorial.module.modules.combat
 import dev.nelly.viamcp.utils.AttackOrder
 import me.memorial.events.*
 import me.memorial.Memorial
-import me.memorial.events.impl.player.MotionEvent
+import me.memorial.events.impl.player.AttackEvent
+import me.memorial.events.impl.player.EntityMovementEvent
+import me.memorial.events.impl.move.MotionEvent
+import me.memorial.events.impl.move.StrafeEvent
+import me.memorial.events.impl.player.UpdateEvent
 import me.memorial.events.impl.render.Render3DEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory

@@ -6,7 +6,7 @@
 package dev.dudu;
 
 
-import me.memorial.events.PacketEvent;
+import me.memorial.events.impl.misc.PacketEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

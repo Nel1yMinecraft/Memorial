@@ -1,9 +1,9 @@
 package me.memorial.module.modules.combat
 
 import me.memorial.Memorial
-import me.memorial.events.AttackEvent
+import me.memorial.events.impl.player.AttackEvent
 import me.memorial.events.EventTarget
-import me.memorial.events.PacketEvent
+import me.memorial.events.impl.misc.PacketEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
@@ -43,7 +43,7 @@ class Criticals : Module() {
             val entity = event.targetEntity
 
             if (!mc.thePlayer.onGround || mc.thePlayer.isOnLadder || mc.thePlayer.isInWeb || mc.thePlayer.isInWater ||
-                    mc.thePlayer.isInLava || mc.thePlayer.ridingEntity != null || entity.hurtTime > hurtTimeValue.get() ||
+                    mc.thePlayer.isInLava || mc.thePlayer.ridingEntity != null || (entity as EntityLivingBase).hurtTime > hurtTimeValue.get() ||
                     Memorial.moduleManager[Fly::class.java]!!.state || !msTimer.hasTimePassed(delayValue.get().toLong()))
                 return
 

@@ -1,8 +1,8 @@
 package me.memorial.module.modules.movement;
 
-import me.memorial.events.ClickWindowEvent;
 import me.memorial.events.EventTarget;
-import me.memorial.events.UpdateEvent;
+import me.memorial.events.impl.misc.ClickWindowEvent;
+import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

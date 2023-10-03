@@ -1,7 +1,7 @@
 package me.memorial.module.modules.player
 
 import me.memorial.events.EventTarget
-import me.memorial.events.impl.player.MotionEvent
+import me.memorial.events.impl.move.MotionEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo

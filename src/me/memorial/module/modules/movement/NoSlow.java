@@ -1,8 +1,8 @@
 package me.memorial.module.modules.movement;
 
 import me.memorial.events.EventTarget;
-import me.memorial.events.impl.player.MotionEvent;
-import me.memorial.events.SlowDownEvent;
+import me.memorial.events.impl.move.MotionEvent;
+import me.memorial.events.impl.move.SlowDownEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
