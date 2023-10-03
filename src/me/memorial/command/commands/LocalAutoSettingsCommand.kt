@@ -2,7 +2,6 @@ package me.memorial.command.commands
 
 import me.memorial.Memorial
 import me.memorial.command.Command
-import me.memorial.ui.client.hud.element.elements.Notification
 import me.memorial.utils.ClientUtils
 import me.memorial.utils.SettingsUtils
 import me.memorial.utils.misc.StringUtils
@@ -27,7 +26,6 @@ class LocalAutoSettingsCommand : Command("localautosettings", arrayOf("localsett
                                 chat("§9Set settings...")
                                 SettingsUtils.executeScript(settings)
                                 chat("§6Settings applied successfully.")
-                                Memorial.hud.addNotification(Notification("Updated Settings"))
                                 playEdit()
                             } catch (e: IOException) {
                                 e.printStackTrace()

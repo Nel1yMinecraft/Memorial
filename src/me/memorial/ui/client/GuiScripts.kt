@@ -89,7 +89,6 @@ class GuiScripts(private val prevGui: GuiScreen) : GuiScreen() {
 
                     Memorial.clickGui = ClickGui()
                     Memorial.fileManager.loadConfig(Memorial.fileManager.clickGuiConfig)
-                    Memorial.fileManager.loadConfig(Memorial.fileManager.hudConfig)
                     return
                 }
 
@@ -107,7 +106,6 @@ class GuiScripts(private val prevGui: GuiScreen) : GuiScreen() {
 
                     Memorial.clickGui = ClickGui()
                     Memorial.fileManager.loadConfig(Memorial.fileManager.clickGuiConfig)
-                    Memorial.fileManager.loadConfig(Memorial.fileManager.hudConfig)
                 }
             } catch (t: Throwable) {
                 ClientUtils.getLogger().error("Something went wrong while deleting a script.", t)

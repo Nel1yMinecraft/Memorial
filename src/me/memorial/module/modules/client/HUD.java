@@ -10,7 +10,6 @@ import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
-import me.memorial.ui.client.hud.designer.GuiHudDesigner;
 import me.memorial.ui.font.Fonts;
 import me.memorial.value.BoolValue;
 import me.memorial.value.FontValue;
@@ -47,31 +46,13 @@ public class HUD extends Module {
         }
     };
 
-    @EventTarget
-    public void onRender2D(final Render2DEvent event) {
-        if (mc.currentScreen instanceof GuiHudDesigner)
-            return;
-
-        Memorial.hud.render(false);
-    }
-
-    @EventTarget
-    public void onUpdate(final UpdateEvent event) {
-        Memorial.hud.update();
-    }
-
-    @EventTarget
-    public void onKey(final KeyEvent event) {
-        Memorial.hud.handleKey('a', event.getKey());
-    }
-
     @EventTarget(ignoreCondition = true)
     public void onScreen(final ScreenEvent event) {
         if (mc.theWorld == null || mc.thePlayer == null)
             return;
 
         if (getState() && blurValue.get() && !mc.entityRenderer.isShaderActive() && event.getGuiScreen() != null &&
-                !(event.getGuiScreen() instanceof GuiChat || event.getGuiScreen() instanceof GuiHudDesigner))
+                !(event.getGuiScreen() instanceof GuiChat))
             mc.entityRenderer.loadShader(new ResourceLocation("liquidbounce" + "/blur.json"));
         else if (mc.entityRenderer.getShaderGroup() != null &&
                 mc.entityRenderer.getShaderGroup().getShaderGroupName().contains("liquidbounce/blur.json"))

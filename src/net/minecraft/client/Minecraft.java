@@ -612,34 +612,29 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
     private void setWindowIcon() // Mac无法使用这个方法设置
     {
-        if(Util.getOSType() != Util.EnumOS.OSX) {
-            final ByteBuffer[] liquidBounceFavicon = IconUtils.getFavicon();
-            if(liquidBounceFavicon != null) {
-                Display.setIcon(liquidBounceFavicon);
-                return; // 设置完水影的直接返回，设置失败再用原版的
-            }else{
-                logger.info("LiquidBounce icon is null, skipping setting it");
-            }
-        }
+        Util.EnumOS util$enumos = Util.getOSType();
 
-
-
-         Util.EnumOS util$enumos = Util.getOSType();
-
-        if (util$enumos != Util.EnumOS.OSX) {
+        if (util$enumos != Util.EnumOS.OSX)
+        {
             InputStream inputstream = null;
             InputStream inputstream1 = null;
 
-            try {
+            try
+            {
                 inputstream = this.mcDefaultResourcePack.getInputStreamAssets(new ResourceLocation("icons/icon_16x16.png"));
                 inputstream1 = this.mcDefaultResourcePack.getInputStreamAssets(new ResourceLocation("icons/icon_32x32.png"));
 
-                if (inputstream != null && inputstream1 != null) {
+                if (inputstream != null && inputstream1 != null)
+                {
                     Display.setIcon(new ByteBuffer[] {this.readImageToBuffer(inputstream), this.readImageToBuffer(inputstream1)});
                 }
-            } catch (IOException ioexception) {
+            }
+            catch (IOException ioexception)
+            {
                 logger.error((String)"Couldn\'t set icon", (Throwable)ioexception);
-            } finally {
+            }
+            finally
+            {
                 IOUtils.closeQuietly(inputstream);
                 IOUtils.closeQuietly(inputstream1);
             }

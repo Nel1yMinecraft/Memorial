@@ -17,8 +17,6 @@ import me.memorial.tabs.HeadsTab
 import me.memorial.ui.client.GuiMainMenu
 import me.memorial.ui.client.altmanager.GuiAltManager
 import me.memorial.ui.client.clickgui.ClickGui
-import me.memorial.ui.client.hud.HUD
-import me.memorial.ui.client.hud.HUD.Companion.createDefault
 import me.memorial.ui.font.Fonts
 import me.memorial.utils.ClassUtils.hasForge
 import me.memorial.utils.ClientUtils
@@ -45,9 +43,7 @@ object Memorial {
     lateinit var fileManager: FileManager
     lateinit var scriptManager: ScriptManager
 
-    // HUD & ClickGUI
-    lateinit var hud: HUD
-
+    // ClickGUI
     lateinit var clickGui: ClickGui
 
     // Update information
@@ -124,10 +120,6 @@ object Memorial {
         } catch (throwable: Throwable) {
             ClientUtils.getLogger().error("Failed to register cape service", throwable)
         }
-
-        // Set HUD
-        hud = createDefault()
-        fileManager.loadConfig(fileManager.hudConfig)
 
         // Disable optifine fastrender
         ClientUtils.disableFastRender()

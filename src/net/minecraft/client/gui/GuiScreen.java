@@ -588,12 +588,6 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
             final int height = scaledResolution.getScaledHeight();
             ParticleUtils.drawParticles(Mouse.getX() * width / mc.displayWidth, height - Mouse.getY() * height / mc.displayHeight - 1);
         }
-        if (hud.inventoryPaiMon.get() && mc.thePlayer != null) {
-            long currentTime = System.currentTimeMillis() / 30;
-            ResourceLocation resourceLocation = new ResourceLocation(String.format("liquidbounce/paimon/paimon_00%02d.png", (int) (currentTime % 53)));
-
-            RenderUtils.drawImage(resourceLocation, 420, new ScaledResolution(mc).getScaledHeight() - 434, 119, 119);
-        }
     }
 
     public void drawBackground(int tint)
