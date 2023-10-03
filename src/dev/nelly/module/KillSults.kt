@@ -18,13 +18,9 @@ class KillSults : Module() {
     fun onUpdate(event: UpdateEvent) {
         if (target.health <= 0) {
             kill += 1
-            l()
         }
     }
 
-    fun l() {
-   
-    }
 
     override val tag: String
         get() = kill.toString()
