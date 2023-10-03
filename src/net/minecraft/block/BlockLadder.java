@@ -2,7 +2,6 @@ package net.minecraft.block;
 
 import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
-import me.memorial.module.modules.movement.FastClimb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
