@@ -3,6 +3,7 @@ package me.memorial.module
 import me.memorial.Memorial
 import me.memorial.events.Listenable
 import me.memorial.ui.client.hud.element.elements.Notification
+import me.memorial.ui.client.hud.element.elements.NotifyType
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.ColorUtils.stripColor
 import me.memorial.value.Value
@@ -58,7 +59,7 @@ open class Module : MinecraftInstance(), Listenable {
             if (!Memorial.isStarting) {
                 mc.soundHandler.playSound(PositionedSoundRecord.create(ResourceLocation("random.click"),
                         1F))
-                Memorial.hud.addNotification(Notification("${if (value) "Enabled " else "Disabled "}$name"))
+                Memorial.hud.addNotification(Notification("${if (value) "Enabled " else "Disabled "}$name",if(value) NotifyType.SUCCESS else NotifyType.ERROR))
             }
 
             // Call on enabled or disabled

@@ -1,5 +1,6 @@
 package me.memorial.module.modules.combat
 
+import dev.nelly.viamcp.utils.AttackOrder
 import me.memorial.events.*
 import me.memorial.Memorial
 import me.memorial.events.impl.player.MotionEvent
@@ -515,7 +516,7 @@ class KillAura : Module() {
         // Attack target
         if (swingValue.get())
             mc.thePlayer.swingItem()
-        mc.netHandler.addToSendQueue(C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK))
+        AttackOrder.sendFixedAttack(mc.thePlayer, target);
 
         if (keepSprintValue.get()) {
             // Critical Effect

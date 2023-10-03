@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
+import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
 import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.modules.render.AntiBlind;
@@ -403,7 +404,6 @@ public class EntityRenderer implements IResourceManagerReloadListener
             this.mc.renderGlobal.createBindEntityOutlineFbs(width, height);
         }
     }
-
     public void getMouseOver(float partialTicks)
     {
         Entity entity = this.mc.getRenderViewEntity();
@@ -494,8 +494,12 @@ public class EntityRenderer implements IResourceManagerReloadListener
                     }
                 }
             }
-
-            if (this.pointedEntity != null && flag && vec3.distanceTo(vec33) > 3.0D)
+            final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
+            double distance = 3.0D;
+            if (OMG.getState()) {
+                distance = 2.9D;
+            }
+            if (this.pointedEntity != null && flag && vec3.distanceTo(vec33) > distance)
             {
                 this.pointedEntity = null;
                 this.mc.objectMouseOver = new MovingObjectPosition(MovingObjectPosition.MovingObjectType.MISS, vec33, (EnumFacing)null, new BlockPos(vec33));

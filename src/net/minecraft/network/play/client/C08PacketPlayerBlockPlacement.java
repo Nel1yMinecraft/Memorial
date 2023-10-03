@@ -1,6 +1,9 @@
 package net.minecraft.network.play.client;
 
 import java.io.IOException;
+
+import dev.dudu.ViaVersionFix;
+import me.memorial.Memorial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
@@ -41,19 +44,38 @@ public class C08PacketPlayerBlockPlacement implements Packet<INetHandlerPlayServ
         this.position = buf.readBlockPos();
         this.placedBlockDirection = buf.readUnsignedByte();
         this.stack = buf.readItemStackFromBuffer();
-        this.facingX = (float)buf.readUnsignedByte() / 16.0F;
-        this.facingY = (float)buf.readUnsignedByte() / 16.0F;
-        this.facingZ = (float)buf.readUnsignedByte() / 16.0F;
+        final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
+        if (OMG.getState()) {
+            this.facingX = (float)buf.readUnsignedByte();
+            this.facingY = (float)buf.readUnsignedByte();
+            this.facingZ = (float)buf.readUnsignedByte();
+        } else {
+            this.facingX = (float)buf.readUnsignedByte() / 16.0F;
+            this.facingY = (float)buf.readUnsignedByte() / 16.0F;
+            this.facingZ = (float)buf.readUnsignedByte() / 16.0F;
+        }
     }
 
+
+
+    /**
+     * Writes the raw packet data to the data stream.
+     */
     public void writePacketData(PacketBuffer buf) throws IOException
     {
+        final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
         buf.writeBlockPos(this.position);
         buf.writeByte(this.placedBlockDirection);
         buf.writeItemStackToBuffer(this.stack);
-        buf.writeByte((int)(this.facingX * 16.0F));
-        buf.writeByte((int)(this.facingY * 16.0F));
-        buf.writeByte((int)(this.facingZ * 16.0F));
+        if (OMG.getState()) {
+            buf.writeByte((int)(this.facingX));
+            buf.writeByte((int)(this.facingY));
+            buf.writeByte((int)(this.facingZ));
+        } else {
+            buf.writeByte((int)(this.facingX * 16.0F));
+            buf.writeByte((int)(this.facingY * 16.0F));
+            buf.writeByte((int)(this.facingZ * 16.0F));
+        }
     }
 
     public void processPacket(INetHandlerPlayServer handler)

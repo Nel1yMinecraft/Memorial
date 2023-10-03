@@ -16,6 +16,7 @@ import java.nio.ByteOrder;
 import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -270,7 +271,6 @@ public class PacketBuffer extends ByteBuf
             }
         }
     }
-
     public PacketBuffer writeString(String string)
     {
         byte[] abyte = string.getBytes(Charsets.UTF_8);

@@ -1,3 +1,9 @@
 out/*
 run/*
 .idea/*
+.idea/kotlinc.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/toolchains.xml
+.idea/vcs.xml
+.idea/workspace.xml

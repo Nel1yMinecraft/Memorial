@@ -12,7 +12,7 @@ import me.memorial.events.EventManager;
 import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.events.impl.render.ShaderEvent;
 import me.memorial.module.modules.render.AntiBlind;
-import me.memorial.module.modules.render.HUD;
+import me.memorial.module.modules.client.HUD;
 import me.memorial.module.modules.render.NoScoreboard;
 import me.memorial.ui.font.AWTFontRenderer;
 import me.memorial.utils.render.RenderUtils;

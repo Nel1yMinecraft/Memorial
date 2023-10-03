@@ -1,5 +1,7 @@
 package net.minecraft.block;
 
+import dev.dudu.ViaVersionFix;
+import me.memorial.Memorial;
 import me.memorial.module.modules.movement.FastClimb;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -38,23 +40,32 @@ public class BlockLadder extends Block
         return super.getSelectedBoundingBox(worldIn, pos);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
-        final IBlockState iblockstate = worldIn.getBlockState(pos);
+    public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos)
+    {
+        IBlockState iblockstate = worldIn.getBlockState(pos);
 
-        if(iblockstate.getBlock() instanceof BlockLadder) {
-            final FastClimb fastClimb = FastClimb.Companion.getInstance();
-            final float f = fastClimb.getState() && fastClimb.getModeValue().get().equalsIgnoreCase("AAC3.0.0") ? 0.99f : 0.125f;
+        if (iblockstate.getBlock() == this)
+        {
+            final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
+            float f = 0.125F;
+            if (OMG.getState()) {
+                f = 0.1875f;
+            }
 
-            switch(iblockstate.getValue(FACING)) {
+            switch ((EnumFacing)iblockstate.getValue(FACING))
+            {
                 case NORTH:
                     this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
                     break;
+
                 case SOUTH:
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
                     break;
+
                 case WEST:
                     this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                     break;
+
                 case EAST:
                 default:
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);

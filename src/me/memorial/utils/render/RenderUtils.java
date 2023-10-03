@@ -767,9 +767,9 @@ public final class RenderUtils extends MinecraftInstance {
         return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright).getRGB();
     }
 
-    public static Color skyRainbow(int var2, float st, float bright) {
-        double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
-        return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright);
+    public static void setAlphaLimit(float limit) {
+        GlStateManager.enableAlpha();
+        GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
     }
 
     public static int getRainbowOpaque(int seconds, float saturation, float brightness, int index) {
@@ -811,5 +811,24 @@ public final class RenderUtils extends MinecraftInstance {
         tessellator.draw();
         enableTexture2D();
         disableBlend();
+    }
+
+    public static void color(final int color, final float alpha) {
+        final float r = (color >> 16 & 0xFF) / 255.0f;
+        final float g = (color >> 8 & 0xFF) / 255.0f;
+        final float b = (color & 0xFF) / 255.0f;
+        GlStateManager.color(r, g, b, alpha);
+    }
+
+    public static void color(final int color) {
+        color(color, (color >> 24 & 0xFF) / 255.0f);
+    }
+
+    public static void resetColor() {
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+    }
+    public static Color skyRainbow(int var2, float st, float bright) {
+        double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
+        return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright);
     }
 }

@@ -25,7 +25,7 @@ public class DropdownGUI extends GuiScreen {
     private final List<Tab> tabs = new CopyOnWriteArrayList<>();
     private int dragX;
     private int dragY;
-    private final ResourceLocation hudIcon = new ResourceLocation(Memorial.CLIENT_NAME.toLowerCase() + "/custom_hud_icon.png");
+    private final ResourceLocation hudIcon = new ResourceLocation("liquidbounce" + "/custom_hud_icon.png");
 
     public DropdownGUI() {
 

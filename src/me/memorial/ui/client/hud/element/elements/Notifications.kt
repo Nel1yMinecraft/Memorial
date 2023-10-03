@@ -7,10 +7,14 @@ import me.memorial.ui.client.hud.element.Element
 import me.memorial.ui.client.hud.element.ElementInfo
 import me.memorial.ui.client.hud.element.Side
 import me.memorial.ui.font.Fonts
+import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.AnimationUtils
 import me.memorial.utils.render.RenderUtils
 import net.minecraft.client.renderer.GlStateManager
+import net.minecraft.util.ResourceLocation
+import org.lwjgl.opengl.GL11
 import java.awt.Color
+import kotlin.math.max
 
 /**
  * CustomHUD Notification element
@@ -23,7 +27,7 @@ class Notifications(x: Double = 0.0, y: Double = 30.0, scale: Float = 1F,
     /**
      * Example notification for CustomHUD designer
      */
-    private val exampleNotification = Notification("Example Notification")
+    private val exampleNotification = Notification("Example Notification",NotifyType.INFO)
 
     /**
      * Draw element
@@ -47,7 +51,7 @@ class Notifications(x: Double = 0.0, y: Double = 30.0, scale: Float = 1F,
 
 }
 
-class Notification(private val message: String) {
+class Notification(private val message: String, val type: NotifyType = NotifyType.INFO) {
     var x = 0F
     var textLength = 0
 
@@ -64,30 +68,31 @@ class Notification(private val message: String) {
         textLength = Fonts.font35.getStringWidth(message)
     }
 
+
     /**
      * Draw notification
      */
     fun drawNotification() {
-        // Draw notification
-        RenderUtils.drawRect(-x + 8 + textLength, 0F, -x, -20F, Color.BLACK.rgb)
-        RenderUtils.drawRect(-x, 0F, -x - 5, -20F, Color(0, 160, 255).rgb)
-        Fonts.font35.drawString(message, -x + 4, -14F, Int.MAX_VALUE)
-        GlStateManager.resetColor()
-
+        val font = Fonts.font35
+        val width =
+            100.coerceAtLeast(font.getStringWidth(message).coerceAtLeast(font.getStringWidth("Notification")) + 15)
+        var img: ResourceLocation? = null
+        var color: Int? = null
         // Animation
+// Animation
         val delta = RenderUtils.deltaTime
-        val width = textLength + 8F
+        val width2 = textLength + 8F
 
         when (fadeState) {
             FadeState.IN -> {
-                if (x < width) {
-                    x = AnimationUtils.easeOut(fadeStep, width) * width
+                if (x < width2) {
+                    x = AnimationUtils.easeOut(fadeStep, width2) * width2
                     fadeStep += delta / 4F
                 }
-                if (x >= width) {
+                if (x >= width2) {
                     fadeState = FadeState.STAY
-                    x = width
-                    fadeStep = width
+                    x = width2
+                    fadeStep = width2
                 }
 
                 stay = 60F
@@ -99,14 +104,51 @@ class Notification(private val message: String) {
                 fadeState = FadeState.OUT
 
             FadeState.OUT -> if (x > 0) {
-                x = AnimationUtils.easeOut(fadeStep, width) * width
+                x = AnimationUtils.easeOut(fadeStep, width2) * width2
                 fadeStep -= delta / 4F
             } else
                 fadeState = FadeState.END
 
             FadeState.END -> Memorial.hud.removeNotification(this)
         }
+        if (type == NotifyType.WARNING) {
+            img = ResourceLocation("liquidbounce/notifications/warn.png")
+            color = Color(253, 252, 126).rgb
+        }
+        if (type == NotifyType.INFO) {
+            img = ResourceLocation("liquidbounce/notifications/info.png")
+            color = Color(127, 174, 210).rgb
+
+        }
+        if (type == NotifyType.SUCCESS) {
+            img = ResourceLocation("liquidbounce/notifications/okay.png")
+            color = Color(65, 252, 65).rgb
+
+        }
+        if (type == NotifyType.ERROR) {
+            img = ResourceLocation("liquidbounce/notifications/error.png")
+            color = Color(226, 87, 76).rgb
+
+        }
+        RenderUtils.drawRect(0f, 0F, width.toFloat(), 29F, Color(32, 32, 32, 200).rgb)
+        RenderUtils.drawImage(img, 4, 4, 18, 18)
+        Fonts.font40.drawString("Notification", 63F - 38f, 4f, Color.white.rgb, true)
+        Fonts.font35.drawString(
+            message,
+            63f - 38f,
+            4f + Fonts.font35.height + 2f + 2f,
+            Color.white.rgb,
+            true
+        )
+        RenderUtils.drawRect(
+            width.toFloat(), 4f + Fonts.font35.height + 2f + Fonts.font35.height + 2f + 2f, 0F, 26f, color!!
+        )
+        GlStateManager.resetColor()
     }
-
 }
-
+enum class NotifyType(var renderColor:Color) {
+    SUCCESS(Color(0x60E092)),
+    ERROR(Color(0xFF2F2F)),
+    WARNING(Color(0xF5FD00)),
+    INFO(Color(0x6490A7));
+}

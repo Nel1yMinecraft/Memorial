@@ -36,6 +36,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
+import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 import me.memorial.events.impl.misc.KeyEvent;
@@ -569,7 +570,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle(Memorial.CLIENT_NAME+" "+ Memorial.CLIENT_VERSION + " | " + Memorial.MINECRAFT_VERSION + (Memorial.IN_DEV ? " | DEVELOPMENT BUILD" : "MADE BY YUXIANGLL")); //自定义标题
+        Display.setTitle("Memorial | DEVBUILD"); //自定义标题
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
@@ -1438,7 +1439,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (this.leftClickCounter <= 0)
         {
-            this.thePlayer.swingItem();
+        //    this.thePlayer.swingItem();
+            AttackOrder.sendConditionalSwing(this.objectMouseOver);
 
             if (this.objectMouseOver == null)
             {
@@ -1454,7 +1456,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 switch (this.objectMouseOver.typeOfHit)
                 {
                     case ENTITY:
-                        this.playerController.attackEntity(this.thePlayer, this.objectMouseOver.entityHit);
+                        AttackOrder.sendFixedAttack(this.thePlayer, this.objectMouseOver.entityHit);
                         break;
 
                     case BLOCK:

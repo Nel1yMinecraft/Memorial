@@ -1,13 +1,21 @@
 package me.memorial.module
 
-import dev.nelly.sk1d.AntiFakePlayer
+import dev.dudu.ViaVersionFix
+import dev.nelly.hyt.HytPacketManager
+import dev.nelly.sk1d.module.AntiFakePlayer
+import dev.nelly.sk1d.module.AutoSkyWars
+import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
+import me.memorial.events.KeyEvent
 import me.memorial.module.modules.exploit.*
 import me.memorial.events.Listenable
-import me.memorial.events.impl.misc.KeyEvent
+import me.memorial.module.modules.client.HUD
+import me.memorial.module.modules.client.Rotations
+import me.memorial.module.modules.`fun`.Derp
+import me.memorial.module.modules.`fun`.SkinDerp
 import me.memorial.module.modules.misc.*
 import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
@@ -38,6 +46,7 @@ class ModuleManager : Listenable {
             AutoPot::class.java,
             AutoSoup::class.java,
             AutoWeapon::class.java,
+            ViaVersionFix::class.java,
             Criticals::class.java,
             KillAura::class.java,
             Velocity::class.java,
@@ -91,6 +100,7 @@ class ModuleManager : Listenable {
             XRay::class.java,
             Timer::class.java,
             Sneak::class.java,
+            SkinDerp::class.java,
             Paralyze::class.java,
             AutoWalk::class.java,
             AutoBreak::class.java,
@@ -115,6 +125,7 @@ class ModuleManager : Listenable {
             NoFOV::class.java,
             FastStairs::class.java,
             SwingAnimation::class.java,
+            Derp::class.java,
             ReverseStep::class.java,
             InventoryCleaner::class.java,
             TrueSight::class.java,
@@ -155,7 +166,10 @@ class ModuleManager : Listenable {
             NoSlowBreak::class.java,
             PortalMenu::class.java,
             ColorMixer::class.java,
-            AntiFakePlayer::class.java
+            AntiFakePlayer::class.java,
+            JumpCircle::class.java,
+            AutoSkyWars::class.java,
+            HytPacketManager::class.java
         )
 
         registerModule(NoScoreboard)
