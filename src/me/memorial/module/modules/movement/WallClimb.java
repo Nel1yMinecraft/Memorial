@@ -2,6 +2,7 @@ package me.memorial.module.modules.movement;
 
 import me.memorial.events.*;
 
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -38,7 +39,7 @@ public class WallClimb extends Module {
 
     @EventTarget
     public void onUpdate(MotionEvent event) {
-        if(event.getEventState() != EventState.POST)
+        if(event.getState() != EventState.POST)
             return;
 
         switch(modeValue.get().toLowerCase()) {

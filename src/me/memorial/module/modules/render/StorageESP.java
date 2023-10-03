@@ -2,8 +2,10 @@ package me.memorial.module.modules.render;
 
 import co.uk.hexeption.utils.OutlineUtils;
 import me.memorial.events.EventTarget;
-import me.memorial.events.Render2DEvent;
-import me.memorial.events.Render3DEvent;
+;
+
+import me.memorial.events.impl.render.Render2DEvent;
+import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

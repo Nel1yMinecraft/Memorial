@@ -12,8 +12,7 @@ enum class ModuleCategory(val displayName: String,val color: Int) {
     CLIENT("CLIENT",Color(196, 224, 249).rgb),
     SCRIPT("Script",Color(0, 0, 0).rgb),
     MISC("Misc",Color(0, 0, 0).rgb),
-    EXPLOIT("Exploit",Color(0, 0, 0).rgb),
-    FUN("Fun",Color(0, 0, 0).rgb);
+    EXPLOIT("Exploit",Color(0, 0, 0).rgb);
 
     @JvmName("getColor1")
     fun getColor(): Int {

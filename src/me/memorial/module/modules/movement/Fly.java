@@ -2,6 +2,8 @@ package me.memorial.module.modules.movement;
 
 import me.memorial.events.*;
 
+import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -621,7 +623,7 @@ public class Fly extends Module {
     @EventTarget
     public void onMotion(final MotionEvent event) {
         if(modeValue.get().equalsIgnoreCase("boosthypixel")) {
-            switch(event.getEventState()) {
+            switch(event.getState()) {
                 case PRE:
                     hypixelTimer.update();
 

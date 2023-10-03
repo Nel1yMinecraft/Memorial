@@ -8,11 +8,16 @@ import java.util.List;
 import java.util.Random;
 
 import me.memorial.Memorial;
-import me.memorial.events.Render2DEvent;
+import me.memorial.events.EventManager;
+import me.memorial.events.impl.render.Render2DEvent;
+import me.memorial.events.impl.render.ShaderEvent;
 import me.memorial.module.modules.render.AntiBlind;
 import me.memorial.module.modules.client.HUD;
 import me.memorial.module.modules.render.NoScoreboard;
 import me.memorial.ui.font.AWTFontRenderer;
+import me.memorial.utils.render.RenderUtils;
+import me.memorial.utils.render.blur.KawaseBloom;
+import me.memorial.utils.render.blur.KawaseBlur;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -24,6 +29,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -89,7 +95,7 @@ public class GuiIngame extends Gui
     private int lastPlayerHealth = 0;
     private long lastSystemTime = 0L;
     private long healthUpdateCounter = 0L;
-
+    private Framebuffer stencilFramebuffer = new Framebuffer(1, 1, false);
     public GuiIngame(Minecraft mcIn)
     {
         this.mc = mcIn;
@@ -335,16 +341,36 @@ public class GuiIngame extends Gui
             this.overlayPlayerList.updatePlayerList(false);
         }
 
-        Memorial.eventManager.callEvent(new Render2DEvent(partialTicks));
+        Memorial.eventManager.callEvent(new Render2DEvent(partialTicks,scaledresolution));
         AWTFontRenderer.Companion.garbageCollectionTick();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
         GlStateManager.enableAlpha();
     }
+    public void blurScreen() {
+        //修改渲染顺序bloom更自然
+        stencilFramebuffer = RenderUtils.createFrameBuffer(stencilFramebuffer);
+        stencilFramebuffer.framebufferClear();
+        stencilFramebuffer.bindFramebuffer(false);
+        Memorial.eventManager.callEvent(new ShaderEvent());
+        drawBloom();
+        stencilFramebuffer.unbindFramebuffer();
+        KawaseBloom.renderBlur(stencilFramebuffer.framebufferTexture, 2, 3);
+        stencilFramebuffer = RenderUtils.createFrameBuffer(stencilFramebuffer);
+        stencilFramebuffer.framebufferClear();
+        stencilFramebuffer.bindFramebuffer(false);
+        Memorial.eventManager.callEvent(new ShaderEvent());
+        drawBloom();
+        stencilFramebuffer.unbindFramebuffer();
+        KawaseBlur.renderBlur(stencilFramebuffer.framebufferTexture, 3, 1);
+    }
+    private void drawBloom() {
 
+    }
     protected void renderTooltip(ScaledResolution sr, float partialTicks)
     {
+        blurScreen();
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

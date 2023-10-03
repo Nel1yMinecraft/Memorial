@@ -39,6 +39,7 @@ import javax.imageio.ImageIO;
 import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
+import me.memorial.events.impl.misc.KeyEvent;
 import me.memorial.module.modules.combat.AutoClicker;
 import me.memorial.module.modules.exploit.AbortBreaking;
 import me.memorial.module.modules.exploit.MultiActions;

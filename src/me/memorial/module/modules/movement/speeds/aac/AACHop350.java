@@ -2,6 +2,7 @@ package me.memorial.module.modules.movement.speeds.aac;
 
 import me.memorial.events.*;
 import me.memorial.Memorial;
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.modules.movement.speeds.SpeedMode;
 import me.memorial.utils.MovementUtils;
 
@@ -26,7 +27,7 @@ public class AACHop350 extends SpeedMode implements Listenable {
 
     @EventTarget
     public void onMotion(final MotionEvent event) {
-        if(event.getEventState() == EventState.POST && MovementUtils.isMoving() && !mc.thePlayer.isInWater() && !mc.thePlayer.isInLava()) {
+        if(event.getState() == EventState.POST && MovementUtils.isMoving() && !mc.thePlayer.isInWater() && !mc.thePlayer.isInLava()) {
             mc.thePlayer.jumpMovementFactor += 0.00208F;
 
             if(mc.thePlayer.fallDistance <= 1F) {

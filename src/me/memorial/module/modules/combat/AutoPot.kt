@@ -3,7 +3,7 @@ package me.memorial.module.modules.combat
 import me.memorial.events.EventState.POST
 import me.memorial.events.EventState.PRE
 import me.memorial.events.EventTarget
-import me.memorial.events.MotionEvent
+import me.memorial.events.impl.player.MotionEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
@@ -45,7 +45,7 @@ class AutoPot : Module() {
         if (!msTimer.hasTimePassed(delayValue.get().toLong()) || mc.playerController.isInCreativeMode)
             return
 
-        when (motionEvent.eventState) {
+        when (motionEvent.state) {
             PRE -> {
                 // Hotbar Potion
                 val potionInHotbar = findPotion(36, 45)

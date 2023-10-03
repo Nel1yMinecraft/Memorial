@@ -13,7 +13,7 @@ import java.util.concurrent.Callable;
 
 import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
-import me.memorial.events.Render3DEvent;
+import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.modules.render.AntiBlind;
 import me.memorial.module.modules.render.CameraClip;
 import me.memorial.module.modules.render.NoHurtCam;

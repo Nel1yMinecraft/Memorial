@@ -3,8 +3,9 @@ package me.memorial.module.modules.player;
 import me.memorial.Memorial;
 import me.memorial.events.EventTarget;
 import me.memorial.events.PacketEvent;
-import me.memorial.events.Render3DEvent;
+
 import me.memorial.events.UpdateEvent;
+import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

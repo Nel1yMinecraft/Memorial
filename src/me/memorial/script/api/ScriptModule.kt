@@ -2,6 +2,10 @@ package me.memorial.script.api
 
 import jdk.nashorn.api.scripting.JSObject
 import me.memorial.events.*
+import me.memorial.events.impl.misc.KeyEvent
+import me.memorial.events.impl.player.MotionEvent
+import me.memorial.events.impl.render.Render2DEvent
+import me.memorial.events.impl.render.Render3DEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
