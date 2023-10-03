@@ -1,6 +1,7 @@
 package me.memorial.module
 
 import dev.dudu.ViaVersionFix
+import dev.nelly.hyt.HytPacketManager
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
@@ -167,7 +168,8 @@ class ModuleManager : Listenable {
             ColorMixer::class.java,
             AntiFakePlayer::class.java,
             JumpCircle::class.java,
-            AutoSkyWars::class.java
+            AutoSkyWars::class.java,
+            HytPacketManager::class.java
         )
 
         registerModule(NoScoreboard)
