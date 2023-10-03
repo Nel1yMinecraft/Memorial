@@ -8,6 +8,7 @@ import me.memorial.utils.ClientUtils
 import java.util.*
 import dev.dudu.ViaVersionFix
 import dev.nelly.hyt.HytPacketManager
+import dev.nelly.module.KillSults
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
@@ -154,7 +155,8 @@ class ModuleManager : Listenable {
             AntiFakePlayer::class.java,
             JumpCircle::class.java,
             AutoSkyWars::class.java,
-            HytPacketManager::class.java
+            HytPacketManager::class.java,
+            KillSults::class.java
         )
 
         registerModule(NoScoreboard)
