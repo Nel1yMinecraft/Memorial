@@ -1,8 +1,3 @@
-/*
- * ColorByte Hacked Client
- * A free half-open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/SkidderRyF/ColorByte/
- */
 package net.ccbluex.liquidbounce.features.module.modules.world
 
 

@@ -40,6 +40,7 @@ class ModuleManager : Listenable {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
 
         registerModules(
+                KillSults::class.java,
             AutoArmor::class.java,
             AutoLeave::class.java,
             AutoPot::class.java,
