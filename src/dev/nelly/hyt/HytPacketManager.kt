@@ -12,9 +12,9 @@ class HytPacketManager : Module() {
 
     val packets: HashSet<CustomPacket> = java.util.HashSet<CustomPacket>()
 
-    init {
-        if (state)
-            packets.add(GermModPacket())
+    @Override
+    override fun onEnable() {
+        packets.add(GermModPacket())
         packets.add(VexViewPacket())
     }
 }
