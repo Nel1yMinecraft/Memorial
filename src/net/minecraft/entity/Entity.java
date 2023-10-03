@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
+import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
 import me.memorial.events.MoveEvent;
 import me.memorial.events.StepConfirmEvent;
@@ -1758,12 +1759,15 @@ public abstract class Entity implements ICommandSender
 
     public float getCollisionBorderSize() {
         final HitBox hitBox = HitBox.Companion.getInstance();
-
-        if (hitBox.getState())
-            return 0.1F + hitBox.getSizeValue().get();
-
+        final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
+        if (OMG.getState()) {
+            return 0f;
+        }
         return 0.1F;
     }
+
+
+
 
     public Vec3 getLookVec()
     {

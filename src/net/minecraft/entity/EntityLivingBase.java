@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
 import me.memorial.events.JumpEvent;
 import me.memorial.module.modules.movement.AirJump;
@@ -1699,8 +1700,11 @@ EntityLivingBase extends Entity
 
     public void onLivingUpdate()
     {
-        if (NoJumpDelay.getInstance().getState())
-            jumpTicks = 0;
+        final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
+        double movementThreshold = 0.005D;
+        if (OMG.getState()) {
+            movementThreshold = 0.003;
+        }
 
         if (this.jumpTicks > 0)
         {
@@ -1726,17 +1730,17 @@ EntityLivingBase extends Entity
             this.motionZ *= 0.98D;
         }
 
-        if (Math.abs(this.motionX) < 0.005D)
+        if (Math.abs(this.motionX) < movementThreshold)
         {
             this.motionX = 0.0D;
         }
 
-        if (Math.abs(this.motionY) < 0.005D)
+        if (Math.abs(this.motionY) < movementThreshold)
         {
             this.motionY = 0.0D;
         }
 
-        if (Math.abs(this.motionZ) < 0.005D)
+        if (Math.abs(this.motionZ) < movementThreshold)
         {
             this.motionZ = 0.0D;
         }
@@ -1760,25 +1764,24 @@ EntityLivingBase extends Entity
         this.worldObj.theProfiler.endSection();
         this.worldObj.theProfiler.startSection("jump");
 
-        if (AirJump.getInstance().getState() && isJumping && this.jumpTicks == 0) {
-            this.jump();
-            this.jumpTicks = 10;
-        }
-        final LiquidWalk liquidWalk = LiquidWalk.getInstance();
-
-
-        if(liquidWalk.getState() && !isJumping && !isSneaking() && isInWater() && liquidWalk.modeValue.get().equalsIgnoreCase("Swim")) {
-            this.updateAITick();
-        } else if (this.isJumping) {
-            if (this.isInWater()) {
+        if (this.isJumping)
+        {
+            if (this.isInWater())
+            {
                 this.updateAITick();
-            } else if (this.isInLava()) {
+            }
+            else if (this.isInLava())
+            {
                 this.handleJumpLava();
-            } else if (this.onGround && this.jumpTicks == 0) {
+            }
+            else if (this.onGround && this.jumpTicks == 0)
+            {
                 this.jump();
                 this.jumpTicks = 10;
             }
-        } else {
+        }
+        else
+        {
             this.jumpTicks = 0;
         }
 
@@ -1798,7 +1801,6 @@ EntityLivingBase extends Entity
 
         this.worldObj.theProfiler.endSection();
     }
-
     protected void updateEntityActionState()
     {
     }

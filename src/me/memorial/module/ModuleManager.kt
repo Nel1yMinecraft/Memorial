@@ -1,5 +1,6 @@
 package me.memorial.module
 
+import dev.dudu.ViaVersionFix
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
@@ -44,6 +45,7 @@ class ModuleManager : Listenable {
             AutoPot::class.java,
             AutoSoup::class.java,
             AutoWeapon::class.java,
+            ViaVersionFix::class.java,
             Criticals::class.java,
             KillAura::class.java,
             Velocity::class.java,
