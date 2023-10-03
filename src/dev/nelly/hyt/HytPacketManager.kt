@@ -13,8 +13,8 @@ class HytPacketManager : Module() {
     val packets: HashSet<CustomPacket> = java.util.HashSet<CustomPacket>()
 
     init {
-        packets.add(GermModPacket())
-        //packets.add(new Hyt0Packet());
+        if (state)
+            packets.add(GermModPacket())
         packets.add(VexViewPacket())
     }
 }
