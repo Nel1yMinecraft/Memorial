@@ -523,6 +523,7 @@ class KillAura : Module() {
         AttackOrder.sendFixedAttack(mc.thePlayer, target);
 
         if (keepSprintValue.get()) {
+            mc.thePlayer.isSprinting = true
             // Critical Effect
             if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder &&
                     !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && !mc.thePlayer.isRiding)
@@ -532,6 +533,7 @@ class KillAura : Module() {
             if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, entity.creatureAttribute) > 0F)
                 mc.thePlayer.onEnchantmentCritical(entity)
         } else {
+            mc.thePlayer.isSprinting = false
             if (mc.playerController.currentGameType != WorldSettings.GameType.SPECTATOR)
                 mc.thePlayer.attackTargetEntityWithCurrentItem(entity)
         }
