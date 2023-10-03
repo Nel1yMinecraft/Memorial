@@ -10,7 +10,7 @@ import java.util.Random;
 import me.memorial.Memorial;
 import me.memorial.events.Render2DEvent;
 import me.memorial.module.modules.render.AntiBlind;
-import me.memorial.module.modules.render.HUD;
+import me.memorial.module.modules.client.HUD;
 import me.memorial.module.modules.render.NoScoreboard;
 import me.memorial.ui.font.AWTFontRenderer;
 import net.minecraft.block.material.Material;

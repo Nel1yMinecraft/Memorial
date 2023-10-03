@@ -1,6 +1,7 @@
 package me.memorial.utils;
 
 import com.google.gson.JsonObject;
+import me.memorial.Memorial;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.login.client.C01PacketEncryptionResponse;
@@ -15,7 +16,7 @@ import java.security.PublicKey;
 
 public final class ClientUtils extends MinecraftInstance {
 
-    private static final Logger logger = LogManager.getLogger("LiquidBounce");
+    private static final Logger logger = LogManager.getLogger(Memorial.CLIENT_NAME);
 
     private static Field fastRenderField;
 

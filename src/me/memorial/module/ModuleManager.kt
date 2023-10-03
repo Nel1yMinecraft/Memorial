@@ -10,6 +10,8 @@ import me.memorial.events.EventTarget
 import me.memorial.events.KeyEvent
 import me.memorial.module.modules.exploit.*
 import me.memorial.events.Listenable
+import me.memorial.module.modules.client.HUD
+import me.memorial.module.modules.client.Rotations
 import me.memorial.module.modules.`fun`.Derp
 import me.memorial.module.modules.`fun`.SkinDerp
 import me.memorial.module.modules.misc.*

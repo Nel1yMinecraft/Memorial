@@ -1,15 +1,16 @@
 package me.memorial
 
+import dev.nelly.viamcp.ViaMCP
 import me.memorial.cape.CapeAPI.registerCapeService
+import me.memorial.command.CommandManager
 import me.memorial.events.ClientShutdownEvent
 import me.memorial.events.EventManager
-import me.memorial.command.CommandManager
+import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager
+import me.memorial.script.ScriptManager
 import me.memorial.special.AntiForge
 import me.memorial.special.BungeeCordSpoof
 import me.memorial.special.DonatorCape
-import me.memorial.file.FileManager
-import me.memorial.script.ScriptManager
 import me.memorial.tabs.BlocksTab
 import me.memorial.tabs.ExploitsTab
 import me.memorial.tabs.HeadsTab
@@ -25,6 +26,7 @@ import me.memorial.utils.InventoryUtils
 import me.memorial.utils.RotationUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
+
 
 object Memorial {
 
@@ -136,6 +138,14 @@ object Memorial {
         guiMain = GuiMainMenu()
         //guiMain = MainMenu()
 
+        try {
+            ClientUtils.getLogger().info("Starting ViaMCP...")
+            val viaMCP = ViaMCP.getInstance()
+            viaMCP.start()
+            viaMCP.initAsyncSlider(100, 100, 110, 20)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         // Set is starting status
         isStarting = false
     }

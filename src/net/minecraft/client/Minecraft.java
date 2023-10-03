@@ -36,6 +36,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
+import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 import me.memorial.module.modules.combat.AutoClicker;
@@ -1437,7 +1438,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (this.leftClickCounter <= 0)
         {
-            this.thePlayer.swingItem();
+        //    this.thePlayer.swingItem();
+            AttackOrder.sendConditionalSwing(this.objectMouseOver);
 
             if (this.objectMouseOver == null)
             {
@@ -1453,7 +1455,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 switch (this.objectMouseOver.typeOfHit)
                 {
                     case ENTITY:
-                        this.playerController.attackEntity(this.thePlayer, this.objectMouseOver.entityHit);
+                        AttackOrder.sendFixedAttack(this.thePlayer, this.objectMouseOver.entityHit);
                         break;
 
                     case BLOCK:
