@@ -10,10 +10,10 @@ import net.minecraft.util.BlockPos;
 @Getter
 @Setter
 public class BlockBBEvent extends Event {
-    private BlockPos blockPos;
-    private Block block;
-    private AxisAlignedBB boundingBox;
-    private int x, y, z;
+    public BlockPos blockPos;
+    public Block block;
+    public AxisAlignedBB boundingBox;
+    public int x, y, z;
 
     public BlockBBEvent(BlockPos blockPos, Block block, AxisAlignedBB boundingBox) {
         this.blockPos = blockPos;
