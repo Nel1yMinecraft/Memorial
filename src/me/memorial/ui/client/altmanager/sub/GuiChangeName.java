@@ -1,7 +1,7 @@
 package me.memorial.ui.client.altmanager.sub;
 
 import me.memorial.Memorial;
-import me.memorial.events.SessionEvent;
+import me.memorial.events.impl.misc.SessionEvent;
 import me.memorial.ui.client.altmanager.GuiAltManager;
 import me.memorial.ui.font.Fonts;
 import net.minecraft.client.gui.Gui;

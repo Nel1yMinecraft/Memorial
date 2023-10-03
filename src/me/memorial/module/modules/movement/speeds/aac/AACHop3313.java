@@ -1,8 +1,8 @@
 package me.memorial.module.modules.movement.speeds.aac;
 
 import me.memorial.Memorial;
-import me.memorial.events.JumpEvent;
-import me.memorial.events.MoveEvent;
+import me.memorial.events.impl.move.JumpEvent;
+import me.memorial.events.impl.move.MoveEvent;
 import me.memorial.module.modules.movement.speeds.SpeedMode;
 import me.memorial.utils.MovementUtils;
 import me.memorial.utils.block.BlockUtils;

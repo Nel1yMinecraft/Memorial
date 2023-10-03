@@ -1,4 +1,4 @@
-package me.memorial.events.impl.player;
+package me.memorial.events.impl.move;
 
 import lombok.Getter;
 import lombok.Setter;

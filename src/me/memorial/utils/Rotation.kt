@@ -1,6 +1,6 @@
 package me.memorial.utils
 
-import me.memorial.events.StrafeEvent
+import me.memorial.events.impl.move.StrafeEvent
 import me.memorial.utils.block.PlaceInfo
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.MathHelper

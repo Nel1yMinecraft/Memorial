@@ -4,6 +4,8 @@ import me.memorial.events.*;
 import me.memorial.Memorial;
 
 import me.memorial.events.impl.misc.KeyEvent;
+import me.memorial.events.impl.misc.ScreenEvent;
+import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;

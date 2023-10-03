@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.Map.Entry;
 
 import me.memorial.Memorial;
-import me.memorial.events.EntityMovementEvent;
+import me.memorial.events.impl.player.EntityMovementEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.Minecraft;
@@ -566,7 +566,8 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
             float f1 = packetIn.func_149060_h() ? (float)(packetIn.func_149063_g() * 360) / 256.0F : entity.rotationPitch;
             entity.setPositionAndRotation2(d0, d1, d2, f, f1, 3, false);
             entity.onGround = packetIn.getOnGround();
-            Memorial.eventManager.callEvent(new EntityMovementEvent(entity));
+            EntityMovementEvent event = new EntityMovementEvent(entity);
+            Memorial.eventManager.callEvent(event);
 
         }
     }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import me.memorial.Memorial;
-import me.memorial.events.BlockBBEvent;
+import me.memorial.events.impl.world.BlockBBEvent;
 import me.memorial.module.modules.combat.Criticals;
 import me.memorial.module.modules.exploit.GhostHand;
 import me.memorial.module.modules.player.NoFall;

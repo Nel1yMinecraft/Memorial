@@ -2,10 +2,10 @@ package net.minecraft.client.entity;
 
 import me.memorial.Memorial;
 import me.memorial.events.EventState;
-import me.memorial.events.PushOutEvent;
-import me.memorial.events.SlowDownEvent;
-import me.memorial.events.UpdateEvent;
-import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.player.PushOutEvent;
+import me.memorial.events.impl.move.SlowDownEvent;
+import me.memorial.events.impl.move.MotionEvent;
+import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.module.modules.combat.KillAura;
 import me.memorial.module.modules.exploit.PortalMenu;
 import me.memorial.module.modules.movement.InventoryMove;

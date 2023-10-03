@@ -1,7 +1,7 @@
 package me.memorial.module.modules.movement;
 
 import me.memorial.events.EventTarget;
-import me.memorial.events.JumpEvent;
+import me.memorial.events.impl.move.JumpEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

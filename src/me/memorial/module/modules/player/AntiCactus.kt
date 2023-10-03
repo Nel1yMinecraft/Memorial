@@ -1,6 +1,6 @@
 package me.memorial.module.modules.player
 
-import me.memorial.events.BlockBBEvent
+import me.memorial.events.impl.world.BlockBBEvent
 import me.memorial.events.EventTarget
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory

@@ -3,7 +3,7 @@ package me.memorial.command.commands
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
 import me.memorial.events.Listenable
-import me.memorial.events.PacketEvent
+import me.memorial.events.impl.misc.PacketEvent
 import me.memorial.command.Command
 import net.minecraft.network.handshake.client.C00Handshake
 

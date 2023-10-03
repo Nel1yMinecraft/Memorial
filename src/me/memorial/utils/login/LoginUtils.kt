@@ -7,7 +7,7 @@ import com.mojang.authlib.exceptions.AuthenticationUnavailableException
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication
 import me.memorial.Memorial
-import me.memorial.events.SessionEvent
+import me.memorial.events.impl.misc.SessionEvent
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.login.UserUtils.getUUID
 import net.minecraft.util.Session

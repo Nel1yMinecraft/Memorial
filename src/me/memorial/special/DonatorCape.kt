@@ -2,7 +2,7 @@ package me.memorial.special
 
 import me.memorial.events.EventTarget
 import me.memorial.events.Listenable
-import me.memorial.events.SessionEvent
+import me.memorial.events.impl.misc.SessionEvent
 import me.memorial.utils.MinecraftInstance
 
 //TODO: Restore functionality (or crack this would be ok too)

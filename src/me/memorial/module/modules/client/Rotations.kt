@@ -2,7 +2,7 @@ package me.memorial.module.modules.client
 
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
-import me.memorial.events.PacketEvent
+import me.memorial.events.impl.misc.PacketEvent
 import me.memorial.events.impl.render.Render3DEvent
 
 import me.memorial.module.Module

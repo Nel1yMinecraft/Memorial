@@ -3,7 +3,7 @@ package me.memorial
 import dev.nelly.viamcp.ViaMCP
 import me.memorial.cape.CapeAPI.registerCapeService
 import me.memorial.command.CommandManager
-import me.memorial.events.ClientShutdownEvent
+import me.memorial.events.impl.misc.ClientShutdownEvent
 import me.memorial.events.EventManager
 import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager

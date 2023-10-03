@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import me.memorial.Memorial;
-import me.memorial.events.TextEvent;
+import me.memorial.events.impl.misc.TextEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

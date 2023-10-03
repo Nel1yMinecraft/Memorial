@@ -1,9 +1,9 @@
 package me.memorial.utils;
 
-import me.memorial.events.ClickWindowEvent;
 import me.memorial.events.EventTarget;
 import me.memorial.events.Listenable;
-import me.memorial.events.PacketEvent;
+import me.memorial.events.impl.misc.ClickWindowEvent;
+import me.memorial.events.impl.misc.PacketEvent;
 import me.memorial.utils.timer.MSTimer;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

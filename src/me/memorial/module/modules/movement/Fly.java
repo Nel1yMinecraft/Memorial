@@ -2,8 +2,14 @@ package me.memorial.module.modules.movement;
 
 import me.memorial.events.*;
 
-import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.misc.PacketEvent;
+import me.memorial.events.impl.move.JumpEvent;
+import me.memorial.events.impl.move.MotionEvent;
+import me.memorial.events.impl.move.MoveEvent;
+import me.memorial.events.impl.move.StepEvent;
+import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.events.impl.render.Render3DEvent;
+import me.memorial.events.impl.world.BlockBBEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
