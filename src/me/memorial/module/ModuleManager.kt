@@ -1,6 +1,7 @@
 package me.memorial.module
 
 import dev.nelly.sk1d.module.AntiFakePlayer
+import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
@@ -161,7 +162,8 @@ class ModuleManager : Listenable {
             PortalMenu::class.java,
             ColorMixer::class.java,
             AntiFakePlayer::class.java,
-            JumpCircle::class.java
+            JumpCircle::class.java,
+            AutoSkyWars::class.java
         )
 
         registerModule(NoScoreboard)
