@@ -10,7 +10,7 @@ import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
 
-@ModuleInfo(name = "ViaVersionFix", description = "", category = ModuleCategory.EXPLOIT)
+@ModuleInfo(name = "ViaVersionFix", description = "1.12.2 Fix", category = ModuleCategory.EXPLOIT)
 public class ViaVersionFix extends Module {
 
     @Override
