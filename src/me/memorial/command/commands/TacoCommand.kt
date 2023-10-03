@@ -3,9 +3,10 @@ package me.memorial.command.commands
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
 import me.memorial.events.Listenable
-import me.memorial.events.Render2DEvent
+
 import me.memorial.events.UpdateEvent
 import me.memorial.command.Command
+import me.memorial.events.impl.render.Render2DEvent
 import me.memorial.utils.ClientUtils
 import me.memorial.utils.render.RenderUtils
 import net.minecraft.client.gui.ScaledResolution

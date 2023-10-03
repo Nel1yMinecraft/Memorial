@@ -1,7 +1,7 @@
 package me.memorial.module.modules.movement;
 
 import me.memorial.events.EventTarget;
-import me.memorial.events.MotionEvent;
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.events.SlowDownEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
@@ -57,7 +57,7 @@ public class NoSlow extends Module {
             return;
         }
         if (this.packet.get()) {
-            switch (event.getEventState()) {
+            switch (event.getState()) {
                 case PRE:
                     C07PacketPlayerDigging digging = new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN);
                     mc.getNetHandler().addToSendQueue(digging);

@@ -1,6 +1,8 @@
 package me.memorial.module.modules.world
 
 import me.memorial.events.*
+import me.memorial.events.impl.player.MotionEvent
+import me.memorial.events.impl.render.Render3DEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
@@ -57,7 +59,7 @@ class CivBreak : Module() {
         if (BlockUtils.getBlock(pos) is BlockAir || BlockUtils.getCenterDistance(pos) > range.get())
             return
 
-        when (event.eventState) {
+        when (event.state) {
             EventState.PRE -> if (rotationsValue.get())
                 RotationUtils.setTargetRotation((RotationUtils.faceBlock(pos) ?: return).rotation)
 

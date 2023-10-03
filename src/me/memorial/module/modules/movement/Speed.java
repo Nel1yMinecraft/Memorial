@@ -1,6 +1,7 @@
 package me.memorial.module.modules.movement;
 
 import me.memorial.events.*;
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.modules.movement.speeds.aac.*;
 import me.memorial.module.modules.movement.speeds.ncp.*;
 import me.memorial.module.modules.movement.speeds.other.*;
@@ -120,7 +121,7 @@ public class Speed extends Module {
 
     @EventTarget
     public void onMotion(final MotionEvent event) {
-        if(mc.thePlayer.isSneaking() || event.getEventState() != EventState.PRE)
+        if(mc.thePlayer.isSneaking() || event.getState() != EventState.PRE)
             return;
 
         if(MovementUtils.isMoving())

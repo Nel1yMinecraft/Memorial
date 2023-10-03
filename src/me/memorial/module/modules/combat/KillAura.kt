@@ -2,6 +2,8 @@ package me.memorial.module.modules.combat
 
 import me.memorial.events.*
 import me.memorial.Memorial
+import me.memorial.events.impl.player.MotionEvent
+import me.memorial.events.impl.render.Render3DEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
@@ -202,7 +204,7 @@ class KillAura : Module() {
      */
     @EventTarget
     fun onMotion(event: MotionEvent) {
-        if (event.eventState == EventState.POST) {
+        if (event.state == EventState.POST) {
             target ?: return
             currentTarget ?: return
 

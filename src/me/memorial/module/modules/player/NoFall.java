@@ -3,6 +3,7 @@ package me.memorial.module.modules.player;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -172,7 +173,7 @@ public class NoFall extends Module {
         if (!modeValue.get().equalsIgnoreCase("MLG"))
             return;
 
-        if (event.getEventState() == EventState.PRE) {
+        if (event.getState() == EventState.PRE) {
             currentMlgRotation = null;
             mlgTimer.update();
 

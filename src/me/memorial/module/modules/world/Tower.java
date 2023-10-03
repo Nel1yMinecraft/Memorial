@@ -3,6 +3,8 @@ package me.memorial.module.modules.world;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 
+import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -111,7 +113,7 @@ public class Tower extends Module {
 
         mc.timer.timerSpeed = timerValue.get();
 
-        final EventState eventState = event.getEventState();
+        final EventState eventState = event.getState();
 
         if (placeModeValue.get().equalsIgnoreCase(eventState.getStateName()))
             place();

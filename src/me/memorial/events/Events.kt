@@ -50,22 +50,7 @@ data class EntityMovementEvent(val movedEntity: Entity) : Event()
  *
  * @param motion jump motion (y motion)
  */
-class JumpEvent(var motion: Float) : CancellableEvent()
-
-/**
- * Called when user press a key once
- *
- * @param key Pressed key
- */
-class KeyEvent(val key: Int) : Event()
-
-/**
- * Called in "onUpdateWalkingPlayer"
- *
- * @param eventState PRE or POST
- */
-class MotionEvent(val eventState: EventState) : Event()
-
+class JumpEvent(var motion: Float) : me.memorial.events.impl.callables.CancellableEvent()
 /**
  * Called in "onLivingUpdate" when the player is using a use item.
  *
@@ -77,7 +62,7 @@ class SlowDownEvent(var strafe: Float, var forward: Float) : Event()
 /**
  * Called in "moveFlying"
  */
-class StrafeEvent(val strafe: Float, val forward: Float, val friction: Float) : CancellableEvent()
+class StrafeEvent(val strafe: Float, val forward: Float, val friction: Float) : me.memorial.events.impl.callables.CancellableEvent()
 
 /**
  * Called when player moves
@@ -86,7 +71,7 @@ class StrafeEvent(val strafe: Float, val forward: Float, val friction: Float) : 
  * @param y motion
  * @param z motion
  */
-class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent() {
+class MoveEvent(var x: Double, var y: Double, var z: Double) : me.memorial.events.impl.callables.CancellableEvent() {
     var isSafeWalk = false
 
     fun zero() {
@@ -104,23 +89,12 @@ class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent(
 /**
  * Called when receive or send a packet
  */
-class PacketEvent(val packet: Packet<*>) : CancellableEvent()
+class PacketEvent(val packet: Packet<*>) : me.memorial.events.impl.callables.CancellableEvent()
 
 /**
  * Called when a block tries to push you
  */
-class PushOutEvent : CancellableEvent()
-
-/**
- * Called when screen is going to be rendered
- */
-class Render2DEvent(val partialTicks: Float) : Event()
-
-/**
- * Called when world is going to be rendered
- */
-class Render3DEvent(val partialTicks: Float) : Event()
-
+class PushOutEvent : me.memorial.events.impl.callables.CancellableEvent()
 /**
  * Called when entity is going to be rendered
  */
@@ -170,7 +144,7 @@ class WorldEvent(val worldClient: WorldClient?) : Event()
 /**
  * Called when window clicked
  */
-class ClickWindowEvent(val windowId: Int, val slotId: Int, val mouseButtonClicked: Int, val mode: Int) : CancellableEvent()
+class ClickWindowEvent(val windowId: Int, val slotId: Int, val mouseButtonClicked: Int, val mode: Int) : me.memorial.events.impl.callables.CancellableEvent()
 
 /**
  * EntityKill Event

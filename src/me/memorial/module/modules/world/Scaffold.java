@@ -3,6 +3,9 @@ package me.memorial.module.modules.world;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 
+import me.memorial.events.impl.player.MotionEvent;
+import me.memorial.events.impl.render.Render2DEvent;
+import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -257,7 +260,7 @@ public class Scaffold extends Module {
 
     @EventTarget
     public void onMotion(final MotionEvent event) {
-        final EventState eventState = event.getEventState();
+        final EventState eventState = event.getState();
 
         // Lock Rotation
         if (rotationsValue.get() && keepRotationValue.get() && lockRotation != null)

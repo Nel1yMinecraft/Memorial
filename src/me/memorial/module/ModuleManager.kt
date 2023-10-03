@@ -5,11 +5,9 @@ import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
-import me.memorial.events.KeyEvent
 import me.memorial.module.modules.exploit.*
 import me.memorial.events.Listenable
-import me.memorial.module.modules.`fun`.Derp
-import me.memorial.module.modules.`fun`.SkinDerp
+import me.memorial.events.impl.misc.KeyEvent
 import me.memorial.module.modules.misc.*
 import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
@@ -93,7 +91,6 @@ class ModuleManager : Listenable {
             XRay::class.java,
             Timer::class.java,
             Sneak::class.java,
-            SkinDerp::class.java,
             Paralyze::class.java,
             AutoWalk::class.java,
             AutoBreak::class.java,
@@ -118,7 +115,6 @@ class ModuleManager : Listenable {
             NoFOV::class.java,
             FastStairs::class.java,
             SwingAnimation::class.java,
-            Derp::class.java,
             ReverseStep::class.java,
             InventoryCleaner::class.java,
             TrueSight::class.java,

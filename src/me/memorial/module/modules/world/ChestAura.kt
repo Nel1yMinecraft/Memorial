@@ -3,7 +3,7 @@ package me.memorial.module.modules.world
 import me.memorial.Memorial
 import me.memorial.events.EventState
 import me.memorial.events.EventTarget
-import me.memorial.events.MotionEvent
+import me.memorial.events.impl.player.MotionEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
@@ -44,7 +44,7 @@ object ChestAura : Module() {
         if (Memorial.moduleManager[Blink::class.java]!!.state)
             return
 
-        when (event.eventState) {
+        when (event.state) {
             EventState.PRE -> {
                 if (mc.currentScreen is GuiContainer)
                     timer.reset()

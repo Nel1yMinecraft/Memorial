@@ -1,10 +1,13 @@
 package net.minecraft.client.entity;
 
-import me.memorial.events.*;
 import me.memorial.Memorial;
+import me.memorial.events.EventState;
+import me.memorial.events.PushOutEvent;
+import me.memorial.events.SlowDownEvent;
+import me.memorial.events.UpdateEvent;
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.modules.combat.KillAura;
 import me.memorial.module.modules.exploit.PortalMenu;
-import me.memorial.module.modules.fun.Derp;
 import me.memorial.module.modules.movement.InventoryMove;
 import me.memorial.module.modules.movement.NoSlow;
 import me.memorial.module.modules.movement.Sneak;
@@ -145,7 +148,13 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer() {
         try {
-            Memorial.eventManager.callEvent(new MotionEvent(EventState.PRE));
+            MotionEvent pre = new MotionEvent(posX,  posY, posZ, rotationYaw, rotationPitch, onGround, EventState.PRE);
+            MotionEvent post = new MotionEvent(EventState.POST);
+            Memorial.eventManager.callEvent(pre);
+
+            if (pre.isCancelled()) {
+                Memorial.eventManager.callEvent(post);
+            }
 
             final InventoryMove inventoryMove = InventoryMove.getInstance();
             final Sneak sneak = Sneak.getInstance();
@@ -179,13 +188,6 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 float lastReportedYaw = RotationUtils.serverRotation.getYaw();
                 float lastReportedPitch = RotationUtils.serverRotation.getPitch();
 
-                final Derp derp = Derp.getInstance();
-                if (derp.getState()) {
-                    float[] rot = derp.getRotation();
-                    yaw = rot[0];
-                    pitch = rot[1];
-                }
-
                 if (RotationUtils.targetRotation != null) {
                     yaw = RotationUtils.targetRotation.getYaw();
                     pitch = RotationUtils.targetRotation.getPitch();
@@ -199,18 +201,28 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 boolean moved = xDiff * xDiff + yDiff * yDiff + zDiff * zDiff > 9.0E-4D || this.positionUpdateTicks >= 20;
                 boolean rotated = yawDiff != 0.0D || pitchDiff != 0.0D;
 
-                if (this.ridingEntity == null) {
-                    if (moved && rotated) {
-                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, yaw, pitch, this.onGround));
-                    } else if (moved) {
-                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.onGround));
-                    } else if (rotated) {
-                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(yaw, pitch, this.onGround));
-                    } else {
-                        this.sendQueue.addToSendQueue(new C03PacketPlayer(this.onGround));
+                if (this.ridingEntity == null)
+                {
+                    if (moved && rotated)
+                    {
+                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(pre.getPosX(), pre.getPosY(), pre.getPosZ(), pre.getYaw(), pre.getPitch(), pre.isOnGround()));
                     }
-                } else {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, yaw, pitch, this.onGround));
+                    else if (moved)
+                    {
+                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(pre.getPosX(), pre.getPosY(), pre.getPosZ(), pre.isOnGround()));
+                    }
+                    else if (rotated)
+                    {
+                        this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(pre.getYaw(), pre.getPitch(), pre.isOnGround()));
+                    }
+                    else
+                    {
+                        this.sendQueue.addToSendQueue(new C03PacketPlayer(pre.isOnGround()));
+                    }
+                }
+                else
+                {
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, pre.getYaw(), pre.getPitch(), pre.isOnGround()));
                     moved = false;
                 }
 
@@ -229,7 +241,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 }
             }
 
-            Memorial.eventManager.callEvent(new MotionEvent(EventState.POST));
+            Memorial.eventManager.callEvent(post);
         } catch (final Exception e) {
             e.printStackTrace();
         }

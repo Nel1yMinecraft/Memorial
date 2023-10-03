@@ -2,7 +2,8 @@ package me.memorial.module.modules.misc;
 
 import me.memorial.Memorial;
 import me.memorial.events.EventTarget;
-import me.memorial.events.Render2DEvent;
+;
+import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;

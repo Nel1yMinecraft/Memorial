@@ -2,7 +2,7 @@ package me.memorial.module.modules.movement;
 
 import me.memorial.events.EventState;
 import me.memorial.events.EventTarget;
-import me.memorial.events.MotionEvent;
+import me.memorial.events.impl.player.MotionEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -56,7 +56,7 @@ public class Sneak extends Module {
                 mc.gameSettings.keyBindSneak.pressed = true;
                 break;
             case "switch":
-                switch(event.getEventState()) {
+                switch(event.getState()) {
                     case PRE:
                         if (!MovementUtils.isMoving())
                             return;
@@ -71,7 +71,7 @@ public class Sneak extends Module {
                 }
                 break;
             case "minesecure":
-                if(event.getEventState() == EventState.PRE)
+                if(event.getState() == EventState.PRE)
                     break;
 
                 mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, C0BPacketEntityAction.Action.START_SNEAKING));

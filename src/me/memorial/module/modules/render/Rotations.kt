@@ -3,11 +3,11 @@ package me.memorial.module.modules.render
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
 import me.memorial.events.PacketEvent
-import me.memorial.events.Render3DEvent
+import me.memorial.events.impl.render.Render3DEvent
+
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
-import me.memorial.module.modules.`fun`.Derp
 import me.memorial.module.modules.combat.KillAura
 import me.memorial.module.modules.world.*
 import me.memorial.utils.RotationUtils
@@ -49,8 +49,7 @@ class Rotations : Module() {
     private fun shouldRotate(): Boolean {
         val killAura = Memorial.moduleManager.getModule(KillAura::class.java) as KillAura
         return getState(Scaffold::class.java) || getState(Tower::class.java) ||
-                (getState(KillAura::class.java) && killAura.target != null) ||
-                getState(Derp::class.java) || getState(ChestAura::class.java)
+                (getState(KillAura::class.java) && killAura.target != null) || getState(ChestAura::class.java)
                 getState(Fucker::class.java) || getState(CivBreak::class.java) || getState(Nuker::class.java)
         }
     }
