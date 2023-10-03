@@ -21,6 +21,7 @@ import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
 import me.memorial.module.modules.world.*
 import me.memorial.module.modules.world.Timer
+import net.ccbluex.liquidbounce.features.module.modules.world.ScaFull
 
 class ModuleManager : Listenable {
 
@@ -44,7 +45,9 @@ class ModuleManager : Listenable {
             AutoSoup::class.java,
             AutoWeapon::class.java,
             ViaVersionFix::class.java,
+            ScaFull::class.java,
             Criticals::class.java,
+            ScaffoldHelper::class.java,
             KillAura::class.java,
             Velocity::class.java,
             Fly::class.java,
