@@ -1,5 +1,11 @@
 package me.memorial.module
 
+import me.memorial.Memorial
+import me.memorial.events.EventTarget
+import me.memorial.events.Listenable
+import me.memorial.events.impl.misc.KeyEvent
+import me.memorial.utils.ClientUtils
+import java.util.*
 import dev.dudu.ViaVersionFix
 import dev.nelly.hyt.HytPacketManager
 import dev.nelly.sk1d.module.AntiFakePlayer
@@ -7,11 +13,7 @@ import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
-import me.memorial.Memorial
-import me.memorial.events.EventTarget
 import me.memorial.module.modules.exploit.*
-import me.memorial.events.Listenable
-import me.memorial.events.impl.misc.KeyEvent
 import me.memorial.module.modules.client.HUD
 import me.memorial.module.modules.client.Rotations
 import me.memorial.module.modules.misc.*
@@ -19,9 +21,6 @@ import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
 import me.memorial.module.modules.world.*
 import me.memorial.module.modules.world.Timer
-import me.memorial.utils.ClientUtils
-import java.util.*
-
 
 class ModuleManager : Listenable {
 
@@ -53,7 +52,6 @@ class ModuleManager : Listenable {
             HighJump::class.java,
             InventoryMove::class.java,
             NoSlow::class.java,
-            LiquidWalk::class.java,
             SafeWalk::class.java,
             WallClimb::class.java,
             Strafe::class.java,
@@ -80,7 +78,6 @@ class ModuleManager : Listenable {
             NoClip::class.java,
             Nuker::class.java,
             PingSpoof::class.java,
-            FastClimb::class.java,
             Step::class.java,
             AutoRespawn::class.java,
             AutoTool::class.java,
@@ -99,7 +96,6 @@ class ModuleManager : Listenable {
             Timer::class.java,
             Sneak::class.java,
             Paralyze::class.java,
-            AutoWalk::class.java,
             AutoBreak::class.java,
             FreeCam::class.java,
             Eagle::class.java,
@@ -110,7 +106,6 @@ class ModuleManager : Listenable {
             Parkour::class.java,
             LadderJump::class.java,
             MultiActions::class.java,
-            AirJump::class.java,
             AutoClicker::class.java,
             NoBob::class.java,
             BlockOverlay::class.java,
@@ -120,14 +115,12 @@ class ModuleManager : Listenable {
             Phase::class.java,
             ServerCrasher::class.java,
             NoFOV::class.java,
-            FastStairs::class.java,
             SwingAnimation::class.java,
             ReverseStep::class.java,
             InventoryCleaner::class.java,
             TrueSight::class.java,
             AntiBlind::class.java,
             NoSwing::class.java,
-            BugUp::class.java,
             Breadcrumbs::class.java,
             AbortBreaking::class.java,
             PotionSaver::class.java,
@@ -139,19 +132,15 @@ class ModuleManager : Listenable {
             Kick::class.java,
             Liquids::class.java,
             AtAllProvider::class.java,
-            AirLadder::class.java,
-            BufferSpeed::class.java,
             SuperKnockback::class.java,
             ProphuntESP::class.java,
             AutoFish::class.java,
             Damage::class.java,
-            Freeze::class.java,
             KeepContainer::class.java,
             VehicleOneHit::class.java,
             Reach::class.java,
             Rotations::class.java,
             NoJumpDelay::class.java,
-            BlockWalk::class.java,
             AntiAFK::class.java,
             PerfectHorseJump::class.java,
             HUD::class.java,
