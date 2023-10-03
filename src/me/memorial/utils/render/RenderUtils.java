@@ -82,7 +82,10 @@ public final class RenderUtils extends MinecraftInstance {
     public static void bindTexture(int texture) {
         glBindTexture(GL_TEXTURE_2D, texture);
     }
-
+    public static void setAlphaLimit(float limit) {
+        GlStateManager.enableAlpha();
+        GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
+    }
     public static Framebuffer createFrameBuffer(Framebuffer framebuffer, boolean depth) {
         if (needsNewFramebuffer(framebuffer)) {
             if (framebuffer != null) {
