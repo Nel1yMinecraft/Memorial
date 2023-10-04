@@ -1403,8 +1403,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         if (!leftClick) {
             this.leftClickCounter = 0;
         }
+        final MultiActions MultiActions = (me.memorial.module.modules.exploit.MultiActions) Memorial.moduleManager.getModule(MultiActions.class);
 
-        if (this.leftClickCounter <= 0 && (!this.thePlayer.isUsingItem() || MultiActions.Companion.getInstance().getState())) {
+        if (this.leftClickCounter <= 0 && (!this.thePlayer.isUsingItem() || MultiActions.getState())) {
             if (leftClick && this.objectMouseOver != null && this.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 BlockPos blockpos = this.objectMouseOver.getBlockPos();
                 if(this.leftClickCounter == 0) {

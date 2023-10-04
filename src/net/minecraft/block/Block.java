@@ -8,6 +8,7 @@ import me.memorial.Memorial;
 import me.memorial.events.impl.world.BlockBBEvent;
 import me.memorial.module.Module;
 import me.memorial.module.modules.combat.Criticals;
+import me.memorial.module.modules.exploit.AbortBreaking;
 import me.memorial.module.modules.exploit.GhostHand;
 import me.memorial.module.modules.movement.Speed;
 import me.memorial.module.modules.player.NoFall;
@@ -430,9 +431,11 @@ public class Block
     }
 
     public boolean isCollidable() {
-        GhostHand hand = GhostHand.Companion.getInstance();
+        GhostHand hand = (GhostHand) Memorial.moduleManager.getModule(GhostHand.class);
+        final Integer block = ((GhostHand) Objects.requireNonNull(Memorial.moduleManager.getModule(GhostHand.class))).blockValue.get();
+
         if(hand != null && hand.getState()){
-            return hand.getBlockValue().get() == Block.getIdFromBlock(this);
+            return block == Block.getIdFromBlock(this);
         }
         return true;
     }

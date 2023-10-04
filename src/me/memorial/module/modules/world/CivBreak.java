@@ -68,7 +68,7 @@ public class CivBreak extends Module {
         switch (event.state) {
             case PRE:
                 if (rotationsValue.get()) {
-                    RotationUtils.setTargetRotation(RotationUtils.faceBlock(pos));
+                    RotationUtils.setTargetRotation(RotationUtils.faceBlock(pos).getRotation());
                 }
                 break;
             case POST:

@@ -1,6 +1,7 @@
 package me.memorial.module.modules.render;
 
 import co.uk.hexeption.utils.OutlineUtils;
+import me.memorial.Memorial;
 import me.memorial.events.EventTarget;
 ;
 
@@ -9,6 +10,7 @@ import me.memorial.events.impl.render.Render3DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
+import me.memorial.module.modules.exploit.GhostHand;
 import me.memorial.module.modules.world.ChestAura;
 import me.memorial.utils.ClientUtils;
 import me.memorial.utils.render.RenderUtils;
@@ -22,8 +24,11 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.tileentity.*;
+import net.minecraft.util.BlockPos;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -36,11 +41,13 @@ public class StorageESP extends Module {
     private final BoolValue furnaceValue = new BoolValue("Furnace", true);
     private final BoolValue dispenserValue = new BoolValue("Dispenser", true);
     private final BoolValue hopperValue = new BoolValue("Hopper", true);
+    ArrayList<BlockPos> getClickedBlocks = ((ChestAura) Objects.requireNonNull(Memorial.moduleManager.getModule(ChestAura.class))).clickedBlocks;
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
         try {
             final String mode = modeValue.get();
+
 
             if (mode.equalsIgnoreCase("outline")) {
                 ClientUtils.disableFastRender();
@@ -53,10 +60,10 @@ public class StorageESP extends Module {
             for (final TileEntity tileEntity : mc.theWorld.loadedTileEntityList) {
                 Color color = null;
 
-                if (chestValue.get() && tileEntity instanceof TileEntityChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (chestValue.get() && tileEntity instanceof TileEntityChest && !getClickedBlocks.contains(tileEntity.getPos()))
                     color = new Color(0, 66, 255);
 
-                if (enderChestValue.get() && tileEntity instanceof TileEntityEnderChest && !ChestAura.INSTANCE.getClickedBlocks().contains(tileEntity.getPos()))
+                if (enderChestValue.get() && tileEntity instanceof TileEntityEnderChest && !getClickedBlocks.contains(tileEntity.getPos()))
                     color = Color.MAGENTA;
 
                 if (furnaceValue.get() && tileEntity instanceof TileEntityFurnace)
@@ -199,7 +206,7 @@ public class StorageESP extends Module {
             for (final TileEntity entity : mc.theWorld.loadedTileEntityList) {
                 if (!(entity instanceof TileEntityChest))
                     continue;
-                if (ChestAura.INSTANCE.getClickedBlocks().contains(entity.getPos()))
+                if (getClickedBlocks.contains(entity.getPos()))
                     continue;
 
                 TileEntityRendererDispatcher.instance.renderTileEntityAt(

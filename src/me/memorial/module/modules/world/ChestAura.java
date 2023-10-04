@@ -40,7 +40,7 @@ public class ChestAura extends Module {
     private BlockPos currentBlock = null;
     private final MSTimer timer = new MSTimer();
 
-    private final ArrayList<BlockPos> clickedBlocks = new ArrayList<>();
+    public final ArrayList<BlockPos> clickedBlocks = new ArrayList<>();
 
     public Vec3 getVec(BlockPos pos) {
         return new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
