@@ -9,6 +9,7 @@ import java.util.*
 import dev.dudu.ViaVersionFix
 import dev.nelly.hyt.HytPacketManager
 import dev.nelly.module.Disabler
+import dev.nelly.module.EntitySpeed
 import dev.nelly.module.KillSults
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
@@ -164,8 +165,9 @@ class ModuleManager : Listenable {
             KillSults::class.java,
             ChestAura::class.java,
             FakeFPS::class.java,
-                MiaoRenChecker::class.java,
-            Disabler::class.java
+            MiaoRenChecker::class.java,
+            Disabler::class.java,
+            EntitySpeed::class.java
         )
 
         registerModule(NoScoreboard)
