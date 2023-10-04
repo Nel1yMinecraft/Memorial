@@ -38,6 +38,7 @@ import me.memorial.events.impl.misc.ScreenEvent;
 import me.memorial.events.impl.misc.TickEvent;
 import me.memorial.events.impl.world.WorldEvent;
 import me.memorial.module.Module;
+import me.memorial.module.modules.client.FakeFPS;
 import me.memorial.module.modules.combat.AutoClicker;
 import me.memorial.module.modules.combat.Criticals;
 import me.memorial.module.modules.exploit.AbortBreaking;
@@ -3134,9 +3135,13 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         return this.itemRenderer;
     }
 
-    public static int getDebugFPS()
-    {
-        return debugFPS;
+    public static int getDebugFPS() {
+        FakeFPS fakefps = (me.memorial.module.modules.client.FakeFPS) Memorial.moduleManager.getModule(FakeFPS.class);
+        if (fakefps.getState()) {
+            return debugFPS + fakefps.fakefps.get();
+        } else {
+            return debugFPS;
+        }
     }
 
     public FrameTimer getFrameTimer()
