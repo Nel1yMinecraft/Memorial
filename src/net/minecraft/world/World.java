@@ -945,7 +945,7 @@ public abstract class World implements IBlockAccess
 
                     if (!ignoreBlockWithoutBoundingBox || block1.getCollisionBoundingBox(this, blockpos, iblockstate1) != null)
                     {
-                        if (block.canCollideCheck(iblockstate1, stopOnLiquid))
+                        if (block1.canCollideCheck(iblockstate1, stopOnLiquid))
                         {
                             MovingObjectPosition movingobjectposition1 = block1.collisionRayTrace(this, blockpos, vec31, vec32);
 

@@ -2,8 +2,6 @@ package net.minecraft.block;
 
 import me.memorial.Memorial;
 import me.memorial.events.impl.world.BlockBBEvent;
-import me.memorial.module.modules.combat.Criticals;
-import me.memorial.module.modules.player.NoFall;
 import me.memorial.module.modules.render.XRay;
 import me.memorial.module.modules.world.NoSlowBreak;
 import net.minecraft.block.material.MapColor;
@@ -29,7 +27,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class Block
@@ -481,18 +478,7 @@ public class Block
             if (noSlowBreak.getAirValue().get() && !playerIn.onGround) {
                 returnValue *= 5.0F;
             }
-        } else if (playerIn.onGround) { // NoGround
-            final NoFall noFall = (NoFall) Memorial.moduleManager.getModule(NoFall.class);
-
-            final Criticals criticals = (Criticals) Memorial.moduleManager.getModule(Criticals.class);
-            final String MODEVALUE = ((Criticals) Objects.requireNonNull(Memorial.moduleManager.getModule(Criticals.class))).modeValue.get();
-
-            if (noFall.getState() && noFall.modeValue.get().equalsIgnoreCase("NoGround") ||
-                    criticals.getState() && MODEVALUE.equalsIgnoreCase("NoGround")) {
-                returnValue /= 5F;
-            }
         }
-
         return returnValue;
     }
 
