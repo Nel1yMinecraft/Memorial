@@ -1,5 +1,6 @@
 package net.minecraft.client.resources;
 
+import java.io.IOException;
 import java.io.InputStream;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.util.ResourceLocation;
@@ -15,4 +16,6 @@ public interface IResource
     <T extends IMetadataSection> T getMetadata(String p_110526_1_);
 
     String getResourcePackName();
+
+    void close() throws IOException;
 }

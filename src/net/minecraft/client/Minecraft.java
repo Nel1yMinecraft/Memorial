@@ -209,6 +209,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      * A 10MiB preallocation to ensure the heap is reasonably sized.
      */
     public static byte[] memoryReserve = new byte[10485760];
+
     private static final List<DisplayMode> macDisplayModes = Lists.newArrayList(new DisplayMode[] {new DisplayMode(2560, 1600), new DisplayMode(2880, 1800)});
     private final File fileResourcepacks;
     private final PropertyMap twitchDetails;
@@ -3159,4 +3160,5 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         this.connectedToRealms = isConnected;
     }
+
 }
