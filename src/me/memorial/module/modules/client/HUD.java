@@ -12,15 +12,25 @@ import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
 import me.memorial.ui.font.Fonts;
 import me.memorial.value.BoolValue;
+import me.memorial.value.FloatValue;
 import me.memorial.value.FontValue;
+import me.memorial.value.IntegerValue;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(name = "HUD", description = "Toggles visibility of the HUD.", category = ModuleCategory.CLIENT, array = false)
 public class HUD extends Module {
+
     private static HUD instance;
+
+    public static final FloatValue rainbowStartValue = new FloatValue("RainbowStart", 0.41f, 0f, 1f);
+    public static final FloatValue rainbowStopValue = new FloatValue("RainbowStop", 0.58f, 0f, 1f);
+    public static final IntegerValue rainbowSpeedValue = new IntegerValue("RainbowSpeed", 1500, 500, 7000);
+    public static final FloatValue rainbowSaturationValue = new FloatValue("RainbowSaturation", 0.7f, 0f, 1f);
+    public static final FloatValue rainbowBrightnessValue = new FloatValue("RainbowBrightness", 1f, 0f, 1f);
 
     public static HUD getInstance(){
         return instance;
