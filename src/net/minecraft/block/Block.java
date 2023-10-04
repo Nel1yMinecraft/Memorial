@@ -1,6 +1,7 @@
 package net.minecraft.block;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import me.memorial.Memorial;
@@ -495,11 +496,13 @@ public class Block
                 returnValue *= 5.0F;
             }
         } else if (playerIn.onGround) { // NoGround
-            final NoFall noFall = NoFall.getInstance();
-            final Criticals criticals = Criticals.Companion.getInstance();
+            final NoFall noFall = (NoFall) Memorial.moduleManager.getModule(NoFall.class);
+
+            final Criticals criticals = (Criticals) Memorial.moduleManager.getModule(Criticals.class);
+            final String MODEVALUE = ((Criticals) Objects.requireNonNull(Memorial.moduleManager.getModule(Criticals.class))).modeValue.get();
 
             if (noFall.getState() && noFall.modeValue.get().equalsIgnoreCase("NoGround") ||
-                    criticals.getState() && criticals.getModeValue().get().equalsIgnoreCase("NoGround")) {
+                    criticals.getState() && MODEVALUE.equalsIgnoreCase("NoGround")) {
                 returnValue /= 5F;
             }
         }
