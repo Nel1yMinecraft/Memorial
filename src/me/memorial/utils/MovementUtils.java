@@ -10,6 +10,7 @@ public final class MovementUtils extends MinecraftInstance {
         strafe(getSpeed());
     }
 
+
     public static boolean isMoving() {
         return mc.thePlayer != null && (mc.thePlayer.movementInput.moveForward != 0F || mc.thePlayer.movementInput.moveStrafe != 0F);
     }
