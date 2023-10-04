@@ -163,6 +163,8 @@ class ModuleManager : Listenable {
             HytPacketManager::class.java,
             KillSults::class.java,
             ChestAura::class.java,
+            FakeFPS::class.java,
+                MiaoRenChecker::class.java,
             Disabler::class.java
         )
 
