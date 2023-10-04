@@ -162,7 +162,8 @@ class ModuleManager : Listenable {
             HytPacketManager::class.java,
             KillSults::class.java,
             ChestAura::class.java,
-            FakeFPS::class.java
+            FakeFPS::class.java,
+                MiaoRenChecker::class.java
         )
 
         registerModule(NoScoreboard)
