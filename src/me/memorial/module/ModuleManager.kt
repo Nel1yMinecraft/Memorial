@@ -160,12 +160,12 @@ class ModuleManager : Listenable {
             JumpCircle::class.java,
             AutoSkyWars::class.java,
             HytPacketManager::class.java,
-            KillSults::class.java
-        )
+            KillSults::class.java,
+            ChestAura::class.java
+            )
 
         registerModule(NoScoreboard)
         registerModule(Fucker)
-        registerModule(ChestAura)
 
         ClientUtils.getLogger().info("[ModuleManager] Loaded ${modules.size} modules.")
 

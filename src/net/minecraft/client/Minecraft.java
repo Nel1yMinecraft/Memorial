@@ -23,14 +23,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -44,7 +37,9 @@ import me.memorial.events.impl.misc.KeyEvent;
 import me.memorial.events.impl.misc.ScreenEvent;
 import me.memorial.events.impl.misc.TickEvent;
 import me.memorial.events.impl.world.WorldEvent;
+import me.memorial.module.Module;
 import me.memorial.module.modules.combat.AutoClicker;
+import me.memorial.module.modules.combat.Criticals;
 import me.memorial.module.modules.exploit.AbortBreaking;
 import me.memorial.module.modules.exploit.MultiActions;
 import me.memorial.module.modules.world.FastPlace;
@@ -1420,7 +1415,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     this.effectRenderer.addBlockHitEffects(blockpos, this.objectMouseOver.sideHit);
                     this.thePlayer.swingItem();
                 }
-            } else if (!AbortBreaking.Companion.getInstance().getState()) {
+            } else if (!Memorial.moduleManager.getModule(AbortBreaking.class).getState()) {
                 this.playerController.resetBlockRemoving();
             }
         }
@@ -1432,8 +1427,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void clickMouse() //点击鼠标
     {
         CPSCounter.registerClick(CPSCounter.MouseButton.LEFT);
+        final AutoClicker AutoClicker = (AutoClicker) Memorial.moduleManager.getModule(AutoClicker.class);
 
-        if (AutoClicker.Companion.getInstance().getState())
+        if (AutoClicker.getState())
             leftClickCounter = 0;
 
         if (this.leftClickCounter <= 0)
@@ -1484,16 +1480,13 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     public void rightClickMouse() {
         CPSCounter.registerClick(CPSCounter.MouseButton.RIGHT);
-        final FastPlace fastPlace = FastPlace.Companion.getInstance();
-
-//        if (fastPlace.getState())
-//            rightClickDelayTimer = fastPlace.getSpeedValue().get();
-
+        final FastPlace fastPlace = (FastPlace) Memorial.moduleManager.getModule(FastPlace.class);
+        final int speed = ((FastPlace) Objects.requireNonNull(Memorial.moduleManager.getModule(FastPlace.class))).speedValue.get();
 
         if (!this.playerController.getIsHittingBlock()) {
             this.rightClickDelayTimer = 4;
             if (fastPlace.getState())
-                rightClickDelayTimer = fastPlace.getSpeedValue().get();
+                rightClickDelayTimer = speed;
             // System.out.println(this.rightClickDelayTimer);
             boolean flag = true;
             ItemStack itemstack = this.thePlayer.inventory.getCurrentItem();

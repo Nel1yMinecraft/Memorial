@@ -129,7 +129,7 @@ class Nuker : Module() {
                 // Change head rotations to next block
                 if (rotationsValue.get()) {
                     val rotation = RotationUtils.faceBlock(blockPos) ?: return // In case of a mistake. Prevent flag.
-                    RotationUtils.setTargetRotation(rotation.rotation)
+                    RotationUtils.setTargetRotation(rotation)
                 }
 
                 // Set next target block
@@ -233,6 +233,7 @@ class Nuker : Module() {
     private fun validBlock(block: Block) = block !is BlockAir && block !is BlockLiquid && block != Blocks.bedrock
 
     companion object {
+        @JvmField
         var currentDamage = 0F
     }
 }

@@ -1,13 +1,17 @@
 package net.minecraft.block;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import me.memorial.Memorial;
 import me.memorial.events.impl.world.BlockBBEvent;
+import me.memorial.module.Module;
 import me.memorial.module.modules.combat.Criticals;
 import me.memorial.module.modules.exploit.GhostHand;
+import me.memorial.module.modules.movement.Speed;
 import me.memorial.module.modules.player.NoFall;
+import me.memorial.module.modules.render.ClickGUI;
 import me.memorial.module.modules.render.XRay;
 import me.memorial.module.modules.world.NoSlowBreak;
 import net.minecraft.block.material.MapColor;
@@ -495,11 +499,13 @@ public class Block
                 returnValue *= 5.0F;
             }
         } else if (playerIn.onGround) { // NoGround
-            final NoFall noFall = NoFall.getInstance();
-            final Criticals criticals = Criticals.Companion.getInstance();
+            final NoFall noFall = (NoFall) Memorial.moduleManager.getModule(NoFall.class);
+
+            final Criticals criticals = (Criticals) Memorial.moduleManager.getModule(Criticals.class);
+            final String MODEVALUE = ((Criticals) Objects.requireNonNull(Memorial.moduleManager.getModule(Criticals.class))).modeValue.get();
 
             if (noFall.getState() && noFall.modeValue.get().equalsIgnoreCase("NoGround") ||
-                    criticals.getState() && criticals.getModeValue().get().equalsIgnoreCase("NoGround")) {
+                    criticals.getState() && MODEVALUE.equalsIgnoreCase("NoGround")) {
                 returnValue /= 5F;
             }
         }

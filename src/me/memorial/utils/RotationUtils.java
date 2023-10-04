@@ -75,7 +75,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      *
      * @param blockPos target block
      */
-    public static VecRotation faceBlock(final BlockPos blockPos) {
+    public static Rotation faceBlock(final BlockPos blockPos) {
         if (blockPos == null)
             return null;
 
