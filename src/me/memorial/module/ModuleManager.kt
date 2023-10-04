@@ -12,6 +12,7 @@ import dev.nelly.module.KillSults
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
+import me.memorial.module.modules.client.FakeFPS
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.module.modules.exploit.*
@@ -40,6 +41,7 @@ class ModuleManager : Listenable {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
 
         registerModules(
+                KillSults::class.java,
             AutoArmor::class.java,
             AutoLeave::class.java,
             AutoPot::class.java,
@@ -125,6 +127,7 @@ class ModuleManager : Listenable {
             AntiBlind::class.java,
             NoSwing::class.java,
             Breadcrumbs::class.java,
+            AbortBreaking::class.java,
             PotionSaver::class.java,
             CameraClip::class.java,
             WaterSpeed::class.java,
@@ -158,8 +161,9 @@ class ModuleManager : Listenable {
             AutoSkyWars::class.java,
             HytPacketManager::class.java,
             KillSults::class.java,
-            ChestAura::class.java
-            )
+            ChestAura::class.java,
+            FakeFPS::class.java
+        )
 
         registerModule(NoScoreboard)
         registerModule(Fucker)
