@@ -18,10 +18,8 @@ import me.memorial.ui.client.GuiMainMenu
 import me.memorial.ui.client.altmanager.GuiAltManager
 import me.memorial.ui.client.clickgui.ClickGui
 import me.memorial.ui.font.Fonts
+import me.memorial.utils.*
 import me.memorial.utils.ClassUtils.hasForge
-import me.memorial.utils.ClientUtils
-import me.memorial.utils.InventoryUtils
-import me.memorial.utils.RotationUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
 
@@ -74,6 +72,8 @@ object Memorial {
         eventManager.registerListener(BungeeCordSpoof())
         eventManager.registerListener(DonatorCape())
         eventManager.registerListener(InventoryUtils())
+        eventManager.registerListener(InventoryUtils2())
+        eventManager.registerListener(InventoryHelper)
 
         // Create command manager
         commandManager = CommandManager()

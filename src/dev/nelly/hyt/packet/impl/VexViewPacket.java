@@ -19,9 +19,9 @@ public class VexViewPacket implements CustomPacket {
     public void process(ByteBuf byteBuf) {
         ButtonDecoder buttonDecoder = new ButtonDecoder(byteBuf);
         if (buttonDecoder.invited) {
-            ChatComponentText textComponents = new ChatComponentText("\247b[MIN] 收到来自\247a" + buttonDecoder.inviter + "\247b的邀请消息。\247e\247n(点此查看)");
+            ChatComponentText textComponents = new ChatComponentText("\247b[Vexview] 收到来自\247a" + buttonDecoder.inviter + "\247b的邀请消息。\247e\247n(点此查看)");
             textComponents.getChatStyle().setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ChatComponentText("\247e点击查看!")));
-            textComponents.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/min hyt party handle " + buttonDecoder.getButton("同意").getId() + " " + buttonDecoder.getButton("拒绝").getId()));
+            textComponents.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/vexview hyt party handle " + buttonDecoder.getButton("同意").getId() + " " + buttonDecoder.getButton("拒绝").getId()));
             ClientUtils.getLogger().info(textComponents);
         } else if (buttonDecoder.sign) {
             Sender.clickButton(buttonDecoder.getButton("sign").getId());

@@ -2,10 +2,13 @@ package me.memorial.module
 
 import me.memorial.Memorial
 import me.memorial.events.Listenable
+import me.memorial.utils.ClientUtils
 
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.ColorUtils.stripColor
 import me.memorial.value.Value
+import net.minecraft.client.audio.PositionedSoundRecord
+import net.minecraft.util.ResourceLocation
 import org.lwjgl.input.Keyboard
 
 open class Module : MinecraftInstance(), Listenable {
@@ -52,7 +55,7 @@ open class Module : MinecraftInstance(), Listenable {
             // Call toggle
             onToggle(value)
 
-            // Play sound and add notification
+            ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
 
             // Call on enabled or disabled
             if (value) {
