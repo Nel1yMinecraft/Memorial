@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
+import dev.nelly.RegionUtils;
 import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
@@ -571,7 +572,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Memorial | DEVBUILD"); //自定义标题
+        Display.setTitle("Memorial | DEVBUILD | 您好高贵的"+RegionUtils.INSTANCE.getProvinceByIPv4(RegionUtils.INSTANCE.getIPv4())+"人");
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
