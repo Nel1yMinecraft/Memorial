@@ -8,6 +8,7 @@ import me.memorial.utils.ClientUtils
 import java.util.*
 import dev.dudu.ViaVersionFix
 import dev.nelly.hyt.HytPacketManager
+import dev.nelly.module.Disabler
 import dev.nelly.module.KillSults
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
@@ -41,7 +42,7 @@ class ModuleManager : Listenable {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
 
         registerModules(
-                KillSults::class.java,
+            KillSults::class.java,
             AutoArmor::class.java,
             AutoLeave::class.java,
             AutoPot::class.java,
@@ -162,7 +163,7 @@ class ModuleManager : Listenable {
             HytPacketManager::class.java,
             KillSults::class.java,
             ChestAura::class.java,
-            FakeFPS::class.java
+            Disabler::class.java
         )
 
         registerModule(NoScoreboard)

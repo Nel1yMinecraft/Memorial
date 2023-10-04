@@ -31,13 +31,13 @@ public class NoSlow extends Module {
     private FloatValue blockForwardMultiplier = new FloatValue("BlockForwardMultiplier", 1.0F, 0.2F, 1.0F);
     private FloatValue blockStrafeMultiplier = new FloatValue("BlockStrafeMultiplier", 1.0F, 0.2F, 1.0F);
 
-    private FloatValue consumeForwardMultiplier = new FloatValue("ConsumeForwardMultiplier", 1.0F, 0.2F, 1.0F);
-    private FloatValue consumeStrafeMultiplier = new FloatValue("ConsumeStrafeMultiplier", 1.0F, 0.2F, 1.0F);
+    private FloatValue consumeForwardMultiplier = new FloatValue("ConsumeForwardMultiplier", 0.2F, 0.2F, 1.0F);
+    private FloatValue consumeStrafeMultiplier = new FloatValue("ConsumeStrafeMultiplier", 0.2F, 0.2F, 1.0F);
 
-    private FloatValue bowForwardMultiplier = new FloatValue("BowForwardMultiplier", 1.0F, 0.2F, 1.0F);
-    private FloatValue bowStrafeMultiplier = new FloatValue("BowStrafeMultiplier", 1.0F, 0.2F, 1.0F);
+    private FloatValue bowForwardMultiplier = new FloatValue("BowForwardMultiplier", 0.2F, 0.2F, 1.0F);
+    private FloatValue bowStrafeMultiplier = new FloatValue("BowStrafeMultiplier", 0.2F, 0.2F, 1.0F);
 
-    private BoolValue packet = new BoolValue("Packet", true);
+    private BoolValue grim = new BoolValue("Grim", true);
 
     /**
      * Soulsand
@@ -56,17 +56,14 @@ public class NoSlow extends Module {
         if (!mc.thePlayer.isBlocking() && !killAura.getBlockingStatus()) {
             return;
         }
-        if (this.packet.get()) {
-            switch (event.getState()) {
-                case PRE:
-                    C07PacketPlayerDigging digging = new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN);
-                    mc.getNetHandler().addToSendQueue(digging);
-                    break;
-                case POST:
-                    C08PacketPlayerBlockPlacement blockPlace = new C08PacketPlayerBlockPlacement(mc.thePlayer.inventory.getCurrentItem());
-                    mc.getNetHandler().addToSendQueue(blockPlace);
-                    break;
-            }
+        if (mc.thePlayer.isBlocking() && !mc.thePlayer.isEating() && grim.get()) {
+            mc.getNetHandler().getNetworkManager().sendPacket(
+                    new C07PacketPlayerDigging(
+                            C07PacketPlayerDigging.Action.RELEASE_USE_ITEM,
+                            BlockPos.ORIGIN,
+                            EnumFacing.DOWN
+                    )
+            );
         }
     }
 

@@ -12,6 +12,7 @@ import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
 import me.memorial.module.ModuleInfo
 import me.memorial.utils.MovementUtils
+import me.memorial.utils.MovementUtils2
 import me.memorial.utils.Rotation
 import me.memorial.utils.RotationUtils
 import me.memorial.utils.timer.MSTimer
@@ -43,7 +44,7 @@ class SuperKnockback : Module() {
                 return
             }
             
-            if (onlyMoveForwardValue.get() && RotationUtils.getRotationDifference(Rotation(MovementUtils.movingYaw, mc.thePlayer.rotationPitch), Rotation(mc.thePlayer.rotationYaw, mc.thePlayer.rotationPitch)) > 35) {
+            if (onlyMoveForwardValue.get() && RotationUtils.getRotationDifference(Rotation(MovementUtils2.movingYaw, mc.thePlayer.rotationPitch), Rotation(mc.thePlayer.rotationYaw, mc.thePlayer.rotationPitch)) > 35) {
                 return
             }
                 
