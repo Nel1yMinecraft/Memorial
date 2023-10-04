@@ -164,7 +164,7 @@ class ModuleManager : Listenable {
             KillSults::class.java,
             ChestAura::class.java,
             FakeFPS::class.java,
-                MiaoRenChecker::class.java
+                MiaoRenChecker::class.java,
             Disabler::class.java
         )
 
