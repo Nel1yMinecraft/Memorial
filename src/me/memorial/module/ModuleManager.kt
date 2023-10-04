@@ -40,7 +40,6 @@ class ModuleManager : Listenable {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
 
         registerModules(
-                KillSults::class.java,
             AutoArmor::class.java,
             AutoLeave::class.java,
             AutoPot::class.java,
@@ -49,7 +48,6 @@ class ModuleManager : Listenable {
             ViaVersionFix::class.java,
             ScaFull::class.java,
             Criticals::class.java,
-            ScaffoldHelper::class.java,
             KillAura::class.java,
             Velocity::class.java,
             Fly::class.java,
