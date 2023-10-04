@@ -1345,8 +1345,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     this.effectRenderer.addBlockHitEffects(blockpos, this.objectMouseOver.sideHit);
                     this.thePlayer.swingItem();
                 }
-            } else if (!Memorial.moduleManager.getModule(AbortBreaking.class).getState()) {
-                this.playerController.resetBlockRemoving();
             }
         }
         if(this.leftClickCounter == 0 && theWorld.getBlockState(objectMouseOver.getBlockPos()).getBlock().getMaterial() != Material.air) {
