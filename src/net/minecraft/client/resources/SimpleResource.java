@@ -3,10 +3,8 @@ package net.minecraft.client.resources;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+
+import java.io.*;
 import java.util.Map;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSerializer;
@@ -86,6 +84,11 @@ public class SimpleResource implements IResource
     public String getResourcePackName()
     {
         return this.resourcePackName;
+    }
+
+    @Override
+    public void close() throws IOException {
+
     }
 
     public boolean equals(Object p_equals_1_)
