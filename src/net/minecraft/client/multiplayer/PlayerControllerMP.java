@@ -4,7 +4,6 @@ import me.memorial.Memorial;
 import me.memorial.events.impl.player.AttackEvent;
 import me.memorial.events.impl.misc.ClickWindowEvent;
 import me.memorial.module.modules.combat.AutoClicker;
-import me.memorial.module.modules.exploit.AbortBreaking;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -558,10 +557,6 @@ public class PlayerControllerMP
     }
 
     public boolean getIsHittingBlock() {
-        final AbortBreaking AbortBreaking = (AbortBreaking) Memorial.moduleManager.getModule(AbortBreaking.class);
-
-        if (AbortBreaking.getState())
-            return false;
 
         return this.isHittingBlock;
     }
