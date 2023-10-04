@@ -434,7 +434,7 @@ public class Block
         GhostHand hand = (GhostHand) Memorial.moduleManager.getModule(GhostHand.class);
 
         if(hand.getState()){
-            return hand.blockValue.get() == Block.getIdFromBlock(this);
+            return GhostHand.blockValue.get() == Block.getIdFromBlock(this);
         }
         return true;
     }
