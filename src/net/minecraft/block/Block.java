@@ -432,7 +432,7 @@ public class Block
 
     public boolean isCollidable() {
         GhostHand hand = (GhostHand) Memorial.moduleManager.getModule(GhostHand.class);
-        final Integer block = ((GhostHand) Objects.requireNonNull(Memorial.moduleManager.getModule(GhostHand.class))).blockValue.get();
+        final Integer block = hand.blockValue.get();
 
         if(hand != null && hand.getState()){
             return block == Block.getIdFromBlock(this);
