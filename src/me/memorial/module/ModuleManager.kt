@@ -125,7 +125,6 @@ class ModuleManager : Listenable {
             AntiBlind::class.java,
             NoSwing::class.java,
             Breadcrumbs::class.java,
-            AbortBreaking::class.java,
             PotionSaver::class.java,
             CameraClip::class.java,
             WaterSpeed::class.java,
