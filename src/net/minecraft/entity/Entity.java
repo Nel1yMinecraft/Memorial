@@ -265,8 +265,8 @@ public abstract class Entity implements ICommandSender
         this.rotationYaw = (float)((double)this.rotationYaw + (double)yaw * 0.15D);
         this.rotationPitch = (float)((double)this.rotationPitch - (double)pitch * 0.15D);
         this.rotationPitch = MathHelper.clamp_float(this.rotationPitch, -90.0F, 90.0F);
-
-        if(!NoPitchLimit.Companion.getInstance().getState())
+        final NoPitchLimit NoPitchLimit = (me.memorial.module.modules.exploit.NoPitchLimit) Memorial.moduleManager.getModule(NoPitchLimit.class);
+        if(!NoPitchLimit.getState())
             this.rotationPitch = MathHelper.clamp(this.rotationPitch, -90.0F, 90.0F);
 
         this.prevRotationPitch += this.rotationPitch - f;
