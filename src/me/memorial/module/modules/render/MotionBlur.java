@@ -26,7 +26,7 @@ public class MotionBlur extends Module {
     private Map<String, MotionBlurResourceManager> domainResourceManagers;
     @Override
     public void onDisable() {
-        mc.getEntityRenderer().stopUseShader();
+        mc.entityRenderer.stopUseShader();
     }
     @Override
     public void onEnable() {
@@ -64,7 +64,7 @@ public class MotionBlur extends Module {
         }
     }
     public void applyShader() {
-        mc.getEntityRenderer().loadShader2(new ResourceLocation("motionblur", "motionblur"));
+        mc.entityRenderer.loadShader(new ResourceLocation("motionblur", "motionblur"));
     }
     @EventTarget
     public void onTick(TickEvent event) {
