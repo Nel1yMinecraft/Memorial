@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
+import dev.nelly.hyt.HytPacketManager;
+import dev.nelly.hyt.packet.CustomPacket;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -1655,6 +1657,13 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleCustomPayload(S3FPacketCustomPayload packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
+
+        for (CustomPacket packet : HytPacketManager.packets) {
+            if (packet.getChannel().equals(packetIn.getChannelName())) {
+                packet.process(packetIn.getBufferData());
+                return;
+            }
+        }
 
         if ("MC|TrList".equals(packetIn.getChannelName()))
         {

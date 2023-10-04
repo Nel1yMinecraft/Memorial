@@ -10,11 +10,13 @@ import me.memorial.module.ModuleInfo
 @ModuleInfo("HytPacketManager","HytPacketManager",ModuleCategory.CLIENT)
 class HytPacketManager : Module() {
 
-    val packets: HashSet<CustomPacket> = java.util.HashSet<CustomPacket>()
-
     @Override
     override fun onEnable() {
         packets.add(GermModPacket())
         packets.add(VexViewPacket())
+    }
+    companion object {
+        @JvmField
+        val packets: HashSet<CustomPacket> = java.util.HashSet<CustomPacket>()
     }
 }
