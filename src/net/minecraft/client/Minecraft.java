@@ -3133,10 +3133,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     }
 
     public static int getDebugFPS() {
-        FakeFPS fakeFPS = (FakeFPS) Memorial.moduleManager.getModule(FakeFPS.class);
-        if (fakeFPS.getState()) {
-            return fakeFPS.getFakeFPS();
-        }
         return debugFPS;
     }
 
