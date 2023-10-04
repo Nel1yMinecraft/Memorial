@@ -1758,7 +1758,7 @@ public abstract class Entity implements ICommandSender
     }
 
     public float getCollisionBorderSize() {
-        final HitBox hitBox = HitBox.Companion.getInstance();
+        final HitBox hitBox = HitBox.instance;
         final ViaVersionFix OMG = (ViaVersionFix) Memorial.moduleManager.getModule(ViaVersionFix.class);
         if (OMG.getState()) {
             return 0f;
