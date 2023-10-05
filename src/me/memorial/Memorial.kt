@@ -147,7 +147,7 @@ object Memorial {
      */
     fun stopClient() {
         // Call client shutdown
-        eventManager.callEvent(ClientShutdownEvent()) // pass
+        eventManager.callEvent(ClientShutdownEvent())
 
         // Save all available configs
         fileManager.saveAllConfigs()

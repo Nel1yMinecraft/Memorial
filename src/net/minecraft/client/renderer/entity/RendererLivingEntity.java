@@ -740,7 +740,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
     protected boolean canRenderName(T entity)
     {
-        if(!ESP.renderNameTags && NameTags.getInstance().getState() && EntityUtils.isSelected(entity, false)){
+        if(!ESP.renderNameTags && NameTags.Companion.getModulestate() && EntityUtils.isSelected(entity, false)){
             return false;
         }
 
