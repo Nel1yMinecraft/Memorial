@@ -166,7 +166,8 @@ class ModuleManager : Listenable {
             Disabler::class.java,
             EntitySpeed::class.java,
             MotionBlur::class.java,
-            Velocity2::class.java
+            Velocity2::class.java,
+                    PlayerEdit::class.java
         )
 
         registerModule(NoScoreboard)
