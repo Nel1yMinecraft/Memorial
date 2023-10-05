@@ -5,18 +5,12 @@ import me.memorial.events.impl.misc.TickEvent;
 import me.memorial.events.impl.move.MotionEvent;
 import me.memorial.events.impl.move.MoveEvent;
 import me.memorial.events.impl.player.UpdateEvent;
-import me.memorial.module.modules.movement.speeds.aac.*;
-import me.memorial.module.modules.movement.speeds.ncp.*;
 import me.memorial.module.modules.movement.speeds.other.*;
 
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
 import me.memorial.module.modules.movement.speeds.SpeedMode;
-import me.memorial.module.modules.movement.speeds.spartan.SpartanYPort;
-import me.memorial.module.modules.movement.speeds.spectre.SpectreBHop;
-import me.memorial.module.modules.movement.speeds.spectre.SpectreLowHop;
-import me.memorial.module.modules.movement.speeds.spectre.SpectreOnGround;
 import me.memorial.utils.MovementUtils;
 import me.memorial.value.BoolValue;
 import me.memorial.value.FloatValue;
@@ -29,59 +23,10 @@ import java.util.List;
 public class Speed extends Module {
 
     private final SpeedMode[] speedModes = new SpeedMode[] {
-            // NCP
-            new NCPBHop(),
-            new NCPFHop(),
-            new SNCPBHop(),
-            new NCPHop(),
-            new YPort(),
-            new YPort2(),
-            new NCPYPort(),
-            new Boost(),
-            new Frame(),
-            new MiJump(),
-            new OnGround(),
-
-            // AAC
-            new AACBHop(),
-            new AAC2BHop(),
-            new AAC3BHop(),
-            new AAC4BHop(),
-            new AAC5BHop(),
-            new AAC6BHop(),
-            new AAC7BHop(),
-            new AACHop3313(),
-            new AACHop350(),
-            new AACLowHop(),
-            new AACLowHop2(),
-            new AACLowHop3(),
-            new AACGround(),
-            new AACGround2(),
-            new AACYPort(),
-            new AACYPort2(),
-            new AACPort(),
-            new OldAACBHop(),
-
-            // Spartan
-            new SpartanYPort(),
-
-            // Spectre
-            new SpectreLowHop(),
-            new SpectreBHop(),
-            new SpectreOnGround(),
-            new TeleportCubeCraft(),
-
-            // Server
-            new HiveHop(),
-            new HypixelHop(),
-            new MineplexGround(),
-
-            // Other
-            new SlowHop(),
             new CustomSpeed()
     };
 
-    public final ListValue modeValue = new ListValue("Mode", getModes(), "NCPBHop") {
+    public final ListValue modeValue = new ListValue("Mode", getModes(), "Custom") {
 
         @Override
         protected void onChange(final String oldValue, final String newValue) {
@@ -103,10 +48,6 @@ public class Speed extends Module {
     public final BoolValue resetXZValue = new BoolValue("CustomResetXZ", false);
     public final BoolValue resetYValue = new BoolValue("CustomResetY", false);
 
-    public final FloatValue portMax = new FloatValue("AAC-PortLength", 1, 1, 20);
-    public final FloatValue aacGroundTimerValue = new FloatValue("AACGround-Timer", 3F, 1.1F, 10F);
-    public final FloatValue cubecraftPortLengthValue = new FloatValue("CubeCraft-PortLength", 1F, 0.1F, 2F);
-    public final FloatValue mineplexGroundSpeedValue = new FloatValue("MineplexGround-Speed", 0.5F, 0.1F, 1F);
 
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
@@ -205,4 +146,5 @@ public class Speed extends Module {
             list.add(speedMode.modeName);
         return list.toArray(new String[0]);
     }
+
 }
