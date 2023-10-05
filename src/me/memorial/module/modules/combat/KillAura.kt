@@ -159,7 +159,6 @@ class KillAura : Module() {
     private val limitedMultiTargetsValue = IntegerValue("LimitedMultiTargets", 0, 0, 50)
 
     // Visuals
-    private val markValue = BoolValue("Mark", true)
     private val fakeSharpValue = BoolValue("FakeSharp", true)
     private val circleValue = BoolValue("Circle", true)
     private val circleRed = IntegerValue("CircleRed", 255, 0, 255)// { circleValue.get() }
@@ -389,73 +388,6 @@ class KillAura : Module() {
             hitable = false
             stopBlocking()
             return
-        }
-        if (markValue.get()) {
-                val drawTime = (System.currentTimeMillis() % 1500).toInt()
-                val drawMode = drawTime > 750
-                var drawPercent = drawTime / 750.0
-            //true when goes up
-            if (!drawMode) {
-                drawPercent = 1 - drawPercent
-            } else {
-                drawPercent -= 1
-            }
-                    drawPercent = EaseUtils.easeInOutQuad (drawPercent)
-                    GL11 . glPushMatrix ()
-                    GL11 . glDisable (3553)
-                    GL11 . glEnable (2848)
-                    GL11 . glEnable (2881)
-                    GL11 . glEnable (2832)
-                    GL11 . glEnable (3042)
-                    GL11 . glBlendFunc (770, 771)
-                GL11.glHint(3154, 4354)
-
-            GL11.glHint(3155, 4354)
-                    GL11 . glHint (3153, 4354)
-                GL11.glDisable(2929)
-
-            GL11.glDepthMask(false)
-
-                val bb = target!!.entityBoundingBox
-
-                val radius = (bb.maxX - bb.minX) + 0.3
-                val height = bb.maxY - bb.minY
-                val x =
-                target!!.lastTickPosX + (target!!.posX - target!!.lastTickPosX) * event.partialTicks - mc.renderManager.viewerPosX
-
-                val y =
-                (target!!.lastTickPosY + (target!!.posY - target!!.lastTickPosY) * event.partialTicks - mc.renderManager.viewerPosY) + height * drawPercent
-
-                val z =
-                target!!.lastTickPosZ + (target!!.posZ - target!!.lastTickPosZ) * event.partialTicks - mc.renderManager.viewerPosZ
-
-            GL11.glLineWidth((radius * 5f).toFloat())
-                    GL11 . glBegin (3)
-                for (i in 0..360) {
-                val rainbow = Color(
-                    Color.HSBtoRGB(
-                        (mc.thePlayer!!.ticksExisted / 70.0 + sin(i / 50.0 * 1.75)).toFloat() % 1.0f,
-                        0.7f,
-                        1.0f
-                    )
-                )
-                GL11.glColor3f(rainbow.red / 255.0f, rainbow.green / 255.0f, rainbow.blue / 255.0f)
-                GL11.glVertex3d(
-                    x + radius * cos(i * 6.283185307179586 / 45.0),
-                    y,
-                    z + radius * sin(i * 6.283185307179586 / 45.0)
-                )
-            }
-
-            GL11.glEnd()
-
-                    GL11 . glDepthMask (true)
-                    GL11 . glEnable (2929)
-                    GL11 . glDisable (2848)
-                    GL11 . glDisable (2881)
-                    GL11 . glEnable (2832)
-                    GL11 . glEnable (3553)
-                    GL11 . glPopMatrix ()
         }
 
         if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
