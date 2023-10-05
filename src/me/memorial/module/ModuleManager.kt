@@ -165,7 +165,8 @@ class ModuleManager : Listenable {
             MiaoRenChecker::class.java,
             Disabler::class.java,
             EntitySpeed::class.java,
-                MotionBlur::class.java
+            MotionBlur::class.java,
+            Velocity2::class.java
         )
 
         registerModule(NoScoreboard)

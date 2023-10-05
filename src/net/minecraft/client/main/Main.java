@@ -14,6 +14,7 @@ import java.util.List;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
+import me.memorial.Memorial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 
@@ -106,6 +107,7 @@ public class Main
         {
             public void run()
             {
+                Memorial.INSTANCE.stopClient();
                 Minecraft.stopIntegratedServer();
             }
         });
