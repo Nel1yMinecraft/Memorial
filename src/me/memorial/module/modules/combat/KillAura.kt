@@ -314,7 +314,7 @@ class KillAura : Module() {
         } else if(mc.thePlayer!!.isAirBorne && airrangeValue.get() > 0) {
             rangeValue.set(airrangeValue.get())
         }
-        
+
         if (cancelRun) {
             target = null
             currentTarget = null
