@@ -572,7 +572,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Memorial | DEVBUILD | 您好高贵的"+"人");
+        Display.setTitle("Memorial | DEVBUILD");
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
