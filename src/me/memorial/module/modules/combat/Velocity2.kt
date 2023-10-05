@@ -27,7 +27,6 @@ class Velocity2 : Module() {
     private val airticks = IntegerValue("AirTicks",2,0,10)
     private val timerSpeed = FloatValue("TimerSpeed",0.49f,0.1f,1.0f)
     private val airTest = BoolValue("AirTest",true)
-    private val jumpFix = BoolValue("JumpFix",true)
 
     private var airtick = 0
     private var air = false
@@ -103,13 +102,5 @@ class Velocity2 : Module() {
     @EventTarget
     fun onMotion(event: MotionEvent){
         pre = !event.state.stateName.equals("Post",true)
-    }
-
-    @EventTarget
-    fun onJUmp(event: JumpEvent){
-        if(airtick > 0){
-            if(jumpFix.get())
-                event.cancelEvent()
-        }
     }
 }

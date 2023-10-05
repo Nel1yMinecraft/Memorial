@@ -87,7 +87,9 @@ class KillAura : Module() {
 
     // Range
     private val rangeValue = FloatValue("Range", 3.7f, 1f, 8f)
-    private val throughWallsRangeValue = FloatValue("ThroughWallsRange", 3f, 0f, 8f)
+    private val groundrangeValue = FloatValue("GroundRange", 3.7f, 1f, 8f)
+    private val airrangeValue = FloatValue("AirRange", 3.7f, 1f, 7.9f)
+    private val throughWallsRangeValue = FloatValue("ThroughWallsRange", 1f, 0f, 8f)
     private val rangeSprintReducementValue = FloatValue("RangeSprintReducement", 0f, 0f, 0.4f)
 
     // Modes
@@ -307,6 +309,12 @@ class KillAura : Module() {
      */
     @EventTarget
     fun onUpdate(event: UpdateEvent) {
+        if(mc.thePlayer!!.onGround && groundrangeValue.get() > 0) {
+            rangeValue.set(groundrangeValue.get())
+        } else if(mc.thePlayer!!.isAirBorne && airrangeValue.get() > 0) {
+            rangeValue.set(airrangeValue.get())
+        }
+        
         if (cancelRun) {
             target = null
             currentTarget = null
