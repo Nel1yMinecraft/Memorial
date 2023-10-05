@@ -16,7 +16,7 @@ import net.minecraft.entity.EntityLivingBase
 class EntitySpeed : Module() {
     private val onlyAir = BoolValue("OnlyAir", false)
     private val okstrafe = BoolValue("Strafe", false)
-    private val keepSprint = BoolValue("KeepSprint", false)
+    private val keepSprint = BoolValue("KeepSprint", true)
     private val speedUp = BoolValue("SpeedUp", false)
     private val speed = IntegerValue("Speed", 0, 0, 10)
     private val distance = FloatValue("Range", 0f, 0f, 1f)
