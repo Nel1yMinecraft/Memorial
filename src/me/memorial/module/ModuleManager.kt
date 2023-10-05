@@ -164,7 +164,8 @@ class ModuleManager : Listenable {
             FakeFPS::class.java,
             MiaoRenChecker::class.java,
             Disabler::class.java,
-            EntitySpeed::class.java
+            EntitySpeed::class.java,
+                MotionBlur::class.java
         )
 
         registerModule(NoScoreboard)
