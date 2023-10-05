@@ -19,10 +19,9 @@ import java.util.Set;
 
 import me.memorial.Memorial;
 import me.memorial.module.modules.misc.ComponentOnHover;
-import me.memorial.module.modules.client.HUD;
+import me.memorial.module.modules.render.HUD;
 import me.memorial.ui.client.GuiBackground;
 import me.memorial.utils.render.ParticleUtils;
-import me.memorial.utils.render.RenderUtils;
 import me.memorial.utils.render.shader.shaders.BackgroundShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;

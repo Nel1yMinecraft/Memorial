@@ -7,7 +7,7 @@ package me.memorial.ui.client.clickgui.style.styles.dropdown;
 
 import me.memorial.Memorial;
 import me.memorial.module.modules.render.ClickGUI;
-import me.memorial.module.modules.client.HUD;
+import me.memorial.module.modules.render.HUD;
 import me.memorial.ui.font.Fonts;
 import me.memorial.utils.math.MathUtils;
 import me.memorial.utils.render.RenderUtils;

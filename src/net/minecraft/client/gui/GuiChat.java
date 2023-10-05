@@ -8,6 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.memorial.Memorial;
+import me.memorial.module.modules.render.TargetHUD;
+import me.memorial.utils.render.RenderUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -27,6 +32,8 @@ public class GuiChat extends GuiScreen
     private int sentHistoryCursor = -1;
     private boolean playerNamesFound;
     private boolean waitingOnAutocomplete;
+    private boolean dragTH;
+    private int x1,y1;
     private int autocompleteIndex;
     private List<String> foundPlayerNames = Lists.<String>newArrayList();
     protected GuiTextField inputField;
@@ -136,10 +143,16 @@ public class GuiChat extends GuiScreen
         }
     }
 
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException
-    {
-        if (mouseButton == 0)
-        {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        if (mouseButton == 0) {
+            int x = getScaledMouseCoordinates(mc, mouseX, mouseY)[0];
+            int y = getScaledMouseCoordinates(mc, mouseX, mouseY)[1];
+            TargetHUD targetHUD = (TargetHUD) Memorial.moduleManager.getModule(TargetHUD.class);
+            if (hover(mouseX, mouseY,targetHUD)){
+                x1 = targetHUD.getX() - x;
+                y1 = targetHUD.getY() - y;
+                dragTH = true;
+            }
             IChatComponent ichatcomponent = this.mc.ingameGUI.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
             if (this.handleComponentClick(ichatcomponent))
@@ -152,6 +165,45 @@ public class GuiChat extends GuiScreen
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        if (state == 0){
+            dragTH = false;
+        }
+    }
+    private boolean hover(int mouseX, int mouseY, TargetHUD targetHUD) {
+        return mouseX >= targetHUD.getX() && mouseX <= targetHUD.getX() + targetHUD.getWidth() && mouseY >= targetHUD.getY() && mouseY <= targetHUD.getY() + targetHUD.getHeight();
+    }
+    private int[] getScaledMouseCoordinates(Minecraft mc, int mouseX, int mouseY){
+        int x = mouseX;
+        int y = mouseY;
+        switch (mc.gameSettings.guiScale){
+            case 0:
+                x*=2;
+                y*=2;
+                break;
+            case 1:
+                x*=0.5;
+                y*=0.5;
+                break;
+            case 3:
+                x*=1.4999999999999999998;
+                y*=1.4999999999999999998;
+        }
+        return new int[]{x,y};
+    }
+    private void scale(Minecraft mc){
+            switch (mc.gameSettings.guiScale){
+                case 0:
+                    GlStateManager.scale(0.5,0.5,0.5);
+                    break;
+                case 1:
+                    GlStateManager.scale(2,2,2);
+                    break;
+                case 3:
+                    GlStateManager.scale(0.6666666666666667,0.6666666666666667,0.6666666666666667);
+
+            }
+    }
     protected void setText(String newChatText, boolean shouldOverwrite)
     {
         if (shouldOverwrite)
@@ -268,8 +320,8 @@ public class GuiChat extends GuiScreen
         }
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+
         drawRect(2, this.height - 14, this.width - 2, this.height - 2, Integer.MIN_VALUE);
         this.inputField.drawTextBox();
         if (Memorial.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(Memorial.commandManager.getPrefix()))) {
@@ -286,6 +338,28 @@ public class GuiChat extends GuiScreen
         if (ichatcomponent != null && ichatcomponent.getChatStyle().getChatHoverEvent() != null)
         {
             this.handleComponentHover(ichatcomponent, mouseX, mouseY);
+        }
+        ScaledResolution sr = new ScaledResolution(mc);
+        int x = getScaledMouseCoordinates(mc, mouseX, mouseY)[0];
+        int y = getScaledMouseCoordinates(mc, mouseX, mouseY)[1];
+        TargetHUD targetHUD = (TargetHUD) Memorial.moduleManager.getModule(TargetHUD.class);
+
+        if (targetHUD.getState()){
+            if (dragTH){
+                targetHUD.setX(MathHelper.clamp_int(x1 + x,1, (int) (targetHUD.x.getMaximum() - targetHUD.getWidth())));
+                targetHUD.setY(MathHelper.clamp_int(y1 + y, 1, (int) (targetHUD.y.getMaximum() - targetHUD.getHeight())));
+            }
+            if (hover(x, y, targetHUD)) {
+                if (targetHUD.getX() > sr.getScaledWidth() - 50) {
+                    targetHUD.setX(sr.getScaledWidth() - 50);
+                }
+
+                if (targetHUD.getY() > sr.getScaledHeight() - 50) {
+                    targetHUD.setY(sr.getScaledHeight() - 50);
+                }
+                scale(mc);
+                RenderUtils.drawBorderedRect(targetHUD.getX(), targetHUD.getY(), targetHUD.getX() + targetHUD.getWidth(), targetHUD.getY() + targetHUD.getHeight(), 1, -1,0);
+            }
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

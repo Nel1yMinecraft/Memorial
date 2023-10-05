@@ -54,14 +54,26 @@ public class ShaderUtil implements Utils {
                 case "mask":
                     fragmentShaderID = createShader(new ByteArrayInputStream(mask.getBytes()), GL_FRAGMENT_SHADER);
                     break;
+                case "gradientround":
+                    fragmentShaderID = createShader(new ByteArrayInputStream(gradientround.getBytes()), GL_FRAGMENT_SHADER);
+                    break;
                 case "gradient":
                     fragmentShaderID = createShader(new ByteArrayInputStream(gradient.getBytes()), GL_FRAGMENT_SHADER);
+                    break;
+                case "clickgui":
+                    fragmentShaderID = createShader(new ByteArrayInputStream(clickgui.getBytes()), GL_FRAGMENT_SHADER);
                     break;
                 case "roundedRect":
                     fragmentShaderID = createShader(new ByteArrayInputStream(roundedRect.getBytes()), GL_FRAGMENT_SHADER);
                     break;
                 case "roundedRectGradient":
                     fragmentShaderID = createShader(new ByteArrayInputStream(roundedRectGradient.getBytes()), GL_FRAGMENT_SHADER);
+                    break;
+                case "arc":
+                    fragmentShaderID = createShader(new ByteArrayInputStream(arc.getBytes()), GL_FRAGMENT_SHADER);
+                    break;
+                case "bloom":
+                    fragmentShaderID = createShader(new ByteArrayInputStream(bloom.getBytes()), GL_FRAGMENT_SHADER);
                     break;
                 default:
                     fragmentShaderID = createShader(mc.getResourceManager().getResource(new ResourceLocation(fragmentShaderLoc)).getInputStream(), GL_FRAGMENT_SHADER);
@@ -363,7 +375,47 @@ public class ShaderUtil implements Utils {
             "    vec4 result = sum / 12.0;\n" +
             "    gl_FragColor = vec4(result.rgb / result.a, mix(result.a, result.a * (1.0 - texture2D(textureToCheck, gl_TexCoord[0].st).a),check));\n" +
             "}";
-
+    private String bloom = "#version 120\n" +
+            "\n" +
+            "uniform sampler2D inTexture, textureToCheck;\n" +
+            "uniform vec2 texelSize, direction;\n" +
+            "uniform float radius;\n" +
+            "uniform float weights[256];\n" +
+            "\n" +
+            "#define offset texelSize * direction\n" +
+            "\n" +
+            "void main() {\n" +
+            "    if (direction.y > 0 && texture2D(textureToCheck, gl_TexCoord[0].st).a != 0.0) discard;\n" +
+            "    float blr = texture2D(inTexture, gl_TexCoord[0].st).a * weights[0];\n" +
+            "\n" +
+            "    for (float f = 1.0; f <= radius; f++) {\n" +
+            "        blr += texture2D(inTexture, gl_TexCoord[0].st + f * offset).a * (weights[int(abs(f))]);\n" +
+            "        blr += texture2D(inTexture, gl_TexCoord[0].st - f * offset).a * (weights[int(abs(f))]);\n" +
+            "    }\n" +
+            "\n" +
+            "    gl_FragColor = vec4(0.0, 0.0, 0.0, blr);\n" +
+            "}\n";
+    private String arc = "#version 120\n" +
+            "\n" +
+            "#define PI 3.14159265359\n" +
+            "\n" +
+            "uniform float radialSmoothness, radius, borderThickness, progress;\n" +
+            "uniform int change;\n" +
+            "uniform vec4 color;\n" +
+            "uniform vec2 pos;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    vec2 st = gl_FragCoord.xy - (pos + radius + borderThickness);\n" +
+            "  //  vec2 rp = st * 2. - 1.;\n" +
+            "\n" +
+            "    float circle = sqrt(dot(st,st));\n" +
+            "\n" +
+            "    //Radius minus circle to get just the outline\n" +
+            "    float smoothedAlpha = 1.0 - smoothstep(borderThickness, borderThickness + 3., abs(radius-circle));\n" +
+            "    vec4 circleColor = vec4(color.rgb, smoothedAlpha * color.a);\n" +
+            "\n" +
+            "    gl_FragColor = mix(vec4(circleColor.rgb, 0.0), circleColor, smoothstep(0., radialSmoothness, change * (atan(st.y,st.x) - (progress-.5) * PI * 2.5)));\n" +
+            "}";
     private String kawaseDownBloom = "#version 120\n" +
             "\n" +
             "uniform sampler2D inTexture;\n" +
@@ -424,6 +476,7 @@ public class ShaderUtil implements Utils {
             "    sum += texture2D(inTexture, uv - vec2(halfpixel.x, -halfpixel.y) * offset);\n" +
             "    gl_FragColor = vec4(sum.rgb * .125, 1.0);\n" +
             "}\n";
+
 
     private String gradientMask = "#version 120\n" +
             "\n" +
@@ -509,7 +562,97 @@ public class ShaderUtil implements Utils {
             "    gl_FragColor = vec4(gradient.rgb, gradient.a * smoothedAlpha);\n" +
             "}";
 
-
+    private String gradientround = "#version 120\n" +
+            "\n" +
+            "uniform vec2 u_size;\n" +
+            "uniform float u_radius;\n" +
+            "uniform vec4 u_first_color;\n" +
+            "uniform vec4 u_second_color;\n" +
+            "uniform int u_direction;\n" +
+            "\n" +
+            "void main(void)\n" +
+            "{\n" +
+            "    vec2 tex_coord = gl_TexCoord[0].st;\n" +
+            "    vec4 color = mix(u_first_color, u_second_color, u_direction > 0.0 ? tex_coord.y : tex_coord.x);\n" +
+            "    gl_FragColor = vec4(color.rgb, color.a * smoothstep(1.0, 0.0, length(max((abs(tex_coord - 0.5) + 0.5) * u_size - u_size + u_radius, 0.0)) - u_radius + 0.5));\n" +
+            "}";
+    private String clickgui = "#define M_PI 3.1415926535897932384626433832795\n" +
+            "#define M_TWO_PI (2.0 * M_PI)\n" +
+            "\n" +
+            "uniform float iTime;\n" +
+            "uniform vec2 iResolution;\n" +
+            "uniform vec4 iMouse;\n" +
+            "uniform vec2 rectsize;\n" +
+            "float rand(vec2 n) {\n" +
+            "    return fract(sin(dot(n, vec2(12.9898,12.1414))) * 83758.5453);\n" +
+            "}\n" +
+            "\n" +
+            "float noise(vec2 n) {\n" +
+            "    const vec2 d = vec2(0.0, 1.0);\n" +
+            "    vec2 b = floor(n);\n" +
+            "    vec2 f = smoothstep(vec2(0.0), vec2(1.0), fract(n));\n" +
+            "    return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);\n" +
+            "}\n" +
+            "\n" +
+            "vec3 ramp(float t) {\n" +
+            "    return t <= .5 ? vec3( 1. - t * 1.4, .2, 1.05 ) / t : vec3( .3 * (1. - t) * 2., .2, 1.05 ) / t;\n" +
+            "}\n" +
+            "vec2 polarMap(vec2 uv, float shift, float inner) {\n" +
+            "\n" +
+            "    uv = vec2(0.5) - uv;\n" +
+            "\n" +
+            "\n" +
+            "    float px = 1.0 - fract(atan(uv.y, uv.x) / 6.28 + 0.25) + shift;\n" +
+            "    float py = (sqrt(uv.x * uv.x + uv.y * uv.y) * (1.0 + inner * 2.0) - inner) * 2.0;\n" +
+            "\n" +
+            "    return vec2(px, py);\n" +
+            "}\n" +
+            "float fire(vec2 n) {\n" +
+            "    return noise(n) + noise(n * 2.1) * .6 + noise(n * 5.4) * .42;\n" +
+            "}\n" +
+            "\n" +
+            "float shade(vec2 uv, float t) {\n" +
+            "    uv.x += uv.y < .5 ? 23.0 + t * .035 : -11.0 + t * .03;\n" +
+            "    uv.y = abs(uv.y - .5);\n" +
+            "    uv.x *= 35.0;\n" +
+            "\n" +
+            "    float q = fire(uv - t * .013) / 2.0;\n" +
+            "    vec2 r = vec2(fire(uv + q / 2.0 + t - uv.x - uv.y), fire(uv + q - t));\n" +
+            "\n" +
+            "    return pow((r.y + r.y) * max(.0, uv.y) + .1, 4.0);\n" +
+            "}\n" +
+            "\n" +
+            "vec3 color(float grad) {\n" +
+            "\n" +
+            "    float m2 = iMouse.z < 0.0001 ? 1.15 : iMouse.y * 3.0 / iResolution.y;\n" +
+            "    grad =sqrt( grad);\n" +
+            "    vec3 color = vec3(1.0 / (pow(vec3(0.5, 0.0, .1) + 2.61, vec3(2.0))));\n" +
+            "    vec3 color2 = color;\n" +
+            "    color = ramp(grad);\n" +
+            "    color /= (m2 + max(vec3(0), color));\n" +
+            "\n" +
+            "    return color;\n" +
+            "\n" +
+            "}\n" +
+            "\n" +
+            "void mainImage(out vec4 fragColor, in vec2 fragCoord) {\n" +
+            "\n" +
+            "    float m1 = iMouse.z < 0.0001 ? 3.6 : iMouse.x * 5.0 / iResolution.x;\n" +
+            "\n" +
+            "    float t = iTime;\n" +
+            "    vec2 uv = fragCoord.xy / rectsize.xy;\n" +
+            "    float ff = 1.0 - uv.y;\n" +
+            "    uv.x -= (rectsize.x / rectsize.y - 1.0) / 2.0;\n" +
+            "    vec2 uv2 = uv;\n" +
+            "    uv2.y = 1.0 - uv2.y;\n" +
+            "    uv = polarMap(uv, 1.3, m1);\n" +
+            "    uv2 = polarMap(uv2, 1.9, m1);\n" +
+            "\n" +
+            "    vec3 c1 = color(shade(uv, t)) * ff;\n" +
+            "    vec3 c2 = color(shade(uv2, t)) * (1.0 - ff);\n" +
+            "\n" +
+            "    fragColor = vec4(c1 + c2, 1.0);\n" +
+            "}\n";
     private String roundedRect = "#version 120\n" +
             "\n" +
             "uniform vec2 location, rectSize;\n" +

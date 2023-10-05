@@ -7,7 +7,7 @@ package me.memorial.ui.client.clickgui.style.styles.dropdown;
 
 import me.memorial.Memorial;
 import me.memorial.module.modules.render.ClickGUI;
-import me.memorial.module.modules.client.HUD;
+import me.memorial.module.modules.render.HUD;
 import me.memorial.ui.font.Fonts;
 import me.memorial.utils.render.RenderUtils;
 import me.memorial.utils.timer.TickTimer;
@@ -34,6 +34,8 @@ public class Module {
         this.module = module;
         this.tab = tab;
         for (Value setting :module.getValues() ) {
+            if (!((boolean)setting.getCanDisplay().invoke()))
+                continue;
             settings.add(new Setting(setting, this));
         }
     }

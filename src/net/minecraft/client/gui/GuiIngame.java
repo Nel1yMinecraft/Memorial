@@ -8,11 +8,10 @@ import java.util.List;
 import java.util.Random;
 
 import me.memorial.Memorial;
-import me.memorial.events.EventManager;
 import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.events.impl.render.ShaderEvent;
 import me.memorial.module.modules.render.AntiBlind;
-import me.memorial.module.modules.client.HUD;
+import me.memorial.module.modules.render.HUD;
 import me.memorial.module.modules.render.NoScoreboard;
 import me.memorial.ui.font.AWTFontRenderer;
 import me.memorial.utils.render.RenderUtils;
@@ -95,7 +94,7 @@ public class GuiIngame extends Gui
     private int lastPlayerHealth = 0;
     private long lastSystemTime = 0L;
     private long healthUpdateCounter = 0L;
-    private Framebuffer stencilFramebuffer = new Framebuffer(1, 1, false);
+
     public GuiIngame(Minecraft mcIn)
     {
         this.mc = mcIn;
@@ -342,12 +341,14 @@ public class GuiIngame extends Gui
         }
 
         Memorial.eventManager.callEvent(new Render2DEvent(partialTicks,scaledresolution));
+        RenderUtils.resetColor();
         AWTFontRenderer.Companion.garbageCollectionTick();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
         GlStateManager.enableAlpha();
     }
+    private Framebuffer stencilFramebuffer = new Framebuffer(1, 1, false);
     public void blurScreen() {
         //修改渲染顺序bloom更自然
         stencilFramebuffer = RenderUtils.createFrameBuffer(stencilFramebuffer);
@@ -356,14 +357,14 @@ public class GuiIngame extends Gui
         Memorial.eventManager.callEvent(new ShaderEvent());
         drawBloom();
         stencilFramebuffer.unbindFramebuffer();
-        KawaseBloom.renderBlur(stencilFramebuffer.framebufferTexture, 2, 3);
+        KawaseBlur.renderBlur(stencilFramebuffer.framebufferTexture, 3, 1);
         stencilFramebuffer = RenderUtils.createFrameBuffer(stencilFramebuffer);
         stencilFramebuffer.framebufferClear();
         stencilFramebuffer.bindFramebuffer(false);
         Memorial.eventManager.callEvent(new ShaderEvent());
         drawBloom();
         stencilFramebuffer.unbindFramebuffer();
-        KawaseBlur.renderBlur(stencilFramebuffer.framebufferTexture, 3, 1);
+        KawaseBloom.renderBlur(stencilFramebuffer.framebufferTexture, 2, 3);
     }
     private void drawBloom() {
 
@@ -371,6 +372,7 @@ public class GuiIngame extends Gui
     protected void renderTooltip(ScaledResolution sr, float partialTicks)
     {
         blurScreen();
+        RenderUtils.resetColor();
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

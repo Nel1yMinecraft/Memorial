@@ -1,12 +1,8 @@
-package me.memorial.module.modules.client;
+package me.memorial.module.modules.render;
 
 import me.memorial.events.*;
-import me.memorial.Memorial;
 
-import me.memorial.events.impl.misc.KeyEvent;
 import me.memorial.events.impl.misc.ScreenEvent;
-import me.memorial.events.impl.player.UpdateEvent;
-import me.memorial.events.impl.render.Render2DEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -19,7 +15,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 @ModuleInfo(name = "HUD", description = "Toggles visibility of the HUD.", category = ModuleCategory.CLIENT, array = false)
 public class HUD extends Module {

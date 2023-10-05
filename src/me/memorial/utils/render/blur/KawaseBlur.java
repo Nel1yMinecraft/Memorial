@@ -1,4 +1,3 @@
-
 package me.memorial.utils.render.blur;
 
 import me.memorial.utils.Utils;
@@ -98,6 +97,7 @@ public class KawaseBlur implements Utils {
         GLUtil.startBlend();
         ShaderUtil.drawQuads();
         GlStateManager.bindTexture(0);
+
     }
 
     private static void renderFBO(Framebuffer framebuffer, int framebufferTexture, ShaderUtil shader, float offset) {
@@ -113,5 +113,6 @@ public class KawaseBlur implements Utils {
         ShaderUtil.drawQuads();
         shader.unload();
     }
+
 
 }

@@ -29,6 +29,8 @@ public class Button {
         this.y = y;
         int y2 = y + 15;
         for (Value v : this.cheat.getValues()) {
+            if (!((boolean)v.getCanDisplay().invoke()))
+                continue;
             buttons.add(new ValueButton(v, this.x + 5, y2));
             y2 += 15;
         }

@@ -18,7 +18,7 @@ import me.memorial.module.modules.client.FakeFPS
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.module.modules.exploit.*
-import me.memorial.module.modules.client.HUD
+import me.memorial.module.modules.render.HUD
 import me.memorial.module.modules.client.Rotations
 import me.memorial.module.modules.misc.*
 import me.memorial.module.modules.movement.*
@@ -55,6 +55,7 @@ class ModuleManager : Listenable {
             KillAura::class.java,
             Velocity::class.java,
             Fly::class.java,
+            TargetHUD::class.java,
             ClickGUI::class.java,
             HighJump::class.java,
             InventoryMove::class.java,

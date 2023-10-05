@@ -174,7 +174,7 @@ class KillAura : Module() {
 
     // Target
     var target: EntityLivingBase? = null
-    private var currentTarget: EntityLivingBase? = null
+    var currentTarget: EntityLivingBase? = null
     private var hitable = false
     private val prevTargetEntities = mutableListOf<Int>()
 

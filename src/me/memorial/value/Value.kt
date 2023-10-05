@@ -9,7 +9,7 @@ import me.memorial.utils.ClientUtils
 import net.minecraft.client.gui.FontRenderer
 import java.util.*
 
-abstract class Value<T>(val name: String, protected var value: T) {
+abstract class Value<T>(val name: String, protected var value: T, var canDisplay: () -> Boolean) {
 
     val displayable: Boolean
         get() = displayableFunc()
@@ -49,8 +49,8 @@ abstract class Value<T>(val name: String, protected var value: T) {
 /**
  * Bool value represents a value with a boolean
  */
-open class BoolValue(name: String, value: Boolean) : Value<Boolean>(name, value) {
-
+open class BoolValue(name: String, value: Boolean, displayable: () -> Boolean) : Value<Boolean>(name, value,displayable) {
+    constructor(name: String, value: Boolean): this(name, value, { true } )
     override fun toJson() = JsonPrimitive(value)
 
     override fun fromJson(element: JsonElement) {
@@ -63,9 +63,9 @@ open class BoolValue(name: String, value: Boolean) : Value<Boolean>(name, value)
 /**
  * Integer value represents a value with a integer
  */
-open class IntegerValue(name: String, value: Int, val minimum: Int = 0, val maximum: Int = Integer.MAX_VALUE)
-    : Value<Int>(name, value) {
-
+open class IntegerValue(name: String, value: Int, val minimum: Int = 0, val maximum: Int = Integer.MAX_VALUE, displayable: () -> Boolean)
+    : Value<Int>(name, value,displayable) {
+    constructor(name: String, value: Int, minimum: Int, maximum: Int): this(name, value, minimum, maximum, { true } )
     fun set(newValue: Number) {
         set(newValue.toInt())
     }
@@ -82,9 +82,9 @@ open class IntegerValue(name: String, value: Int, val minimum: Int = 0, val maxi
 /**
  * Float value represents a value with a float
  */
-open class FloatValue(name: String, value: Float, val minimum: Float = 0F, val maximum: Float = Float.MAX_VALUE)
-    : Value<Float>(name, value) {
-
+open class FloatValue(name: String, value: Float, val minimum: Float = 0F, val maximum: Float = Float.MAX_VALUE, displayable: () -> Boolean)
+    : Value<Float>(name, value,displayable) {
+    constructor(name: String, value: Float, minimum: Float, maximum: Float): this(name, value, minimum, maximum, { true } )
     fun set(newValue: Number) {
         set(newValue.toFloat())
     }
@@ -101,8 +101,8 @@ open class FloatValue(name: String, value: Float, val minimum: Float = 0F, val m
 /**
  * Text value represents a value with a string
  */
-open class TextValue(name: String, value: String) : Value<String>(name, value) {
-
+open class TextValue(name: String, value: String, displayable: () -> Boolean) : Value<String>(name, value,displayable) {
+    constructor(name: String, value: String): this(name, value, { true } )
     override fun toJson() = JsonPrimitive(value)
 
     override fun fromJson(element: JsonElement) {
@@ -118,8 +118,9 @@ open class TextValue(name: String, value: String) : Value<String>(name, value) {
 /**
  * Font value represents a value with a font
  */
-open class FontValue(valueName: String, value: FontRenderer) : Value<FontRenderer>(valueName, value) {
+open class FontValue(valueName: String, value: FontRenderer, displayable: () -> Boolean) : Value<FontRenderer>(valueName, value,displayable) {
 
+    constructor(valueName: String, value: FontRenderer): this(valueName, value, { true } )
     override fun toJson(): JsonElement? {
         val fontDetails = Fonts.getFontDetails(value) ?: return null
         val valueObject = JsonObject()
@@ -138,13 +139,14 @@ open class FontValue(valueName: String, value: FontRenderer) : Value<FontRendere
 /**
  * Block value represents a value with a block
  */
-class BlockValue(name: String, value: Int) : IntegerValue(name, value, 1, 197)
-
+class BlockValue(name: String, value: Int, displayable: () -> Boolean) : IntegerValue(name, value, 1, 197,displayable) {
+    constructor(name: String, value: Int) : this(name, value, { true })
+}
 /**
  * List value represents a selectable list of values
  */
-open class ListValue(name: String, val values: Array<String>, value: String) : Value<String>(name, value) {
-
+open class ListValue(name: String, val values: Array<String>, value: String, displayable: () -> Boolean) : Value<String>(name, value,displayable) {
+    constructor(name: String, values: Array<String>, value: String): this(name, values, value, { true } )
     @JvmField
     var openList = false
 

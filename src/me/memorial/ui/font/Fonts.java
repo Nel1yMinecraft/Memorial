@@ -21,7 +21,16 @@ public class Fonts {
 
     @FontDetails(fontName = "Roboto Bold", fontSize = 180)
     public static GameFontRenderer fontBold180;
-
+    @FontDetails(fontName = "Medium", fontSize = 25)
+    public static GameFontRenderer MEDIUM_25;
+    @FontDetails(fontName = "Medium", fontSize = 27)
+    public static GameFontRenderer MEDIUM_27;
+    @FontDetails(fontName = "Medium", fontSize = 35)
+    public static GameFontRenderer MEDIUM_35;
+    @FontDetails(fontName = "Medium", fontSize = 40)
+    public static GameFontRenderer MEDIUM_40;
+    @FontDetails(fontName = "Medium", fontSize = 45)
+    public static GameFontRenderer MEDIUM_45;
     @FontDetails(fontName = "Minecraft Font")
     public static final FontRenderer minecraftFont = Minecraft.getMinecraft().fontRendererObj;
 
@@ -34,6 +43,13 @@ public class Fonts {
 
         font35 = new GameFontRenderer(getFont("sfui.ttf", 35));
         font40 = new GameFontRenderer(getFont("sfui.ttf", 40));
+
+        MEDIUM_25 = new GameFontRenderer(getFont("Medium.ttf", 25));
+        MEDIUM_27 = new GameFontRenderer(getFont("Medium.ttf", 27));
+        MEDIUM_35 = new GameFontRenderer(getFont("Medium.ttf", 35));
+        MEDIUM_40 = new GameFontRenderer(getFont("Medium.ttf", 40));
+        MEDIUM_45 = new GameFontRenderer(getFont("Medium.ttf", 45));
+
         fontBold180 = new GameFontRenderer(getFont("sfuibold.ttf", 180));
 
         ClientUtils.getLogger().info("Loaded Fonts. (" + (System.currentTimeMillis() - l) + "ms)");

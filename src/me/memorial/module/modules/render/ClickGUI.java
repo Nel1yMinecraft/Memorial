@@ -97,7 +97,6 @@ public class ClickGUI extends Module {
             default:
                 updateStyle();
                 mc.displayGuiScreen(Memorial.clickGui);
-                mc.displayGuiScreen(Memorial.clickGui);
         }
     }
     @Override

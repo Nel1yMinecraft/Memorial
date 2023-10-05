@@ -3,18 +3,19 @@ package me.memorial.module
 import me.memorial.Memorial
 import me.memorial.events.Listenable
 import me.memorial.utils.ClientUtils
-
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.ColorUtils.stripColor
 import me.memorial.value.Value
-import net.minecraft.client.audio.PositionedSoundRecord
-import net.minecraft.util.ResourceLocation
 import org.lwjgl.input.Keyboard
+import java.awt.Dimension
+import java.awt.Toolkit
 
 open class Module : MinecraftInstance(), Listenable {
 
     // Module information
     // TODO: Remove ModuleInfo and change to constructor (#Kotlin)
+    val screenSize: Dimension? = Toolkit.getDefaultToolkit().screenSize
+
     var name: String
     var description: String
     var category: ModuleCategory
