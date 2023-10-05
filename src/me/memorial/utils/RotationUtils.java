@@ -24,7 +24,54 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
     private static double x = random.nextDouble();
     private static double y = random.nextDouble();
     private static double z = random.nextDouble();
+    public static VecRotation lockView(final AxisAlignedBB bb, final boolean outborder, final boolean random,
+                                       final boolean predict, final boolean throughWalls, final float distance) {
+        if (outborder) {
+            final Vec3 vec3 = new Vec3(bb.minX + (bb.maxX - bb.minX) * (x * 0.3 + 1.0), bb.minY + (bb.maxY - bb.minY) * (y * 0.3 + 1.0), bb.minZ + (bb.maxZ - bb.minZ) * (z * 0.3 + 1.0));
+            return new VecRotation(vec3, toRotation(vec3, predict));
+        }
 
+        final Vec3 randomVec = new Vec3(bb.minX + (bb.maxX - bb.minX) * x * 0.8, bb.minY + (bb.maxY - bb.minY) * y * 0.8, bb.minZ + (bb.maxZ - bb.minZ) * z * 0.8);
+        final Rotation randomRotation = toRotation(randomVec, predict);
+
+        final Vec3 eyes = mc.thePlayer.getPositionEyes(1F);
+
+        double xMin = 0.0D;
+        double yMin = 0.0D;
+        double zMin = 0.0D;
+        double xMax = 0.0D;
+        double yMax = 0.0D;
+        double zMax = 0.0D;
+        double xDist = 0.0D;
+        double yDist = 0.0D;
+        double zDist = 0.0D;
+        VecRotation vecRotation = null;
+        xMin = 0.45D; xMax = 0.55D; xDist = 0.0125D;
+        yMin = 0.65D; yMax = 0.75D; yDist = 0.0125D;
+        zMin = 0.45D; zMax = 0.55D; zDist = 0.0125D;
+        for(double xSearch = xMin; xSearch < xMax; xSearch += xDist) {
+            for (double ySearch = yMin; ySearch < yMax; ySearch += yDist) {
+                for (double zSearch = zMin; zSearch < zMax; zSearch += zDist) {
+                    final Vec3 vec3 = new Vec3(bb.minX + (bb.maxX - bb.minX) * xSearch, bb.minY + (bb.maxY - bb.minY) * ySearch, bb.minZ + (bb.maxZ - bb.minZ) * zSearch);
+
+                    final Rotation rotation = toRotation(vec3, predict);
+                    final double vecDist = eyes.distanceTo(vec3);
+
+                    if (vecDist > distance)
+                        continue;
+
+                    if (throughWalls || isVisible(vec3)) {
+                        final VecRotation currentVec = new VecRotation(vec3, rotation);
+
+                        if (vecRotation == null || (random ? getRotationDifference(currentVec.getRotation(), randomRotation) < getRotationDifference(vecRotation.getRotation(), randomRotation) : getRotationDifference(currentVec.getRotation()) < getRotationDifference(vecRotation.getRotation())))
+                            vecRotation = currentVec;
+                    }
+                }
+            }
+        }
+
+        return vecRotation;
+    }
     /**
      * @author aquavit
      * <p>

@@ -16,6 +16,7 @@ import me.memorial.module.modules.misc.AntiBot
 import me.memorial.module.modules.misc.Teams
 import me.memorial.module.modules.player.Blink
 import me.memorial.module.modules.render.FreeCam
+import me.memorial.utils.EaseUtils
 import me.memorial.utils.EntityUtils
 import me.memorial.utils.RaycastUtils
 import me.memorial.utils.RotationUtils
@@ -41,10 +42,13 @@ import net.minecraft.potion.Potion
 import net.minecraft.util.*
 import net.minecraft.world.WorldSettings
 import org.lwjgl.input.Keyboard
+import org.lwjgl.opengl.GL11
 import java.awt.Color
 import java.util.*
+import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sin
 
 @ModuleInfo(name = "KillAura", description = "Automatically attacks targets around you.",
         category = ModuleCategory.COMBAT, keyBind = Keyboard.KEY_R)
@@ -122,7 +126,7 @@ class KillAura : Module() {
             if (v < newValue) set(v)
         }
     }
-    private val rotationMode = ListValue("RotationMode", arrayOf("Off", "Normal", "GrimAC"), "Normal")
+    private val rotationMode = ListValue("RotationMode", arrayOf("Off", "Normal", "GrimAC","Hyt"), "Normal")
     private val shakeValue = BoolValue("Shake", true)
     private val silentRotationValue = BoolValue("SilentRotation", true)
     private val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "Strict", "Silent"), "Off")
@@ -157,7 +161,12 @@ class KillAura : Module() {
     // Visuals
     private val markValue = BoolValue("Mark", true)
     private val fakeSharpValue = BoolValue("FakeSharp", true)
-
+    private val circleValue = BoolValue("Circle", true)
+    private val circleRed = IntegerValue("CircleRed", 255, 0, 255)// { circleValue.get() }
+    private val circleGreen = IntegerValue("CircleGreen", 255, 0, 255)// { circleValue.get() }
+    private val circleBlue = IntegerValue("CircleBlue", 255, 0, 255)// { circleValue.get() }
+    private val circleAlpha = IntegerValue("CircleAlpha", 255, 0, 255)// { circleValue.get() }
+    private val circleAccuracy = IntegerValue("CircleAccuracy", 15, 0, 60)
     /**
      * MODULE
      */
@@ -329,12 +338,124 @@ class KillAura : Module() {
      */
     @EventTarget
     fun onRender3D(event: Render3DEvent) {
+
+        if (circleValue.get()) {
+            GL11.glPushMatrix()
+            GL11.glTranslated(
+                mc.thePlayer!!.lastTickPosX + (mc.thePlayer!!.posX - mc.thePlayer!!.lastTickPosX) * mc.timer.renderPartialTicks - mc.renderManager.renderPosX,
+                mc.thePlayer!!.lastTickPosY + (mc.thePlayer!!.posY - mc.thePlayer!!.lastTickPosY) * mc.timer.renderPartialTicks - mc.renderManager.renderPosY,
+                mc.thePlayer!!.lastTickPosZ + (mc.thePlayer!!.posZ - mc.thePlayer!!.lastTickPosZ) * mc.timer.renderPartialTicks - mc.renderManager.renderPosZ
+            )
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glEnable(GL11.GL_LINE_SMOOTH)
+            GL11.glDisable(GL11.GL_TEXTURE_2D)
+            GL11.glDisable(GL11.GL_DEPTH_TEST)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
+
+            GL11.glLineWidth(1F)
+            GL11.glColor4f(
+                circleRed.get().toFloat() / 255.0F,
+                circleGreen.get().toFloat() / 255.0F,
+                circleBlue.get().toFloat() / 255.0F,
+                circleAlpha.get().toFloat() / 255.0F
+            )
+            GL11.glRotatef(90F, 1F, 0F, 0F)
+            GL11.glBegin(GL11.GL_LINE_STRIP)
+
+            for (i in 0..360 step 61 - circleAccuracy.get()) { // You can change circle accuracy  (60 - accuracy)
+                GL11.glVertex2f(
+                    cos(i * Math.PI / 180.0).toFloat() * rangeValue.get(),
+                    (sin(i * Math.PI / 180.0).toFloat() * rangeValue.get())
+                )
+            }
+            GL11.glVertex2f(
+                cos(360 * Math.PI / 180.0).toFloat() * rangeValue.get(),
+                (sin(360 * Math.PI / 180.0).toFloat() * rangeValue.get())
+            )
+
+            GL11.glEnd()
+
+            GL11.glDisable(GL11.GL_BLEND)
+            GL11.glEnable(GL11.GL_TEXTURE_2D)
+            GL11.glEnable(GL11.GL_DEPTH_TEST)
+            GL11.glDisable(GL11.GL_LINE_SMOOTH)
+
+            GL11.glPopMatrix()
+        }
+
         if (cancelRun) {
             target = null
             currentTarget = null
             hitable = false
             stopBlocking()
             return
+        }
+        if (markValue.get()) {
+                val drawTime = (System.currentTimeMillis() % 1500).toInt()
+                val drawMode = drawTime > 750
+                var drawPercent = drawTime / 750.0
+            //true when goes up
+            if (!drawMode) {
+                drawPercent = 1 - drawPercent
+            } else {
+                drawPercent -= 1
+            }
+                    drawPercent = EaseUtils.easeInOutQuad (drawPercent)
+                    GL11 . glPushMatrix ()
+                    GL11 . glDisable (3553)
+                    GL11 . glEnable (2848)
+                    GL11 . glEnable (2881)
+                    GL11 . glEnable (2832)
+                    GL11 . glEnable (3042)
+                    GL11 . glBlendFunc (770, 771)
+                GL11.glHint(3154, 4354)
+
+            GL11.glHint(3155, 4354)
+                    GL11 . glHint (3153, 4354)
+                GL11.glDisable(2929)
+
+            GL11.glDepthMask(false)
+
+                val bb = target!!.entityBoundingBox
+
+                val radius = (bb.maxX - bb.minX) + 0.3
+                val height = bb.maxY - bb.minY
+                val x =
+                target!!.lastTickPosX + (target!!.posX - target!!.lastTickPosX) * event.partialTicks - mc.renderManager.viewerPosX
+
+                val y =
+                (target!!.lastTickPosY + (target!!.posY - target!!.lastTickPosY) * event.partialTicks - mc.renderManager.viewerPosY) + height * drawPercent
+
+                val z =
+                target!!.lastTickPosZ + (target!!.posZ - target!!.lastTickPosZ) * event.partialTicks - mc.renderManager.viewerPosZ
+
+            GL11.glLineWidth((radius * 5f).toFloat())
+                    GL11 . glBegin (3)
+                for (i in 0..360) {
+                val rainbow = Color(
+                    Color.HSBtoRGB(
+                        (mc.thePlayer!!.ticksExisted / 70.0 + sin(i / 50.0 * 1.75)).toFloat() % 1.0f,
+                        0.7f,
+                        1.0f
+                    )
+                )
+                GL11.glColor3f(rainbow.red / 255.0f, rainbow.green / 255.0f, rainbow.blue / 255.0f)
+                GL11.glVertex3d(
+                    x + radius * cos(i * 6.283185307179586 / 45.0),
+                    y,
+                    z + radius * sin(i * 6.283185307179586 / 45.0)
+                )
+            }
+
+            GL11.glEnd()
+
+                    GL11 . glDepthMask (true)
+                    GL11 . glEnable (2929)
+                    GL11 . glDisable (2848)
+                    GL11 . glDisable (2881)
+                    GL11 . glEnable (2832)
+                    GL11 . glEnable (3553)
+                    GL11 . glPopMatrix ()
         }
 
         if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
@@ -348,7 +469,7 @@ class KillAura : Module() {
 
         target ?: return
 
-        if (markValue.get() && !targetModeValue.get().equals("Multi", ignoreCase = true))
+        if (!targetModeValue.get().equals("Multi", ignoreCase = true))
             RenderUtils.drawPlatform(target, if (hitable) Color(37, 126, 255, 70) else Color(255, 0, 0, 70))
 
         if (currentTarget != null && attackTimer.hasTimePassed(attackDelay) &&
@@ -595,6 +716,33 @@ class KillAura : Module() {
         when(rotationMode.get()){
             "Normal"-> {
                 RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
+            }
+            "Hyt" -> {
+                if (predictValue.get())
+                    boundingBox = boundingBox.offset(
+                        (entity.posX - entity.prevPosX) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
+                        (entity.posY - entity.prevPosY) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
+                        (entity.posZ - entity.prevPosZ) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get())
+                    )
+                val (_, rotation) = RotationUtils.lockView(
+                    boundingBox,
+                    outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
+                    randomCenterValue.get(),
+                    predictValue.get(),
+                    mc.thePlayer!!.getDistanceToEntityBox(entity) < throughWallsRangeValue.get(),
+                    maxRange
+                ) ?: return false
+
+                val limitedRotation = RotationUtils.limitAngleChange(
+                    RotationUtils.serverRotation,
+                    rotation,
+                    (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat()
+                )
+
+                if (silentRotationValue.get())
+                    RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
+                else
+                    limitedRotation.toPlayer(mc.thePlayer!!)
             }
             "GrimAC"-> {
                 val bb : AxisAlignedBB = entity.entityBoundingBox
