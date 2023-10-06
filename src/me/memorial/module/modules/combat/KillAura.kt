@@ -1,6 +1,6 @@
 package me.memorial.module.modules.combat
 
-import dev.nelly.viamcp.utils.AttackOrder
+import de.florianmichael.viamcp.fixes.AttackOrder
 import me.memorial.events.*
 import me.memorial.Memorial
 import me.memorial.events.impl.player.AttackEvent
