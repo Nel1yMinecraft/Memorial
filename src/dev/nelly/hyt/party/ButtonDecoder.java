@@ -8,15 +8,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
-// Fix by nelly
 public class ButtonDecoder {
+    public static boolean inviting = false;
     private final String[] elements;
     public final boolean invited;
     public final String inviter;
     public final boolean sign;
     public final boolean list;
     public final ArrayList<Request> requests;
-    public ButtonDecoder(ByteBuf byteBuf) {
+
+    public ButtonDecoder(ByteBuf byteBuf) throws IOException {
         byte[] bytes = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(bytes);
         String result = decode(bytes);
@@ -26,7 +27,7 @@ public class ButtonDecoder {
                 result = result.replace("[but]", "[but]sign");
             }
             list = result.contains("[gui]https://ok.166.net/gameyw-misc/opd/squash/20210915/195203-c2npy8skq6.png");
-            requests = new ArrayList<Request>();
+            requests = new ArrayList<>();
             if (list) {
                 result = result.replace("null<#>[but]", "null<#>[denyButton]");
                 result = result.replace("[but]", "[but]accept");
@@ -43,7 +44,8 @@ public class ButtonDecoder {
             String cacheName = "";
             int cacheAccept = -1;
             for (int i = 0; i < elements.length; i++) {
-               String element = elements[i];
+                String element = elements[i];
+                if (element.contains("[but]邀请组队")) inviting = true;
                 if (element.equals("true<#>[but]accept申请列表")) continue;
                 if (!nextDeny) {
                     if (element.contains("<#>[but]accept")) {
@@ -53,7 +55,7 @@ public class ButtonDecoder {
                     }
                 } else if (element.contains("<#>[but]deny")) {
                     nextDeny = false;
-                    requests.add(new Request(cacheName, String.valueOf(cacheAccept), elements[i += 6]));
+                    requests.add(new Request(cacheName, elements[cacheAccept], elements[i += 6]));
                 }
             }
         }
@@ -67,19 +69,15 @@ public class ButtonDecoder {
         }
     }
 
-    private String decode(byte[] bytes) {
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            GZIPInputStream gZIPInputStream = new GZIPInputStream(new ByteArrayInputStream(bytes));
-            byte[] array = new byte[256];
-            int read;
-            while ((read = gZIPInputStream.read(array)) >= 0) {
-                byteArrayOutputStream.write(array, 0, read);
-            }
-            return byteArrayOutputStream.toString("UTF-8");
-        } catch (IOException ignored) {
+    private String decode(byte[] bytes) throws IOException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        GZIPInputStream gZIPInputStream = new GZIPInputStream(new ByteArrayInputStream(bytes));
+        byte[] array = new byte[256];
+        int read;
+        while ((read = gZIPInputStream.read(array)) >= 0) {
+            byteArrayOutputStream.write(array, 0, read);
         }
-        return "";
+        return byteArrayOutputStream.toString("UTF-8");
     }
 
     public boolean containsButtons(String... buttons) {
