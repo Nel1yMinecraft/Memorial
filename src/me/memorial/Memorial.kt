@@ -1,11 +1,10 @@
 package me.memorial
 
-
-import de.florianmichael.viamcp.ViaMCP
+import dev.nelly.viamcp.ViaMCP
 import me.memorial.cape.CapeAPI.registerCapeService
 import me.memorial.command.CommandManager
-import me.memorial.events.EventManager
 import me.memorial.events.impl.misc.ClientShutdownEvent
+import me.memorial.events.EventManager
 import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager
 import me.memorial.script.ScriptManager
@@ -131,12 +130,14 @@ object Memorial {
         guiMain = GuiMainMenu()
         //guiMain = MainMenu()
 
-
-        ViaMCP.create()
-
-        // In case you want a version slider like in the Minecraft options, you can use this code here, please choose one of those:
-        ViaMCP.INSTANCE.initAsyncSlider() // For top left aligned slider
-        ; // For top left a
+        try {
+            ClientUtils.getLogger().info("Starting ViaMCP...")
+            val viaMCP = ViaMCP.getInstance()
+            viaMCP.start()
+            viaMCP.initAsyncSlider(100, 100, 110, 20)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         // Set is starting status
         isStarting = false
     }

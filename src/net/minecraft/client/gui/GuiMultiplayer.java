@@ -6,10 +6,10 @@ import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.util.List;
 
-import de.florianmichael.viamcp.ViaMCP;
+import dev.nelly.viamcp.gui.GuiProtocolSelector;
 import me.memorial.Memorial;
+import me.memorial.special.BungeeCordSpoof;
 import me.memorial.ui.client.tools.GuiTools;
-
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
@@ -88,7 +88,6 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
     private GuiButton bungeeCordSpoofButton;
 
     public void createButtons() {
-        this.buttonList.add(ViaMCP.INSTANCE.getAsyncVersionSlider());
         this.buttonList.add(this.btnEditServer = new GuiButton(7, this.width / 2 - 154, this.height - 28, 70, 20, I18n.format("selectServer.edit", new Object[0])));
         this.buttonList.add(this.btnDeleteServer = new GuiButton(2, this.width / 2 - 74, this.height - 28, 70, 20, I18n.format("selectServer.delete", new Object[0])));
         this.buttonList.add(this.btnSelectServer = new GuiButton(1, this.width / 2 - 154, this.height - 52, 100, 20, I18n.format("selectServer.select", new Object[0])));
@@ -96,8 +95,9 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
         this.buttonList.add(new GuiButton(3, this.width / 2 + 4 + 50, this.height - 52, 100, 20, I18n.format("selectServer.add", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 + 4, this.height - 28, 70, 20, I18n.format("selectServer.refresh", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 + 4 + 76, this.height - 28, 75, 20, I18n.format("gui.cancel", new Object[0])));
-        //     buttonList.add(bungeeCordSpoofButton = new GuiButton(998, 108, 8, 98, 20, "BungeeCord Spoof: " + (BungeeCordSpoof.enabled ? "On" : "Off")));
-        buttonList.add(new GuiButton(999, width - 104, 8, 98, 20, "Tools"));
+        buttonList.add(bungeeCordSpoofButton = new GuiButton(998, 108, 8, 98, 20, "BungeeCord Spoof: " + (BungeeCordSpoof.enabled ? "On" : "Off")));
+        buttonList.add(new GuiButton(999, width - 200, 8, 93, 20, "Tools"));
+        this.buttonList.add(new GuiButton(1337, this.width - 104, 8, 100, 20, "Protocol Switcher"));
         this.selectServer(this.serverListSelector.func_148193_k());
     }
 
@@ -137,7 +137,8 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
         if (button.enabled) {
             switch(button.id) {
                 case 998:
-
+                    BungeeCordSpoof.enabled = !BungeeCordSpoof.enabled;
+                    bungeeCordSpoofButton.displayString = "BungeeCord Spoof: " + (BungeeCordSpoof.enabled ? "On" : "Off");
                     Memorial.fileManager.saveConfig(Memorial.fileManager.valuesConfig);
                     break;
                 case 999:
@@ -176,6 +177,8 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
                 this.mc.displayGuiScreen(this.parentScreen);
             } else if (button.id == 8) {
                 this.refreshServerList();
+            }  else if (button.id == 1337) {
+                this.mc.displayGuiScreen(new GuiProtocolSelector(this));
             }
         }
     }

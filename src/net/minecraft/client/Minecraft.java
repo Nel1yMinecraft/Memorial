@@ -29,8 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
-
-import de.florianmichael.viamcp.fixes.AttackOrder;
+import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
 import me.memorial.events.impl.world.ClickBlockEvent;
