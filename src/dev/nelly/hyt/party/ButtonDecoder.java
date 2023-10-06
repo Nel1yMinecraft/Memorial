@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.GZIPInputStream;
 
+// Fix by nelly
 public class ButtonDecoder {
     private final String[] elements;
     public final boolean invited;
@@ -15,7 +16,6 @@ public class ButtonDecoder {
     public final boolean sign;
     public final boolean list;
     public final ArrayList<Request> requests;
-
     public ButtonDecoder(ByteBuf byteBuf) {
         byte[] bytes = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(bytes);
@@ -44,15 +44,16 @@ public class ButtonDecoder {
             int cacheAccept = -1;
             for (int i = 0; i < elements.length; i++) {
                String element = elements[i];
+                if (element.equals("true<#>[but]accept申请列表")) continue;
                 if (!nextDeny) {
                     if (element.contains("<#>[but]accept")) {
-                        cacheName = element.substring(0, element.length() - 8);
+                        cacheName = element.substring(0, element.length() - 14);
                         cacheAccept = i += 6;
                         nextDeny = true;
                     }
                 } else if (element.contains("<#>[but]deny")) {
                     nextDeny = false;
-                    requests.add(new Request(cacheName, String.valueOf(cacheAccept), String.valueOf(i += 6)));
+                    requests.add(new Request(cacheName, String.valueOf(cacheAccept), elements[i += 6]));
                 }
             }
         }

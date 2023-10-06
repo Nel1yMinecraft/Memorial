@@ -257,6 +257,14 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         this.gameController.thePlayer.setReducedDebug(packetIn.isReducedDebugInfo());
         this.gameController.playerController.setGameType(packetIn.getGameType());
         this.gameController.gameSettings.sendSettingsToServer();
+        this.netManager.sendPacket(new C17PacketCustomPayload("REGISTER", (new PacketBuffer(Unpooled.buffer().writeBytes(new byte[]{
+                70, 77, 76, 124, 72, 83, 0, 70, 77, 76,
+                0, 70, 77, 76, 124, 77, 80, 0, 70, 77,
+                76, 0, 70, 79, 82, 71, 69, 0, 103, 101,
+                114, 109, 112, 108, 117, 103, 105, 110, 45, 110,
+                101, 116, 101, 97, 115, 101, 0, 104, 121, 116,
+                48, 0, 97, 114, 109, 111, 117, 114, 101, 114,
+                115})))));
         this.netManager.sendPacket(new C17PacketCustomPayload("MC|Brand", (new PacketBuffer(Unpooled.buffer())).writeString(ClientBrandRetriever.getClientModName())));
     }
 
