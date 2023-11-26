@@ -11,6 +11,7 @@ import dev.nelly.hyt.HytPacketManager
 import dev.nelly.module.Disabler
 import dev.nelly.module.EntitySpeed
 import dev.nelly.module.KillSults
+import dev.nelly.module.Velocity2
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
@@ -168,7 +169,8 @@ class ModuleManager : Listenable {
             EntitySpeed::class.java,
             MotionBlur::class.java,
             Velocity2::class.java,
-                    PlayerEdit::class.java
+            PlayerEdit::class.java,
+            Text::class.java
         )
 
         registerModule(NoScoreboard)

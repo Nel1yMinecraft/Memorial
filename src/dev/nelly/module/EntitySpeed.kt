@@ -20,12 +20,6 @@ class EntitySpeed : Module() {
     private val speedUp = BoolValue("SpeedUp", false)
     private val speed = IntegerValue("Speed", 0, 0, 10)
     private val distance = FloatValue("Range", 0f, 0f, 1f)
-    private var speeded = false
-    var sprint = false
-
-    override fun onEnable() {
-        speeded = false
-    }
 
     @EventTarget
     fun onUpdate(event: UpdateEvent) {
@@ -40,14 +34,14 @@ class EntitySpeed : Module() {
                     mc.thePlayer.motionZ *= (1 + (speed.get() * 0.01))
                 }
                 if (keepSprint.get()) {
-                    sprint = true
+                    mc.thePlayer.isSprinting = true
                 }
                 if (okstrafe.get()) {
                     strafe.state = true
                 }
                 return
             }
-            sprint = false
+            mc.thePlayer.isSprinting = false
             strafe.state = false
         }
     }

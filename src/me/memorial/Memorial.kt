@@ -23,7 +23,6 @@ import me.memorial.utils.ClassUtils.hasForge
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
 
-
 object Memorial {
 
     // Client information
