@@ -14,7 +14,7 @@ import net.minecraft.network.*;
 import java.util.*;
 import net.minecraft.network.play.client.*;
 import org.jetbrains.annotations.Nullable;
-@ModuleInfo(name ="Disabler",description =  "1", category =ModuleCategory.CLIENT)
+@ModuleInfo(name ="Disabler",description =  "Fucking Grim", category =ModuleCategory.CLIENT)
 public class Disabler extends Module
 {
     BoolValue postValue;
