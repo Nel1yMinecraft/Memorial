@@ -946,4 +946,38 @@ public final class RenderUtils extends MinecraftInstance {
         glPopMatrix();
     }
 
+
+    public static void drawRoundedCornerRect(float x, float y, float x1, float y1, float radius, int color) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_TEXTURE_2D);
+        final boolean hasCull = glIsEnabled(GL_CULL_FACE);
+        glDisable(GL_CULL_FACE);
+
+        glColor(color);
+        drawRoundedCornerRect(x, y, x1, y1, radius);
+
+        glEnable(GL_TEXTURE_2D);
+        glDisable(GL_BLEND);
+        setGlState(GL_CULL_FACE, hasCull);
+    }
+    public static void drawRoundedCornerRect(float x, float y, float x1, float y1, float radius) {
+        glBegin(GL_POLYGON);
+
+        float xRadius = (float) Math.min((x1 - x) * 0.5, radius);
+        float yRadius = (float) Math.min((y1 - y) * 0.5, radius);
+        quickPolygonCircle(x + xRadius,y + yRadius, xRadius, yRadius,180,270,4);
+        quickPolygonCircle(x1 - xRadius,y + yRadius, xRadius, yRadius,90,180,4);
+        quickPolygonCircle(x1 - xRadius,y1 - yRadius, xRadius, yRadius,0,90,4);
+        quickPolygonCircle(x + xRadius,y1 - yRadius, xRadius, yRadius,270,360,4);
+
+        glEnd();
+    }
+
+    private static void quickPolygonCircle(float x, float y, float xRadius, float yRadius, int start, int end, int split) {
+        for(int i = end; i >= start; i -= split) {
+            glVertex2d(x + Math.sin(i * Math.PI / 180.0D) * xRadius, y + Math.cos(i * Math.PI / 180.0D) * yRadius);
+        }
+    }
+
 }
