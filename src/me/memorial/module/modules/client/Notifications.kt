@@ -16,18 +16,10 @@ import java.awt.Color
 import kotlin.math.max
 
 @ModuleInfo(name = "Notifications", description = "notif", category = ModuleCategory.CLIENT)
-object Notifications : Module() {
+class Notifications : Module() {
 
     val winnotif = BoolValue("winnotif",false)
     val lognotif = BoolValue("lognotif",true)
-
-    fun winNotif(): Boolean {
-        return winnotif.get()
-    }
-
-    fun logNotif(): Boolean {
-        return lognotif.get()
-    }
 
      fun add(text: String,color: Color) {
         val width =  Fonts.font30.getStringWidth(text).toFloat()

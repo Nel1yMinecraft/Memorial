@@ -59,11 +59,13 @@ open class Module : MinecraftInstance(), Listenable {
 
             // Call toggle
             onToggle(value)
-            if(Notifications.logNotif()) {
+
+            val notif = Memorial.moduleManager.getModule(Notifications::class.java) as Notifications
+            if(notif.lognotif.get()) {
                 ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
             }
 
-            if(Notifications.winNotif()) {
+            if(notif.winnotif.get()) {
                 Memorial.showNotification(
                     "Notifications",
                     "$name has ${if (state) "enabled" else "disabled"}",
