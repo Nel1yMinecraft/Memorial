@@ -8,3 +8,4 @@ run/*
 .idea/vcs.xml
 .idea/workspace.xml
 *.dll
+.idea/misc.xml
