@@ -10,12 +10,24 @@ import me.memorial.ui.font.Fonts
 import me.memorial.utils.ClientUtils
 import me.memorial.utils.EaseUtils
 import me.memorial.utils.render.RenderUtils
+import me.memorial.value.BoolValue
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 import kotlin.math.max
 
 @ModuleInfo(name = "Notifications", description = "notif", category = ModuleCategory.CLIENT)
 object Notifications : Module() {
+
+    val winnotif = BoolValue("winnotif",false)
+    val lognotif = BoolValue("lognotif",true)
+
+    fun winNotif(): Boolean {
+        return winnotif.get()
+    }
+
+    fun logNotif(): Boolean {
+        return lognotif.get()
+    }
 
      fun add(text: String,color: Color) {
         val width =  Fonts.font30.getStringWidth(text).toFloat()

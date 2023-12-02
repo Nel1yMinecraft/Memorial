@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Toolkit
+import java.awt.TrayIcon
 
 open class Module : MinecraftInstance(), Listenable {
 
@@ -58,9 +59,17 @@ open class Module : MinecraftInstance(), Listenable {
 
             // Call toggle
             onToggle(value)
+            if(Notifications.logNotif()) {
+                ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
+            }
 
-            ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
-            Notifications.add("$name has ${if (state) "enabled" else "disabled"}",if (value) Color(0x60E092) else Color(0xFF2F2F))
+            if(Notifications.winNotif()) {
+                Memorial.showNotification(
+                    "Notifications",
+                    "$name has ${if (state) "enabled" else "disabled"}",
+                     if (state)  TrayIcon.MessageType.INFO else  TrayIcon.MessageType.ERROR
+                )
+            }
 
             // Call on enabled or disabled
             if (value) {

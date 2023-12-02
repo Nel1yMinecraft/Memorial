@@ -22,6 +22,9 @@ import me.memorial.utils.*
 import me.memorial.utils.ClassUtils.hasForge
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
+import java.awt.SystemTray
+import java.awt.Toolkit
+import java.awt.TrayIcon
 
 object Memorial {
 
@@ -50,6 +53,21 @@ object Memorial {
     var background: ResourceLocation? = null
 
     lateinit var guiMain: GuiScreen
+
+    @JvmStatic
+    fun showNotification(title: String, text: String, type: TrayIcon.MessageType?) {
+        val tray = SystemTray.getSystemTray()
+        val image = Toolkit.getDefaultToolkit().createImage("icon.png")
+        val trayIcon = TrayIcon(image, "Tray Demo")
+        trayIcon.isImageAutoSize = true
+        trayIcon.toolTip = "System tray icon demo"
+        tray.add(trayIcon)
+        trayIcon.displayMessage(title, text, type)
+    }
+
+    fun showNotification(title: String, text: String) {
+        showNotification(title,text, TrayIcon.MessageType.INFO)
+    }
 
 
     /**
