@@ -7,3 +7,4 @@ run/*
 .idea/toolchains.xml
 .idea/vcs.xml
 .idea/workspace.xml
+*.dll
