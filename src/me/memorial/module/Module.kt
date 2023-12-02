@@ -96,10 +96,7 @@ open class Module : MinecraftInstance(), Listenable {
     /**
      * Called when module toggled
      */
-    open fun onToggle(state: Boolean) {
-
-
-    }
+    open fun onToggle(state: Boolean) {}
 
     /**
      * Called when module enabled

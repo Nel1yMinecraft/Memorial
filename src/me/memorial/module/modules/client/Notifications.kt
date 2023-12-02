@@ -85,10 +85,15 @@ object Notifications : Module() {
             END -> TODO()
         }
 
-        val transX = width - (width * pct) - width
+         ClientUtils.getLogger().info("有操作好像不显示3")
+
+
+         val transX = width - (width * pct) - width
         GL11.glTranslated(transX, transY, 0.0)
 
-        RenderUtils.drawRoundedCornerRect(
+         ClientUtils.getLogger().info("有操作好像不显示4")
+
+         RenderUtils.drawRoundedCornerRect(
             0F + 3f,
             0F,
             max(width - width * ((nowTime - displayTime) / (animeTime * 2F + time)) + 5f, 0F),
@@ -96,11 +101,21 @@ object Notifications : Module() {
             2f,
             Color(0, 0, 0, 150).rgb
         )
-           // if (state) Color(0x60E092).rgb else Color(0xFF2F2F).rgb
+         ClientUtils.getLogger().info("有操作好像不显示5")
+
+         // if (state) Color(0x60E092).rgb else Color(0xFF2F2F).rgb
         RenderUtils.drawRoundedCornerRect(3F, 0F, width + 5f, 27f - 5f, 2f, color.rgb)
-        Fonts.font35.drawCenteredString("Module", 25F, 3F, -1)
-        Fonts.font30.drawCenteredString(text,30F, 12F, -1)
-    }
+         ClientUtils.getLogger().info("有操作好像不显示6")
+
+         ClientUtils.getLogger().info("有操作好像不显示6 获取文本$text")
+
+         Fonts.font35.drawCenteredString("Module", 25F, 3F, -1)
+         ClientUtils.getLogger().info("有操作好像不显示7")
+
+         Fonts.font30.drawCenteredString(text,30F, 12F, -1)
+         ClientUtils.getLogger().info("有操作好像不显示8")
+
+     }
 
 
 }
