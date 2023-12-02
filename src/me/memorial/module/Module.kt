@@ -60,26 +60,6 @@ open class Module : MinecraftInstance(), Listenable {
             onToggle(value)
 
 
-            /*
-
-            val notifications = Memorial.moduleManager.getModule(Notifications::class.java) as Notifications
-
-            notifications.add(
-                 "${
-                    if (value) "Enabled "
-                    else "Disabled "
-                }$name",
-                Fonts.font35,
-                Color.BLACK,
-                if (value) Color(0x60E092)
-                else Color(0xFF2F2F),
-                true
-            )
-
-             */
-
-
-
             ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
 
             // Call on enabled or disabled
@@ -116,7 +96,21 @@ open class Module : MinecraftInstance(), Listenable {
     /**
      * Called when module toggled
      */
-    open fun onToggle(state: Boolean) {}
+    open fun onToggle(state: Boolean) {
+        val notifications = Memorial.moduleManager.getModule(Notifications::class.java) as Notifications
+
+        notifications.add(
+            "${
+                if (state) "Enabled "
+                else "Disabled "
+            }$name",
+            Color.BLACK,
+            if (state) Color(0x60E092)
+            else Color(0xFF2F2F),
+            true
+        )
+
+    }
 
     /**
      * Called when module enabled
