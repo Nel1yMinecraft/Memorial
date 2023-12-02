@@ -7,6 +7,7 @@ import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
 import me.memorial.ui.font.Fonts;
+import me.memorial.ui.font.GameFontRenderer;
 import me.memorial.utils.render.RenderUtils;
 import me.memorial.value.IntegerValue;
 import me.memorial.value.ListValue;
@@ -35,25 +36,27 @@ public class Notifications extends Module {
         instance = this;
     }
 
-    public void add(String str, FontRenderer font, Color rectcolor,Color fontcolor, boolean shadowtext) {
+    public void add(String str, Color rectcolor,Color fontcolor, boolean shadowtext) {
 
         if(mode.get().equals("none")) {
             return;
         }
+
+        final GameFontRenderer font = Fonts.font30;
 
         width = font.getStringWidth(str);
         height = font.FONT_HEIGHT;
 
         drawnotif(rectcolor);
 
-        /*
+
         if (shadowtext) {
             font.drawStringWithShadow(str, x1 , y.get() , fontcolor.getRGB());
         } else {
             font.drawString(str, (int) x1, y.get() , fontcolor.getRGB());
         }
 
-         */
+
 
         Fonts.font30.drawString(str, 7F, 17F, -1);
 
@@ -61,7 +64,7 @@ public class Notifications extends Module {
 
     @EventTarget
     void onRender2D(Render2DEvent event) {
-        add("test",Fonts.font35,Color.BLACK,Color.WHITE,true);
+        add("test",Color.BLACK,Color.WHITE,true);
     }
 
 
@@ -76,8 +79,7 @@ public class Notifications extends Module {
         }
 
         if(mode.get().equals("test3")) {
-            RenderUtils.drawRect(22F, 0F, width, height, color);
-            Fonts.font35.drawString("Module", 7F, 4F, -1);
+            RenderUtils.drawRoundedRect(x1, y.get(), width, height,0F, -1);
         }
 
         RenderUtils.resetColor();
