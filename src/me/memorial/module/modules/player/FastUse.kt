@@ -11,10 +11,12 @@ import me.memorial.value.BoolValue
 import me.memorial.value.FloatValue
 import me.memorial.value.IntegerValue
 import me.memorial.value.ListValue
+import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.item.ItemBucketMilk
 import net.minecraft.item.ItemFood
 import net.minecraft.item.ItemPotion
 import net.minecraft.network.play.client.C03PacketPlayer
+
 
 @ModuleInfo(name = "FastUse", description = "Allows you to use items faster.", category = ModuleCategory.PLAYER)
 class FastUse : Module() {
@@ -52,6 +54,16 @@ class FastUse : Module() {
                     }
 
                     mc.playerController.onStoppedUsingItem(mc.thePlayer)
+                }
+
+                "grim" -> {
+                    usedTimer = true
+                   mc.timer.timerSpeed = 0.3f
+                    for (i in 0..1) {
+                        val thePlayer: EntityPlayerSP = mc.thePlayer
+                        ++thePlayer.positionUpdateTicks
+                        mc.netHandler.addToSendQueue(C03PacketPlayer(mc.thePlayer.onGround))
+                    }
                 }
 
                 "ncp" -> if (mc.thePlayer.itemInUseDuration > 14) {

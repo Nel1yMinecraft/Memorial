@@ -380,11 +380,14 @@ public class GuiIngame extends Gui
             EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
 
             HUD hud = HUD.getInstance();
+            /*
             if(hud.getState() && hud.blackHotbarValue.get()){
                 int middleScreen = sr.getScaledWidth() / 2;
                 GuiIngame.drawRect(middleScreen - 91, sr.getScaledHeight() - 24, middleScreen + 90, sr.getScaledHeight(), Integer.MIN_VALUE);
                 GuiIngame.drawRect(middleScreen - 91 - 1 + entityPlayer.inventory.currentItem * 20 + 1, sr.getScaledHeight() - 24, middleScreen - 91 - 1 + entityPlayer.inventory.currentItem * 20 + 22, sr.getScaledHeight() - 22 - 1 + 24, Integer.MAX_VALUE);
             }else{
+
+             */
                 this.mc.getTextureManager().bindTexture(widgetsTexPath);
                 EntityPlayer entityplayer = (EntityPlayer) this.mc.getRenderViewEntity();
                 int i = sr.getScaledWidth() / 2;
@@ -393,7 +396,7 @@ public class GuiIngame extends Gui
                 this.drawTexturedModalRect(i - 91, sr.getScaledHeight() - 22, 0, 0, 182, 22);
                 this.drawTexturedModalRect(i - 91 - 1 + entityplayer.inventory.currentItem * 20, sr.getScaledHeight() - 22 - 1, 0, 22, 24, 22);
                 this.zLevel = f;
-            }
+           // }
 
 
 

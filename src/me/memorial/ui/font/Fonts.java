@@ -13,6 +13,14 @@ import java.util.List;
 
 public class Fonts {
 
+    @FontDetails(fontName = "Roboto Medium", fontSize = 14)
+    public static GameFontRenderer font14;
+    @FontDetails(fontName = "Roboto Medium", fontSize = 18)
+    public static GameFontRenderer font18;
+    @FontDetails(fontName = "Roboto Medium", fontSize = 20)
+    public static GameFontRenderer font20;
+    @FontDetails(fontName = "Roboto Medium", fontSize = 30)
+    public static GameFontRenderer font30;
     @FontDetails(fontName = "Roboto Medium", fontSize = 35)
     public static GameFontRenderer font35;
 
@@ -41,6 +49,10 @@ public class Fonts {
 
         ClientUtils.getLogger().info("Loading Fonts.");
 
+        font14 = new GameFontRenderer(getFont("sfui.ttf", 14));
+        font18 = new GameFontRenderer(getFont("sfui.ttf", 18));
+        font20 = new GameFontRenderer(getFont("sfui.ttf", 20));
+        font30 = new GameFontRenderer(getFont("sfui.ttf", 30));
         font35 = new GameFontRenderer(getFont("sfui.ttf", 35));
         font40 = new GameFontRenderer(getFont("sfui.ttf", 40));
 

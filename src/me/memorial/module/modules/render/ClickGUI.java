@@ -89,14 +89,10 @@ public class ClickGUI extends Module {
         switch (styleValue.get().toLowerCase()) {
             case "novoline":
                 mc.displayGuiScreen(new ClickyUI());
-                this.setState(false);
                 break;
             case "dropdown":
                 mc.displayGuiScreen(getDropdownGUI());
                 break;
-            default:
-                updateStyle();
-                mc.displayGuiScreen(Memorial.clickGui);
         }
     }
     @Override

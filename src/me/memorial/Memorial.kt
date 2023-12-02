@@ -51,6 +51,7 @@ object Memorial {
 
     lateinit var guiMain: GuiScreen
 
+
     /**
      * Execute if client will be started
      */

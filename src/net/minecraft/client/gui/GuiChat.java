@@ -8,11 +8,12 @@ import java.util.Comparator;
 import java.util.List;
 
 import me.memorial.Memorial;
-import me.memorial.module.modules.render.TargetHUD;
+import me.memorial.module.modules.client.Notifications;
+import me.memorial.module.modules.client.TargetHUD;
+import me.memorial.ui.font.Fonts;
 import me.memorial.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -153,6 +154,7 @@ public class GuiChat extends GuiScreen
                 y1 = targetHUD.getY() - y;
                 dragTH = true;
             }
+
             IChatComponent ichatcomponent = this.mc.ingameGUI.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
             if (this.handleComponentClick(ichatcomponent))
@@ -173,6 +175,8 @@ public class GuiChat extends GuiScreen
     private boolean hover(int mouseX, int mouseY, TargetHUD targetHUD) {
         return mouseX >= targetHUD.getX() && mouseX <= targetHUD.getX() + targetHUD.getWidth() && mouseY >= targetHUD.getY() && mouseY <= targetHUD.getY() + targetHUD.getHeight();
     }
+
+
     private int[] getScaledMouseCoordinates(Minecraft mc, int mouseX, int mouseY){
         int x = mouseX;
         int y = mouseY;
@@ -322,6 +326,7 @@ public class GuiChat extends GuiScreen
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
+
         drawRect(2, this.height - 14, this.width - 2, this.height - 2, Integer.MIN_VALUE);
         this.inputField.drawTextBox();
         if (Memorial.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(Memorial.commandManager.getPrefix()))) {
@@ -361,6 +366,8 @@ public class GuiChat extends GuiScreen
                 RenderUtils.drawBorderedRect(targetHUD.getX(), targetHUD.getY(), targetHUD.getX() + targetHUD.getWidth(), targetHUD.getY() + targetHUD.getHeight(), 1, -1,0);
             }
         }
+
+
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

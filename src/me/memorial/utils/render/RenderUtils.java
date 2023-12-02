@@ -76,16 +76,15 @@ public final class RenderUtils extends MinecraftInstance {
 
         glEndList();
     }
+
     public static void drawRect2(double d, double e, double g, double h, int color) {
-        if (d < g)
-        {
+        if (d < g) {
             int i = (int) d;
             d = g;
             g = i;
         }
 
-        if (e < h)
-        {
+        if (e < h) {
             int j = (int) e;
             e = h;
             h = j;
@@ -109,26 +108,29 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.disableBlend();
         GLUtil.end2DRendering();
     }
-    public static void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, float zLevel)
-    {
+
+    public static void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height, float zLevel) {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        worldrenderer.pos((x + 0), (y + height), zLevel).tex(((float)(textureX + 0) * f), ((float)(textureY + height) * f1)).endVertex();
-        worldrenderer.pos((x + width), (y + height), zLevel).tex(((float)(textureX + width) * f), ((float)(textureY + height) * f1)).endVertex();
-        worldrenderer.pos((x + width), (y + 0), zLevel).tex(((float)(textureX + width) * f), ((float)(textureY + 0) * f1)).endVertex();
-        worldrenderer.pos((x + 0), (y + 0), zLevel).tex(((float)(textureX + 0) * f), ((float)(textureY + 0) * f1)).endVertex();
+        worldrenderer.pos((x + 0), (y + height), zLevel).tex(((float) (textureX + 0) * f), ((float) (textureY + height) * f1)).endVertex();
+        worldrenderer.pos((x + width), (y + height), zLevel).tex(((float) (textureX + width) * f), ((float) (textureY + height) * f1)).endVertex();
+        worldrenderer.pos((x + width), (y + 0), zLevel).tex(((float) (textureX + width) * f), ((float) (textureY + 0) * f1)).endVertex();
+        worldrenderer.pos((x + 0), (y + 0), zLevel).tex(((float) (textureX + 0) * f), ((float) (textureY + 0) * f1)).endVertex();
         tessellator.draw();
     }
+
     public static void bindTexture(int texture) {
         glBindTexture(GL_TEXTURE_2D, texture);
     }
+
     public static void setAlphaLimit(float limit) {
         GlStateManager.enableAlpha();
         GlStateManager.alphaFunc(GL_GREATER, (float) (limit * .01));
     }
+
     public static Framebuffer createFrameBuffer(Framebuffer framebuffer, boolean depth) {
         if (needsNewFramebuffer(framebuffer)) {
             if (framebuffer != null) {
@@ -138,6 +140,7 @@ public final class RenderUtils extends MinecraftInstance {
         }
         return framebuffer;
     }
+
     public static boolean needsNewFramebuffer(Framebuffer framebuffer) {
         return framebuffer == null || framebuffer.framebufferWidth != mc.displayWidth || framebuffer.framebufferHeight != mc.displayHeight;
     }
@@ -392,10 +395,10 @@ public final class RenderUtils extends MinecraftInstance {
             top = cacheBottom;
         }
 
-        float f3 = (float)(color >> 24 & 255) / 255.0F;
-        float f = (float)(color >> 16 & 255) / 255.0F;
-        float f1 = (float)(color >> 8 & 255) / 255.0F;
-        float f2 = (float)(color & 255) / 255.0F;
+        float f3 = (float) (color >> 24 & 255) / 255.0F;
+        float f = (float) (color >> 16 & 255) / 255.0F;
+        float f1 = (float) (color >> 8 & 255) / 255.0F;
+        float f2 = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         GlStateManager.enableBlend();
@@ -411,6 +414,11 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
     }
+
+    public static void drawRoundedRect(float x, float y, float width, float height, float radius, Color color) {
+        drawRoundedRect(x, y, width, height, radius, color.getRGB());
+    }
+
     public static void drawRoundedRect(float x, float y, float width, float height, float radius, int color) {
         float x1 = x + width, // @off
                 y1 = y + height;
@@ -461,6 +469,7 @@ public final class RenderUtils extends MinecraftInstance {
         GL11.glPopAttrib();
         GL11.glColor4f(1, 1, 1, 1);
     }
+
     public static void quickDrawRect(final float x, final float y, final float x2, final float y2, final int color) {
         glColor(color);
         glBegin(GL_QUADS);
@@ -735,7 +744,7 @@ public final class RenderUtils extends MinecraftInstance {
 
     /**
      * GL CAP MANAGER
-     *
+     * <p>
      * TODO: Remove gl cap manager and replace by something better
      */
 
@@ -772,6 +781,7 @@ public final class RenderUtils extends MinecraftInstance {
         else
             glDisable(cap);
     }
+
     public static void start2D() {
         GL11.glEnable(3042);
         GL11.glDisable(3553);
@@ -809,6 +819,7 @@ public final class RenderUtils extends MinecraftInstance {
         GL11.glPopMatrix();
         stop2D();
     }
+
     public static void drawCheck(double x, double y, int lineWidth, int color) {
         start2D();
         GL11.glPushMatrix();
@@ -862,8 +873,9 @@ public final class RenderUtils extends MinecraftInstance {
 
     public static int SkyRainbow(int var2, float st, float bright) {
         double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
-        return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright).getRGB();
+        return Color.getHSBColor(((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright).getRGB();
     }
+
     public static int getRainbowOpaque(int seconds, float saturation, float brightness, int index) {
         float hue = ((System.currentTimeMillis() + index) % (int) (seconds * 1000)) / (float) (seconds * 1000);
         int color = Color.HSBtoRGB(hue, saturation, brightness);
@@ -871,24 +883,22 @@ public final class RenderUtils extends MinecraftInstance {
     }
 
     public static void newDrawRect(float left, float top, float right, float bottom, int color) {
-        if (left < right)
-        {
+        if (left < right) {
             float i = left;
             left = right;
             right = i;
         }
 
-        if (top < bottom)
-        {
+        if (top < bottom) {
             float j = top;
             top = bottom;
             bottom = j;
         }
 
-        float f3 = (float)(color >> 24 & 255) / 255.0F;
-        float f = (float)(color >> 16 & 255) / 255.0F;
-        float f1 = (float)(color >> 8 & 255) / 255.0F;
-        float f2 = (float)(color & 255) / 255.0F;
+        float f3 = (float) (color >> 24 & 255) / 255.0F;
+        float f = (float) (color >> 16 & 255) / 255.0F;
+        float f1 = (float) (color >> 8 & 255) / 255.0F;
+        float f2 = (float) (color & 255) / 255.0F;
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         GlStateManager.enableBlend();
@@ -919,15 +929,21 @@ public final class RenderUtils extends MinecraftInstance {
     public static void resetColor() {
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
     }
+
     public static Color skyRainbow(int var2, float st, float bright) {
         double v1 = Math.ceil(System.currentTimeMillis() + (long) (var2 * 109)) / 5;
-        return Color.getHSBColor( ((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright);
+        return Color.getHSBColor(((float) ((v1 %= 360.0) / 360.0)) < 0.5 ? -((float) (v1 / 360.0)) : (float) (v1 / 360.0), st, bright);
     }
+
     public static void scaleStart(float x, float y, float scale) {
         glPushMatrix();
         glTranslatef(x, y, 0);
         glScalef(scale, scale, 1);
         glTranslatef(-x, -y, 0);
     }
-    public static void scaleEnd() {glPopMatrix();}
+
+    public static void scaleEnd() {
+        glPopMatrix();
+    }
+
 }

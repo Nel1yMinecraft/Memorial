@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.features.module.modules.world
+package me.memorial.module.modules.world
 
 
 
@@ -54,7 +54,7 @@ import net.minecraft.util.MovingObjectPosition
 import org.apache.commons.lang3.RandomUtils
 import java.util.*
 
-@ModuleInfo(name = "ScaFull", "我的天哪",ModuleCategory.WORLD)
+@ModuleInfo("ScaFull", "我的天哪",ModuleCategory.WORLD)
 class ScaFull: Module() {
     /**
      * OPTIONS (Scaffold)

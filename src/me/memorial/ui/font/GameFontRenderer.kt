@@ -34,6 +34,10 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
         FONT_HEIGHT = height
     }
 
+
+    fun getMiddleOfBox(height: Float): Float {
+        return height / 2.0f - this.height.toFloat() / 2.0f
+    }
     fun drawString(s: String, x: Float, y: Float, color: Int) = drawString(s, x, y, color, false)
 
     override fun drawStringWithShadow(text: String, x: Float, y: Float, color: Int) = drawString(text, x, y, color, true)

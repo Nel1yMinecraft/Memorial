@@ -2,11 +2,14 @@ package me.memorial.module
 
 import me.memorial.Memorial
 import me.memorial.events.Listenable
+import me.memorial.module.modules.client.Notifications
+import me.memorial.ui.font.Fonts
 import me.memorial.utils.ClientUtils
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.ColorUtils.stripColor
 import me.memorial.value.Value
 import org.lwjgl.input.Keyboard
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.Toolkit
 
@@ -56,6 +59,27 @@ open class Module : MinecraftInstance(), Listenable {
             // Call toggle
             onToggle(value)
 
+
+            /*
+
+            val notifications = Memorial.moduleManager.getModule(Notifications::class.java) as Notifications
+
+            notifications.add(
+                 "${
+                    if (value) "Enabled "
+                    else "Disabled "
+                }$name",
+                Fonts.font35,
+                Color.BLACK,
+                if (value) Color(0x60E092)
+                else Color(0xFF2F2F),
+                true
+            )
+
+             */
+
+
+
             ClientUtils.displayChatMessage("Module $name is currently ${if (value) "enabled" else "disabled"}.")
 
             // Call on enabled or disabled
@@ -74,10 +98,6 @@ open class Module : MinecraftInstance(), Listenable {
         }
 
 
-    // HUD
-    val hue = Math.random().toFloat()
-    var slide = 0F
-    var arrayY = 0F
 
     // Tag
     open val tag: String?
@@ -85,9 +105,6 @@ open class Module : MinecraftInstance(), Listenable {
 
     val tagName: String
         get() = "$name${if (tag == null) "" else " §7$tag"}"
-
-    val colorlessTagName: String
-        get() = "$name${if (tag == null) "" else " " + stripColor(tag)}"
 
     /**
      * Toggle module

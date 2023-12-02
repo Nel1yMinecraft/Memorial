@@ -579,20 +579,24 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
             this.drawBackground(tint);
         }
 
-        final HUD hud = HUD.getInstance();
+        final HUD hud = (HUD) Memorial.moduleManager.getModule(HUD.class);
 
+        /*
         if (hud.inventoryParticle.get() && mc.thePlayer != null) {
             final ScaledResolution scaledResolution = new ScaledResolution(mc);
             final int width = scaledResolution.getScaledWidth();
             final int height = scaledResolution.getScaledHeight();
             ParticleUtils.drawParticles(Mouse.getX() * width / mc.displayWidth, height - Mouse.getY() * height / mc.displayHeight - 1);
         }
+
+         */
     }
 
     public void drawBackground(int tint)
     {
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
+
 
         if(GuiBackground.Companion.getEnabled()) {
             if (Memorial.INSTANCE.getBackground() == null) {
@@ -624,6 +628,10 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
                 ParticleUtils.drawParticles(Mouse.getX() * width / mc.displayWidth, height - Mouse.getY() * height / mc.displayHeight - 1);
             return;
         }
+
+
+
+
         //System.out.println("Bakc");
         GlStateManager.disableLighting();
         GlStateManager.disableFog();

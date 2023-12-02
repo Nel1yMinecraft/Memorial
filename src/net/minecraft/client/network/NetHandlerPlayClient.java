@@ -4,8 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
-import dev.nelly.hyt.HytPacketManager;
-import dev.nelly.hyt.packet.CustomPacket;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -257,14 +255,6 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         this.gameController.thePlayer.setReducedDebug(packetIn.isReducedDebugInfo());
         this.gameController.playerController.setGameType(packetIn.getGameType());
         this.gameController.gameSettings.sendSettingsToServer();
-        this.netManager.sendPacket(new C17PacketCustomPayload("REGISTER", (new PacketBuffer(Unpooled.buffer().writeBytes(new byte[]{
-                70, 77, 76, 124, 72, 83, 0, 70, 77, 76,
-                0, 70, 77, 76, 124, 77, 80, 0, 70, 77,
-                76, 0, 70, 79, 82, 71, 69, 0, 103, 101,
-                114, 109, 112, 108, 117, 103, 105, 110, 45, 110,
-                101, 116, 101, 97, 115, 101, 0, 104, 121, 116,
-                48, 0, 97, 114, 109, 111, 117, 114, 101, 114,
-                115})))));
         this.netManager.sendPacket(new C17PacketCustomPayload("MC|Brand", (new PacketBuffer(Unpooled.buffer())).writeString(ClientBrandRetriever.getClientModName())));
     }
 
@@ -1665,13 +1655,6 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
     public void handleCustomPayload(S3FPacketCustomPayload packetIn)
     {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-
-        for (CustomPacket packet : HytPacketManager.packets) {
-            if (packet.getChannel().equals(packetIn.getChannelName())) {
-                packet.process(packetIn.getBufferData());
-                return;
-            }
-        }
 
         if ("MC|TrList".equals(packetIn.getChannelName()))
         {

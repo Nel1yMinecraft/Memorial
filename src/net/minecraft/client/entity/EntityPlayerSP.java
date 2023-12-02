@@ -1,6 +1,5 @@
 package net.minecraft.client.entity;
 
-import dev.dudu.ViaVersionFix;
 import me.memorial.Memorial;
 import me.memorial.events.EventState;
 import me.memorial.events.impl.player.PushOutEvent;
@@ -18,7 +17,7 @@ import me.memorial.module.modules.world.Scaffold;
 import me.memorial.utils.MovementUtils;
 import me.memorial.utils.Rotation;
 import me.memorial.utils.RotationUtils;
-import net.ccbluex.liquidbounce.features.module.modules.world.ScaFull;
+import me.memorial.module.modules.world.ScaFull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -83,7 +82,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     public float lastReportedPitch;
     private boolean serverSneakState;
     public boolean serverSprintState;
-    private int positionUpdateTicks;
+    public int positionUpdateTicks;
     private boolean hasValidHealth;
     private String clientBrand;
     public MovementInput movementInput;

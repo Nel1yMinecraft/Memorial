@@ -7,26 +7,22 @@ import me.memorial.events.impl.misc.KeyEvent
 import me.memorial.utils.ClientUtils
 import java.util.*
 import dev.dudu.ViaVersionFix
-import dev.nelly.hyt.HytPacketManager
-import dev.nelly.module.Disabler
-import dev.nelly.module.EntitySpeed
-import dev.nelly.module.KillSults
-import dev.nelly.module.Velocity2
+import dev.nelly.hyt.Protocol
+import dev.nelly.module.*
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
-import me.memorial.module.modules.client.FakeFPS
+import me.memorial.module.modules.client.*
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.module.modules.exploit.*
 import me.memorial.module.modules.render.HUD
-import me.memorial.module.modules.client.Rotations
 import me.memorial.module.modules.misc.*
 import me.memorial.module.modules.movement.*
 import me.memorial.module.modules.player.*
 import me.memorial.module.modules.world.*
 import me.memorial.module.modules.world.Timer
-import net.ccbluex.liquidbounce.features.module.modules.world.ScaFull
+import me.memorial.module.modules.world.ScaFull
 
 class ModuleManager : Listenable {
 
@@ -149,7 +145,6 @@ class ModuleManager : Listenable {
             Rotations::class.java,
             NoJumpDelay::class.java,
             PerfectHorseJump::class.java,
-            HUD::class.java,
             TNTESP::class.java,
             ComponentOnHover::class.java,
             KeepAlive::class.java,
@@ -160,7 +155,7 @@ class ModuleManager : Listenable {
             AntiFakePlayer::class.java,
             JumpCircle::class.java,
             AutoSkyWars::class.java,
-            HytPacketManager::class.java,
+            Protocol::class.java,
             KillSults::class.java,
             ChestAura::class.java,
             FakeFPS::class.java,
@@ -170,7 +165,10 @@ class ModuleManager : Listenable {
             MotionBlur::class.java,
             Velocity2::class.java,
             PlayerEdit::class.java,
-            Text::class.java
+            Notifications::class.java,
+            HUD::class.java,
+            HUD::class.java,
+            TellyHelper::class.java
         )
 
         registerModule(NoScoreboard)

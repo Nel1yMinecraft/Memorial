@@ -21,13 +21,9 @@ class Text : Module() {
     val text = TextValue("Text",Memorial.CLIENT_NAME)
     val font = FontValue("Fonts",Fonts.font35)
     val rect = BoolValue("Rect",true)
-    val rectaplha = FloatValue("RectAplha",150F,255F,0F)
 
     @EventTarget
     fun onRender2D(event : Render2DEvent) {
-        if(text.get() == null) {
-            text.set(Memorial.CLIENT_NAME)
-        }
 
         if(rect.get()) {
             RenderUtils.drawRect(
@@ -35,7 +31,7 @@ class Text : Module() {
                 0F,
                 font.get().FONT_HEIGHT.toFloat(),
                 font.get().getStringWidth(text.get()).toFloat(),
-                Color(0F, 0F, 0F, rectaplha.get())
+                Color(0, 0, 0, 150)
             )
         }
 

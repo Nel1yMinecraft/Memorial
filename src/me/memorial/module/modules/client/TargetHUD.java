@@ -1,4 +1,4 @@
-package me.memorial.module.modules.render;
+package me.memorial.module.modules.client;
 
 import me.memorial.Memorial;
 import me.memorial.events.EventTarget;
@@ -21,7 +21,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import java.awt.*;
 
-@ModuleInfo(name = "TargetHUD", description = "Shows your target's info", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "TargetHUD", description = "Shows your target's info", category = ModuleCategory.CLIENT)
 public class TargetHUD extends Module {
     public ListValue mode = new ListValue("Styles",new String[]{"Moon"},"Moon");
     public IntegerValue red = new IntegerValue("Red", 255, 0, 255);

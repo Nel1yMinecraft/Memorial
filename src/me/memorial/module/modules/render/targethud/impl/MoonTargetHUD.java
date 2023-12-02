@@ -1,7 +1,7 @@
 package me.memorial.module.modules.render.targethud.impl;
 
 import me.memorial.Memorial;
-import me.memorial.module.modules.render.TargetHUD;
+import me.memorial.module.modules.client.TargetHUD;
 import me.memorial.module.modules.render.targethud.Style;
 import me.memorial.ui.font.Fonts;
 import me.memorial.utils.animations.ContinualAnimation;

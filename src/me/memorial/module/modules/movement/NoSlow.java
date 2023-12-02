@@ -56,6 +56,7 @@ public class NoSlow extends Module {
         if (!mc.thePlayer.isBlocking() && !killAura.getBlockingStatus()) {
             return;
         }
+
         if (mc.thePlayer.isBlocking() && !mc.thePlayer.isEating() && grim.get()) {
             mc.getNetHandler().getNetworkManager().sendPacket(
                     new C07PacketPlayerDigging(
@@ -65,6 +66,7 @@ public class NoSlow extends Module {
                     )
             );
         }
+
     }
 
     @EventTarget

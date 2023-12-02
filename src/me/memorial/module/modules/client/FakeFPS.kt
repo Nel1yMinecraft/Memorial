@@ -7,7 +7,7 @@ import me.memorial.utils.misc.RandomUtils
 import me.memorial.value.IntegerValue
 import net.minecraft.client.Minecraft
 
-@ModuleInfo(name = "FakeFPS", description = "", category = ModuleCategory.CLIENT)
+@ModuleInfo(name = "FakeFPS", description = "1", category = ModuleCategory.CLIENT)
 class FakeFPS : Module() {
 
     private val maxFps: IntegerValue = object : IntegerValue("MaxFPS",1000,30,3000) {
