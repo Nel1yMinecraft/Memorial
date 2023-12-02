@@ -11,7 +11,6 @@ import me.memorial.events.EventState;
 import me.memorial.events.EventTarget;
 import me.memorial.events.impl.move.MotionEvent;
 import me.memorial.events.impl.render.Render3DEvent;
-import me.memorial.events.impl.world.ClickBlockEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
 import me.memorial.module.ModuleInfo;
@@ -34,20 +33,6 @@ public class CivBreak extends Module {
     private final BoolValue airResetValue = new BoolValue("Air-Reset", true);
     private final BoolValue rangeResetValue = new BoolValue("Range-Reset", true);
 
-    @EventTarget
-    public void onBlockClick(ClickBlockEvent event) {
-        if (BlockUtils.getBlock(event.clickedBlock) == net.minecraft.init.Blocks.bedrock)
-            return;
-
-        blockPos = event.clickedBlock;
-        enumFacing = event.enumFacing;
-
-        // Break
-        Minecraft.getMinecraft().getNetHandler()
-            .addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, blockPos, enumFacing));
-        Minecraft.getMinecraft().getNetHandler()
-            .addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, blockPos, enumFacing));
-    }
 
     @EventTarget
     public void onUpdate(MotionEvent event) {

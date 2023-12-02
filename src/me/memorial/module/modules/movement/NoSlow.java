@@ -13,6 +13,7 @@ import me.memorial.value.FloatValue;
 import net.minecraft.item.*;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
+import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
@@ -37,7 +38,9 @@ public class NoSlow extends Module {
     private FloatValue bowForwardMultiplier = new FloatValue("BowForwardMultiplier", 0.2F, 0.2F, 1.0F);
     private FloatValue bowStrafeMultiplier = new FloatValue("BowStrafeMultiplier", 0.2F, 0.2F, 1.0F);
 
-    private BoolValue grim = new BoolValue("Grim", true);
+    private BoolValue grim = new BoolValue("Grim", false);
+    private BoolValue grim2 = new BoolValue("Grim2", true);
+
 
     /**
      * Soulsand
@@ -57,6 +60,7 @@ public class NoSlow extends Module {
             return;
         }
 
+        // laoshu
         if (mc.thePlayer.isBlocking() && !mc.thePlayer.isEating() && grim.get()) {
             mc.getNetHandler().getNetworkManager().sendPacket(
                     new C07PacketPlayerDigging(
@@ -65,6 +69,12 @@ public class NoSlow extends Module {
                             EnumFacing.DOWN
                     )
             );
+        }
+
+        //lvziqiao
+        if (mc.thePlayer.isBlocking() && !mc.thePlayer.isEating() && grim2.get()) {
+            mc.getNetHandler().getNetworkManager().sendPacket(new C09PacketHeldItemChange(mc.thePlayer.inventory.currentItem % 8 + 1));
+            mc.getNetHandler().getNetworkManager().sendPacket(new C09PacketHeldItemChange(mc.thePlayer.inventory.currentItem));
         }
 
     }

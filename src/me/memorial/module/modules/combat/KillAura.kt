@@ -16,10 +16,7 @@ import me.memorial.module.modules.misc.AntiBot
 import me.memorial.module.modules.misc.Teams
 import me.memorial.module.modules.player.Blink
 import me.memorial.module.modules.render.FreeCam
-import me.memorial.utils.EaseUtils
-import me.memorial.utils.EntityUtils
-import me.memorial.utils.RaycastUtils
-import me.memorial.utils.RotationUtils
+import me.memorial.utils.*
 import me.memorial.utils.extensions.getDistanceToEntityBox
 import me.memorial.utils.misc.RandomUtils
 import me.memorial.utils.render.RenderUtils
@@ -128,7 +125,8 @@ class KillAura : Module() {
             if (v < newValue) set(v)
         }
     }
-    private val rotationMode = ListValue("RotationMode", arrayOf("Off", "Normal", "GrimAC","Hyt"), "Normal")
+    private val rotationMode = ListValue("RotationMode", arrayOf("Off", "Normal", "GrimAC","Hyt","Novoline"), "Normal")
+    private val shakeAmout = FloatValue("NovolineShakeAmoutTest", 4f, 0f, 10f)
     private val shakeValue = BoolValue("Shake", true)
     private val silentRotationValue = BoolValue("SilentRotation", true)
     private val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "Strict", "Silent"), "Off")
@@ -657,6 +655,14 @@ class KillAura : Module() {
             "Normal"-> {
                 RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
             }
+
+            "novoline" -> {
+                Rotation(
+                    (RotationUtils.getAngles(entity).yaw + Math.random() * shakeAmout.get() - shakeAmout.get() / 2).toFloat(),
+                    (RotationUtils.getAngles(entity).pitch + Math.random() * shakeAmout.get() - shakeAmout.get() / 2).toFloat()
+                )
+            }
+
             "Hyt" -> {
                 if (predictValue.get())
                     boundingBox = boundingBox.offset(

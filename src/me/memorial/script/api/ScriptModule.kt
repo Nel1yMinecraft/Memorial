@@ -16,7 +16,6 @@ import me.memorial.events.impl.move.StrafeEvent
 import me.memorial.events.impl.player.UpdateEvent
 import me.memorial.events.impl.render.Render2DEvent
 import me.memorial.events.impl.render.Render3DEvent
-import me.memorial.events.impl.world.ClickBlockEvent
 import me.memorial.events.impl.world.WorldEvent
 import me.memorial.module.Module
 import me.memorial.module.ModuleCategory
@@ -120,8 +119,6 @@ class ScriptModule(private val moduleObject: JSObject) : Module() {
     @EventTarget
     fun onSession(sessionEvent: SessionEvent) = callEvent("session")
 
-    @EventTarget
-    fun onClickBlock(clickBlockEvent: ClickBlockEvent) = callEvent("clickBlock", clickBlockEvent)
 
     @EventTarget
     fun onStrafe(strafeEvent: StrafeEvent) = callEvent("strafe", strafeEvent)

@@ -24,6 +24,23 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
     private static double x = random.nextDouble();
     private static double y = random.nextDouble();
     private static double z = random.nextDouble();
+
+    public static Rotation getAngles(Entity entity) {
+        if (entity == null)
+            return null;
+        final EntityPlayerSP thePlayer = mc.thePlayer;
+
+        final double diffX = entity.posX - thePlayer.posX,
+                diffY = entity.posY + entity.getEyeHeight() * 0.9 - (thePlayer.posY + thePlayer.getEyeHeight()),
+                diffZ = entity.posZ - thePlayer.posZ, dist = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ); // @on
+
+        final float yaw = (float) (Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F,
+                pitch = (float) -(Math.atan2(diffY, dist) * 180.0D / Math.PI);
+
+        return new Rotation (thePlayer.rotationYaw + MathHelper.wrapAngleTo180_float(yaw - thePlayer.rotationYaw),
+                thePlayer.rotationPitch + MathHelper.wrapAngleTo180_float(pitch - thePlayer.rotationPitch));
+    }
+
     public static VecRotation lockView(final AxisAlignedBB bb, final boolean outborder, final boolean random,
                                        final boolean predict, final boolean throughWalls, final float distance) {
         if (outborder) {

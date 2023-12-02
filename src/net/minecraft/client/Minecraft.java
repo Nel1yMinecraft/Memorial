@@ -32,7 +32,6 @@ import javax.imageio.ImageIO;
 import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
 import me.memorial.Memorial;
-import me.memorial.events.impl.world.ClickBlockEvent;
 import me.memorial.events.impl.misc.KeyEvent;
 import me.memorial.events.impl.misc.ScreenEvent;
 import me.memorial.events.impl.misc.TickEvent;
@@ -1409,18 +1408,12 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         if (this.leftClickCounter <= 0 && (!this.thePlayer.isUsingItem())) {
             if (leftClick && this.objectMouseOver != null && this.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 BlockPos blockpos = this.objectMouseOver.getBlockPos();
-                if(this.leftClickCounter == 0) {
-                    Memorial.eventManager.callEvent(new ClickBlockEvent(blockpos, this.objectMouseOver.sideHit));
-                }
 
                 if (this.theWorld.getBlockState(blockpos).getBlock().getMaterial() != Material.air && this.playerController.onPlayerDamageBlock(blockpos, this.objectMouseOver.sideHit)) {
                     this.effectRenderer.addBlockHitEffects(blockpos, this.objectMouseOver.sideHit);
                     this.thePlayer.swingItem();
                 }
             }
-        }
-        if(this.leftClickCounter == 0 && theWorld.getBlockState(objectMouseOver.getBlockPos()).getBlock().getMaterial() != Material.air) {
-            Memorial.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
         }
     }
 

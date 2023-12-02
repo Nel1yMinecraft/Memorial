@@ -12,6 +12,7 @@ import me.memorial.value.BoolValue;
 import me.memorial.value.IntegerValue;
 import net.minecraft.client.settings.KeyBinding;
 import kotlin.random.Random;
+import net.minecraft.item.ItemBlock;
 
 import static net.optifine.CustomColors.random;
 
@@ -45,6 +46,7 @@ public class AutoClicker extends Module {
     private BoolValue rightValue = new BoolValue("Right", true);
     private BoolValue leftValue = new BoolValue("Left", true);
     private BoolValue jitterValue = new BoolValue("Jitter", false);
+    private BoolValue onlyBlock = new BoolValue("onlyBlock", true);
 
     private long rightDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
     private long rightLastSwing = 0L;
@@ -53,22 +55,45 @@ public class AutoClicker extends Module {
 
     @EventTarget
     public void onRender(Render3DEvent event) {
-        // Left click
-        if (mc.gameSettings.keyBindAttack.isKeyDown() && leftValue.get()
-                && System.currentTimeMillis() - leftLastSwing >= leftDelay && mc.playerController.curBlockDamageMP == 0F) {
-            KeyBinding.onTick(mc.gameSettings.keyBindAttack.getKeyCode()); // Minecraft Click Handling
 
-            leftLastSwing = System.currentTimeMillis();
-            leftDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+        if (onlyBlock.get() && mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock) {
+            // Left click
+            if (mc.gameSettings.keyBindAttack.isKeyDown() && leftValue.get()
+                    && System.currentTimeMillis() - leftLastSwing >= leftDelay && mc.playerController.curBlockDamageMP == 0F) {
+                KeyBinding.onTick(mc.gameSettings.keyBindAttack.getKeyCode()); // Minecraft Click Handling
+
+                leftLastSwing = System.currentTimeMillis();
+                leftDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+            }
+
+            // Right click
+            if (mc.gameSettings.keyBindUseItem.isKeyDown() && !mc.thePlayer.isUsingItem() && rightValue.get()
+                    && System.currentTimeMillis() - rightLastSwing >= rightDelay) {
+                KeyBinding.onTick(mc.gameSettings.keyBindUseItem.getKeyCode()); // Minecraft Click Handling
+
+                rightLastSwing = System.currentTimeMillis();
+                rightDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+            }
         }
 
-        // Right click
-        if (mc.gameSettings.keyBindUseItem.isKeyDown() && !mc.thePlayer.isUsingItem() && rightValue.get()
-                && System.currentTimeMillis() - rightLastSwing >= rightDelay) {
-            KeyBinding.onTick(mc.gameSettings.keyBindUseItem.getKeyCode()); // Minecraft Click Handling
+        if(!onlyBlock.get()) {
+            // Left click
+            if (mc.gameSettings.keyBindAttack.isKeyDown() && leftValue.get()
+                    && System.currentTimeMillis() - leftLastSwing >= leftDelay && mc.playerController.curBlockDamageMP == 0F) {
+                KeyBinding.onTick(mc.gameSettings.keyBindAttack.getKeyCode()); // Minecraft Click Handling
 
-            rightLastSwing = System.currentTimeMillis();
-            rightDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+                leftLastSwing = System.currentTimeMillis();
+                leftDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+            }
+
+            // Right click
+            if (mc.gameSettings.keyBindUseItem.isKeyDown() && !mc.thePlayer.isUsingItem() && rightValue.get()
+                    && System.currentTimeMillis() - rightLastSwing >= rightDelay) {
+                KeyBinding.onTick(mc.gameSettings.keyBindUseItem.getKeyCode()); // Minecraft Click Handling
+
+                rightLastSwing = System.currentTimeMillis();
+                rightDelay = TimeUtils.randomClickDelay(minCPSValue.get(), maxCPSValue.get());
+            }
         }
     }
 
