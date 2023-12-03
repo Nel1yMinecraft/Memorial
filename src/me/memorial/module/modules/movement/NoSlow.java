@@ -77,6 +77,7 @@ public class NoSlow extends Module {
             mc.getNetHandler().getNetworkManager().sendPacket(new C09PacketHeldItemChange(mc.thePlayer.inventory.currentItem));
         }
 
+
     }
 
     @EventTarget
