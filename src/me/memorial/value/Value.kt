@@ -99,6 +99,26 @@ open class FloatValue(name: String, value: Float, val minimum: Float = 0F, val m
 }
 
 /**
+ * Double value represents a value with a float
+ */
+open class DoubleValue(name: String, value: Double, val minimum: Double = 0.0, val maximum: Double = Double.MAX_VALUE, displayable: () -> Boolean)
+    : Value<Double>(name, value,displayable) {
+    constructor(name: String, value: Double, minimum: Double, maximum: Double): this(name, value, minimum, maximum, { true } )
+
+    fun set(newValue: Number) {
+        set(newValue.toFloat())
+    }
+
+    override fun toJson() = JsonPrimitive(value)
+
+    override fun fromJson(element: JsonElement) {
+        if (element.isJsonPrimitive)
+            value = element.asFloat.toDouble()
+    }
+
+}
+
+/**
  * Text value represents a value with a string
  */
 open class TextValue(name: String, value: String, displayable: () -> Boolean) : Value<String>(name, value,displayable) {
