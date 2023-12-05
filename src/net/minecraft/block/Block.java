@@ -426,9 +426,6 @@ public class Block
     }
 
     public boolean isCollidable() {
-        if(GhostHand.getInstance().getState()){
-            return GhostHand.blockValue.get() == Block.getIdFromBlock(this);
-        }
         return true;
     }
 
