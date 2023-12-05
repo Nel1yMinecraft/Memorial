@@ -2,7 +2,6 @@ package me.memorial.module.modules.movement;
 
 import lombok.Getter;
 import me.memorial.events.EventTarget;
-import me.memorial.events.impl.misc.ClickWindowEvent;
 import me.memorial.events.impl.player.UpdateEvent;
 import me.memorial.module.Module;
 import me.memorial.module.ModuleCategory;
@@ -13,6 +12,8 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiIngameMenu;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.settings.GameSettings;
+import me.memorial.events.impl.misc.ClickWindowEvent;
+
 
 @ModuleInfo(name = "InventoryMove", description = "Allows you to walk while an inventory is opened.", category = ModuleCategory.MOVEMENT)
 public class InventoryMove extends Module {

@@ -1,5 +1,6 @@
 package me.memorial.events
 
+import me.memorial.utils.ClientUtils
 import java.util.*
 
 class EventManager {
@@ -52,6 +53,7 @@ class EventManager {
                     continue
 
                 invokableEventTarget.method.invoke(invokableEventTarget.eventClass, event)
+                ClientUtils.getLogger().info("CallEvent-" + event.javaClass.name)
             } catch (throwable: Throwable) {
                 throwable.printStackTrace()
             }

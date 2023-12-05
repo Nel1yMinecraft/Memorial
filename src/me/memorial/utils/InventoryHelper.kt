@@ -12,15 +12,12 @@ import me.memorial.events.Listenable
 import me.memorial.events.impl.misc.ClickWindowEvent
 import me.memorial.events.impl.misc.PacketEvent
 import me.memorial.utils.timer.MSTimer
-import net.minecraft.block.Block
 import net.minecraft.init.Blocks
-import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemPotion
 import net.minecraft.item.ItemStack
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement
 import net.minecraft.network.play.client.C0DPacketCloseWindow
-import net.minecraft.network.play.client.C0EPacketClickWindow
 import net.minecraft.network.play.client.C16PacketClientStatus
 import net.minecraft.potion.Potion
 

@@ -1,6 +1,7 @@
 package dev.nelly.usergroups
 
 import me.memorial.utils.misc.HttpUtils
+import java.net.InetAddress
 import java.util.Base64
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
@@ -16,7 +17,7 @@ object PermissionManager {
 
     // 获取IP
     fun getip() : String {
-        return encryption(get("https://api.ipify.org/?format=txt"))
+        return encryption(InetAddress.getLocalHost().toString())
     }
 
     // AES加密
