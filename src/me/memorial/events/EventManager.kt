@@ -53,7 +53,6 @@ class EventManager {
                     continue
 
                 invokableEventTarget.method.invoke(invokableEventTarget.eventClass, event)
-                ClientUtils.getLogger().info("CallEvent-" + event.javaClass.name)
             } catch (throwable: Throwable) {
                 throwable.printStackTrace()
             }

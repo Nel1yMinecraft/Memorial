@@ -28,8 +28,9 @@ public class MainMenu extends GuiScreen {
 	
 	private MainButton btnSingleplayer;
 	private MainButton btnMultiplayer;
-	
-	private ImageButton btnLunarOptions;
+    private MainButton btnAltManager;
+
+    private ImageButton btnLunarOptions;
 	private ImageButton btnCosmetics;
 	private ImageButton btnMinecraftOptions;
 	private ImageButton btnLanguage;
@@ -56,6 +57,7 @@ public class MainMenu extends GuiScreen {
         
         this.btnSingleplayer = new MainButton("S I N G L E P L A Y E R", this.width / 2 - 66, this.height / 2);
         this.btnMultiplayer = new MainButton("M U L T I P L A Y E R", this.width / 2 - 66, this.height / 2 + 15);
+        this.btnAltManager = new MainButton("A L T M A N A G E R", this.width / 2 - 66, this.height / 2 + 15 + 15);
         
         int yPos = this.height - 20;
         this.btnLunarOptions = new ImageButton("BACKROUND", new ResourceLocation("lunar/icons/lunar.png"), this.width / 2 - 30, yPos);
@@ -76,13 +78,17 @@ public class MainMenu extends GuiScreen {
         GlStateManager.color(1.0F, 1.0F, 1.0F);
         mc.getTextureManager().bindTexture(logo);
         Gui.drawModalRectWithCustomSizedTexture(this.width / 2 - 25, this.height / 2 - 68, 0, 0, 49, 49, 49, 49);
-        
-        FontUtil.TITLE.getFont().drawCenteredString("LUNAR CLIENT", this.width / 2 - 0.25F, this.height / 2 - 18, new Color(30, 30, 30, 70).getRGB());
-        FontUtil.TITLE.getFont().drawCenteredString("LUNAR CLIENT", this.width / 2, this.height / 2 - 19, -1);
+
+        //        FontUtil.TITLE.getFont().drawCenteredString("LUNAR CLIENT", this.width / 2 - 0.25F, this.height / 2 - 18, new Color(30, 30, 30, 70).getRGB());
+        //        FontUtil.TITLE.getFont().drawCenteredString("LUNAR CLIENT", this.width / 2, this.height / 2 - 19, -1);
+
+        FontUtil.TITLE.getFont().drawCenteredString("MEMORIAL CLIENT", this.width / 2 - 0.25F, this.height / 2 - 18, new Color(30, 30, 30, 70).getRGB());
+        FontUtil.TITLE.getFont().drawCenteredString("MEMORIAL CLIENT", this.width / 2, this.height / 2 - 19, -1);
         
         this.btnSingleplayer.drawButton(mouseX, mouseY);
         this.btnMultiplayer.drawButton(mouseX, mouseY);
-        
+        this.btnAltManager.drawButton(mouseX, mouseY);
+
         this.btnLunarOptions.drawButton(mouseX, mouseY);
         this.btnCosmetics.drawButton(mouseX, mouseY);
         this.btnMinecraftOptions.drawButton(mouseX, mouseY);
@@ -91,7 +97,8 @@ public class MainMenu extends GuiScreen {
         this.btnQuit.drawButton(mouseX, mouseY);
         
         String s = "Copyright Mojang Studios. Do not distribute!";
-        FontUtil.TEXT.getFont().drawString("Lunar Client 1.8.9 ("+ Memorial.CLIENT_VERSION +"/master)", 7, this.height - 11, new Color(255, 255, 255, 100).getRGB());
+        //        FontUtil.TEXT.getFont().drawString("Lunar Client 1.8.9 ("+ Memorial.CLIENT_VERSION +"/master)", 7, this.height - 11, new Color(255, 255, 255, 100).getRGB());
+        FontUtil.TEXT.getFont().drawString("Memorial Client 1.8.9 ("+ Memorial.CLIENT_VERSION +"/master)", 7, this.height - 11, new Color(255, 255, 255, 100).getRGB());
         FontUtil.TEXT.getFont().drawString(s, this.width - FontUtil.TEXT.getFont().getWidth(s) - 6, this.height - 11, new Color(255, 255, 255, 100).getRGB());
         
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -112,6 +119,9 @@ public class MainMenu extends GuiScreen {
         }
         if (this.btnMultiplayer.hoverFade >0) {
             mc.displayGuiScreen(new GuiMultiplayer(this));
+        }
+        if (this.btnAltManager.hoverFade >0) {
+            mc.displayGuiScreen(new GuiAltManager(this));
         }
         if (this.btnQuit.hoverFade >0){
             mc.shutdown();

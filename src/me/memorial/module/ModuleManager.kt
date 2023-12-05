@@ -197,7 +197,7 @@ class ModuleManager : Listenable {
     /**
      * Register [moduleClass]
      */
-    private fun registerModule(moduleClass: Class<out Module>) {
+    fun registerModule(moduleClass: Class<out Module>) {
         try {
             registerModule(moduleClass.newInstance())
         } catch (e: Throwable) {

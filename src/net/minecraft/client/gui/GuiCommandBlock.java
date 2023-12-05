@@ -79,6 +79,7 @@ public class GuiCommandBlock extends GuiScreen
                 {
                     this.localCommandBlock.setLastOutput((IChatComponent)null);
                 }
+                this.mc.displayGuiScreen((GuiScreen)null);
             }
             else if (button.id == 4)
             {

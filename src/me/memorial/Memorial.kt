@@ -7,6 +7,7 @@ import me.memorial.events.impl.misc.ClientShutdownEvent
 import me.memorial.events.EventManager
 import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager
+import me.memorial.module.modules.client.test
 import me.memorial.script.ScriptManager
 import me.memorial.special.AntiForge
 import me.memorial.special.BungeeCordSpoof
@@ -17,6 +18,7 @@ import me.memorial.tabs.HeadsTab
 import me.memorial.ui.client.GuiMainMenu
 import me.memorial.ui.client.altmanager.GuiAltManager
 import me.memorial.ui.client.clickgui.ClickGui
+import me.memorial.ui.client.lunar.ui.MainMenu
 import me.memorial.ui.font.Fonts
 import me.memorial.utils.*
 import me.memorial.utils.ClassUtils.hasForge
@@ -145,8 +147,8 @@ object Memorial {
         // Load generators
         GuiAltManager.loadGenerators()
 
-        guiMain = GuiMainMenu()
-        //guiMain = MainMenu()
+        //guiMain = GuiMainMenu()
+        guiMain = MainMenu()
 
         try {
             ClientUtils.getLogger().info("Starting ViaMCP...")
@@ -156,6 +158,10 @@ object Memorial {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        me.memorial.modules.ModuleManager.init()
+        moduleManager.registerModule(test::class.java)
+
         // Set is starting status
         isStarting = false
     }
