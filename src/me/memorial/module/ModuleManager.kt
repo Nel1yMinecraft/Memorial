@@ -169,7 +169,8 @@ class ModuleManager : Listenable {
             HUD::class.java,
             HUD::class.java,
             TellyHelper::class.java,
-            KillAura2::class.java
+            KillAura2::class.java,
+            Arraylist::class.java
         )
 
         registerModule(NoScoreboard)
