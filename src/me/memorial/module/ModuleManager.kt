@@ -13,6 +13,7 @@ import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
 import dev.nelly.sk1d.module.JumpCircle
 import me.memorial.module.modules.client.*
+import me.memorial.module.modules.client.Text
 import me.memorial.module.modules.combat.*
 import me.memorial.module.modules.render.*
 import me.memorial.module.modules.exploit.*
@@ -171,7 +172,8 @@ class ModuleManager : Listenable {
             TellyHelper::class.java,
             KillAura2::class.java,
             Arraylist::class.java,
-            Fonts::class.java
+            Fonts::class.java,
+            Text::class.java
         )
 
         registerModule(NoScoreboard)

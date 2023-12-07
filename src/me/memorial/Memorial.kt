@@ -133,12 +133,15 @@ object Memorial {
             HeadsTab()
         }
 
+        /*
         // Register capes service
         try {
             registerCapeService()
         } catch (throwable: Throwable) {
             ClientUtils.getLogger().error("Failed to register cape service", throwable)
         }
+        
+         */
 
         // Disable optifine fastrender
         ClientUtils.disableFastRender()
