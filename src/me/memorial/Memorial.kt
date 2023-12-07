@@ -71,7 +71,6 @@ object Memorial {
         showNotification(title,text, TrayIcon.MessageType.INFO)
     }
 
-
     /**
      * Execute if client will be started
      */

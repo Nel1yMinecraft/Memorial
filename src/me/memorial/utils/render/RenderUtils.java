@@ -415,6 +415,48 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.disableBlend();
     }
 
+    public static void drawRoundedRect3(float left, float top, float right, float bottom, int color, float radius) {
+        drawRoundedRect3((double) left,top,right,bottom,color,radius);
+    }
+
+    // by langya466
+    public static void drawRoundedRect3(double left, double top, double right, double bottom, int color, float radius) {
+        // 绘制矩形主体
+        drawRect(left + radius, top, right - radius, bottom, color);
+        drawRect(left, top + radius, right, bottom - radius, color);
+
+        // 绘制圆角
+        drawCirclePart(left + radius, top + radius, radius, 180, 270, color); // 左上角
+        drawCirclePart(right - radius, top + radius, radius, 270, 360, color); // 右上角
+        drawCirclePart(right - radius, bottom - radius, radius, 0, 90, color); // 右下角
+        drawCirclePart(left + radius, bottom - radius, radius, 90, 180, color); // 左下角
+    }
+
+    public static void drawCirclePart(double x, double y, double radius, int startAngle, int endAngle, int color) {
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        float f3 = (float) (color >> 24 & 255) / 255.0F;
+        float f = (float) (color >> 16 & 255) / 255.0F;
+        float f1 = (float) (color >> 8 & 255) / 255.0F;  // 提取绿色分量
+        float f2 = (float) (color & 255) / 255.0F;
+        GlStateManager.color(f, f1, f2, f3);
+        worldrenderer.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(x, y, 0).endVertex(); // 圆心
+        for (int i = startAngle; i <= endAngle; i++) {
+            double angle = Math.toRadians(i);
+            double xPos = x + Math.cos(angle) * radius;
+            double yPos = y + Math.sin(angle) * radius;
+            worldrenderer.pos(xPos, yPos, 0).endVertex();
+        }
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+
     public static void drawRoundedRect(float x, float y, float width, float height, float radius, Color color) {
         drawRoundedRect(x, y, width, height, radius, color.getRGB());
     }
@@ -978,6 +1020,61 @@ public final class RenderUtils extends MinecraftInstance {
         for(int i = end; i >= start; i -= split) {
             glVertex2d(x + Math.sin(i * Math.PI / 180.0D) * xRadius, y + Math.cos(i * Math.PI / 180.0D) * yRadius);
         }
+    }
+
+    public static void drawRoundedRect2(float paramXStart, float paramYStart, float paramXEnd, float paramYEnd, float radius, int color) {
+        drawRoundedRect(paramXStart, paramYStart, paramXEnd, paramYEnd, radius, color, true);
+    }
+
+    public static void drawRoundedRect(float paramXStart, float paramYStart, float paramXEnd, float paramYEnd, float radius, int color, boolean popPush) {
+        float alpha = (color >> 24 & 0xFF) / 255.0F;
+        float red = (color >> 16 & 0xFF) / 255.0F;
+        float green = (color >> 8 & 0xFF) / 255.0F;
+        float blue = (color & 0xFF) / 255.0F;
+
+        float z = 0;
+        if (paramXStart > paramXEnd) {
+            z = paramXStart;
+            paramXStart = paramXEnd;
+            paramXEnd = z;
+        }
+
+        if (paramYStart > paramYEnd) {
+            z = paramYStart;
+            paramYStart = paramYEnd;
+            paramYEnd = z;
+        }
+
+        double x1 = (paramXStart + radius);
+        double y1 = (paramYStart + radius);
+        double x2 = (paramXEnd - radius);
+        double y2 = (paramYEnd - radius);
+
+        if (popPush) glPushMatrix();
+        glEnable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(1);
+
+        glColor4f(red, green, blue, alpha);
+        glBegin(GL_POLYGON);
+
+        double degree = Math.PI / 180;
+        for (double i = 0; i <= 90; i += 1)
+            glVertex2d(x2 + Math.sin(i * degree) * radius, y2 + Math.cos(i * degree) * radius);
+        for (double i = 90; i <= 180; i += 1)
+            glVertex2d(x2 + Math.sin(i * degree) * radius, y1 + Math.cos(i * degree) * radius);
+        for (double i = 180; i <= 270; i += 1)
+            glVertex2d(x1 + Math.sin(i * degree) * radius, y1 + Math.cos(i * degree) * radius);
+        for (double i = 270; i <= 360; i += 1)
+            glVertex2d(x1 + Math.sin(i * degree) * radius, y2 + Math.cos(i * degree) * radius);
+        glEnd();
+
+        glEnable(GL_TEXTURE_2D);
+        glDisable(GL_BLEND);
+        glDisable(GL_LINE_SMOOTH);
+        if (popPush) glPopMatrix();
     }
 
 }
