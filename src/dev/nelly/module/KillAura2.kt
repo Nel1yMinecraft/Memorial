@@ -139,7 +139,7 @@ class KillAura2 : Module() {
 
         if(swing) {
             mc.thePlayer.swingItem()
-            click += 1
+            ++click
         }
 
         AttackOrder.sendFixedAttack(mc.thePlayer,entity)
