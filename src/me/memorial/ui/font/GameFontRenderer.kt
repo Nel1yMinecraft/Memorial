@@ -2,6 +2,7 @@ package me.memorial.ui.font
 
 import me.memorial.Memorial
 import me.memorial.events.impl.misc.TextEvent
+import me.memorial.module.modules.render.HUD
 import me.memorial.utils.ClassUtils
 import me.memorial.utils.render.ColorUtils
 import me.memorial.utils.render.RenderUtils
@@ -57,12 +58,47 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
         val currY = y - 3F
 
         val rainbow = RainbowFontShader.INSTANCE.isInUse
+        val hud = Memorial.moduleManager[me.memorial.module.modules.client.Fonts::class.java] as me.memorial.module.modules.client.Fonts
+
 
         if (shadow) {
             glUseProgram(0)
 
-            drawText(currentText, x + 1f, currY + 1f, Color(0, 0, 0, 150).rgb, true)
+            when {
+                hud.shadowValue.get().equals("LiquidBounce", ignoreCase = true) -> drawText(
+                    currentText,
+                    x + 1f,
+                    currY + 1f,
+                    Color(0, 0, 0, 150).rgb,
+                    true
+                )
+
+                hud.shadowValue.get().equals("Default", ignoreCase = true) -> drawText(
+                    currentText,
+                    x + 0.5f,
+                    currY + 0.5f,
+                    Color(0, 0, 0, 130).rgb,
+                    true
+                )
+
+                hud.shadowValue.get().equals("Autumn", ignoreCase = true) -> drawText(
+                    currentText,
+                    x + 1f,
+                    currY + 1f,
+                    Color(20, 20, 20, 200).rgb,
+                    true
+                )
+
+                hud.shadowValue.get().equals("Outline", ignoreCase = true) -> {
+                    drawText(currentText, x + 0.5f, currY + 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x - 0.5f, currY - 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x + 0.5f, currY - 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x - 0.5f, currY + 0.5f, Color(0, 0, 0, 130).rgb, true)
+                }
+            }
         }
+
+
 
         return drawText(currentText, x, currY, color, false, rainbow)
     }
@@ -183,6 +219,7 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
             // Color code states
             defaultFont.drawString(text, 0.0, 0.0, currentColor)
         }
+
 
         GlStateManager.disableBlend()
         GlStateManager.translate(-(x - 1.5), -(y + 0.5), 0.0)

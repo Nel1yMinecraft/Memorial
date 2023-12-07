@@ -14,6 +14,7 @@ import java.util.Random;
 
 import me.memorial.Memorial;
 import me.memorial.events.impl.misc.TextEvent;
+import me.memorial.module.modules.client.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -316,16 +317,21 @@ public class FontRenderer implements IResourceManagerReloadListener
 
     public int drawStringWithShadow(String text, float x, float y, int color)
     {
-        return this.drawString(text, x, y, color, true);
+        if(Fonts.Companion.getFont()) {
+            return me.memorial.ui.font.Fonts.font35.drawStringWithShadow(text,x,y,color);
+        } else {
+            return this.drawString(text, x, y, color, true);
+        }
     }
 
     public int drawString(String text, int x, int y, int color)
     {
-        return this.drawString(text, (float)x, (float)y, color, false);
+        return this.drawString(text, (float) x, (float) y, color, false);
     }
 
     public int drawString(String text, float x, float y, int color, boolean dropShadow)
     {
+
         this.enableAlpha();
 
         if (this.blend)
@@ -354,6 +360,7 @@ public class FontRenderer implements IResourceManagerReloadListener
         }
 
         return i;
+
     }
 
     private String bidiReorder(String text)
