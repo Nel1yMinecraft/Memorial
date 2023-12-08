@@ -41,7 +41,6 @@ class ModuleManager : Listenable {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
 
         registerModules(
-            KillSults::class.java,
             AutoArmor::class.java,
             AutoLeave::class.java,
             AutoPot::class.java,
@@ -173,7 +172,8 @@ class ModuleManager : Listenable {
             KillAura2::class.java,
             Arraylist::class.java,
             Fonts::class.java,
-            Text::class.java
+            Text::class.java,
+            KillSults::class.java
         )
 
         registerModule(NoScoreboard)

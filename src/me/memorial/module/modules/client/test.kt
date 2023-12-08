@@ -11,14 +11,10 @@ class test : Module() {
 
 
     override fun onDisable() {
-        Client().state = false
-        ClientUtils.displayChatMessage(state.toString())
         super.onDisable()
     }
 
     override fun onEnable() {
-        Client().state = true
-        ClientUtils.displayChatMessage(state.toString())
         super.onEnable()
     }
 

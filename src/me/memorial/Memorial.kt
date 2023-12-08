@@ -133,7 +133,7 @@ object Memorial {
             HeadsTab()
         }
 
-        /*
+
         // Register capes service
         try {
             registerCapeService()
@@ -141,7 +141,7 @@ object Memorial {
             ClientUtils.getLogger().error("Failed to register cape service", throwable)
         }
         
-         */
+
 
         // Disable optifine fastrender
         ClientUtils.disableFastRender()
@@ -160,9 +160,6 @@ object Memorial {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        me.memorial.modules.ModuleManager.init()
-        moduleManager.registerModule(test::class.java)
 
         // Set is starting status
         isStarting = false
