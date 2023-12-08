@@ -4,8 +4,6 @@ import com.mojang.authlib.GameProfile;
 import java.io.File;
 import java.util.Objects;
 
-import me.memorial.cape.CapeAPI;
-import me.memorial.cape.CapeInfo;
 import me.memorial.module.modules.misc.NameProtect;
 import me.memorial.module.modules.render.NoFOV;
 import net.minecraft.client.Minecraft;
@@ -95,17 +93,8 @@ public abstract class AbstractClientPlayer extends EntityPlayer
         return networkplayerinfo == null ? DefaultPlayerSkin.getDefaultSkin(this.getUniqueID()) : networkplayerinfo.getLocationSkin();
     }
 
-    private CapeInfo capeInfo;
 
     public ResourceLocation getLocationCape() { // CapeAPI
-        //todo optifine披风和LB披风优先级
-        if(CapeAPI.INSTANCE.hasCapeService()){
-            if (capeInfo == null)
-                capeInfo = CapeAPI.INSTANCE.loadCape(getUniqueID());
-
-            if(capeInfo != null && capeInfo.isCapeAvailable())
-                return capeInfo.getResourceLocation();
-        }
         if (!Config.isShowCapes()) {
             return null;
         } else {

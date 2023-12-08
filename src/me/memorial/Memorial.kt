@@ -2,13 +2,11 @@ package me.memorial
 
 import dev.nelly.ui.GuiLogin
 import dev.nelly.viamcp.ViaMCP
-import me.memorial.cape.CapeAPI.registerCapeService
 import me.memorial.command.CommandManager
 import me.memorial.events.impl.misc.ClientShutdownEvent
 import me.memorial.events.EventManager
 import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager
-import me.memorial.module.modules.client.test
 import me.memorial.script.ScriptManager
 import me.memorial.special.AntiForge
 import me.memorial.special.BungeeCordSpoof
@@ -16,7 +14,6 @@ import me.memorial.special.DonatorCape
 import me.memorial.tabs.BlocksTab
 import me.memorial.tabs.ExploitsTab
 import me.memorial.tabs.HeadsTab
-import me.memorial.ui.client.GuiMainMenu
 import me.memorial.ui.client.altmanager.GuiAltManager
 import me.memorial.ui.client.clickgui.ClickGui
 import me.memorial.ui.client.lunar.ui.MainMenu
@@ -137,13 +134,6 @@ object Memorial {
             BlocksTab()
             ExploitsTab()
             HeadsTab()
-        }
-
-        // Register capes service
-        try {
-            registerCapeService()
-        } catch (throwable: Throwable) {
-            ClientUtils.getLogger().error("Failed to register cape service", throwable)
         }
 
 
