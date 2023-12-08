@@ -22,6 +22,7 @@ import me.memorial.ui.client.lunar.ui.MainMenu
 import me.memorial.ui.font.Fonts
 import me.memorial.utils.*
 import me.memorial.utils.ClassUtils.hasForge
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
 import java.awt.SystemTray
@@ -76,6 +77,10 @@ object Memorial {
      */
     fun startClient() {
         isStarting = true
+
+        if (!System.getProperty("os.name").lowercase().contains("win")) {
+            MinecraftInstance.mc.shutdown()
+        }
 
         ClientUtils.getLogger().info("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
 
