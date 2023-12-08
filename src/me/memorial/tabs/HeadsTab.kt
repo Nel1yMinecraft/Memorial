@@ -30,7 +30,7 @@ class HeadsTab : CreativeTabs(-3,"Heads") {
      */
     private fun loadHeads() {
         try {
-            ClientUtils.getLogger().info("Loading heads...")
+            me.memorial.utils.ClientUtils.loginfo("Loading heads...")
 
             val headsConfiguration = JsonParser().parse(HttpUtils.get("${Memorial.CLIENT_CLOUD}/heads.json"))
 
@@ -41,7 +41,7 @@ class HeadsTab : CreativeTabs(-3,"Heads") {
             if (headsConf.get("enabled").asBoolean) {
                 val url = headsConf.get("url").asString
 
-                ClientUtils.getLogger().info("Loading heads from $url...")
+                me.memorial.utils.ClientUtils.loginfo("Loading heads from $url...")
 
                 val headsElement = JsonParser().parse(HttpUtils.get(url))
 
@@ -58,9 +58,9 @@ class HeadsTab : CreativeTabs(-3,"Heads") {
                     heads.add(ItemUtils.createItem("skull 1 3 {display:{Name:\"${headElement.get("name").asString}\"},SkullOwner:{Id:\"${headElement.get("uuid").asString}\",Properties:{textures:[{Value:\"${headElement.get("value").asString}\"}]}}}"))
                 }
 
-                ClientUtils.getLogger().info("Loaded " + heads.size + " heads from HeadDB.")
+                me.memorial.utils.ClientUtils.loginfo("Loaded " + heads.size + " heads from HeadDB.")
             } else
-                ClientUtils.getLogger().info("Heads are disabled.")
+                me.memorial.utils.ClientUtils.loginfo("Heads are disabled.")
         } catch (e: Exception) {
             ClientUtils.getLogger().error("Error while reading heads.", e)
         }

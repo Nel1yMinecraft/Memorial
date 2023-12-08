@@ -33,7 +33,7 @@ class DonatorCape : Listenable, MinecraftInstance() {
             val response = httpClient.execute(request)
             val statusCode = response.statusLine.statusCode
 
-            ClientUtils.getLogger().info(
+            me.memorial.utils.ClientUtils.loginfo(
                     if(statusCode == HttpStatus.SC_NO_CONTENT)
                         "[Donator Cape] Successfully transferred cape to $uuid ($username)"
                     else

@@ -46,6 +46,10 @@ public final class ClientUtils extends MinecraftInstance {
         }
     }
 
+    public static void loginfo(final String text) {
+        logger.info(text);
+    }
+
     public static void sendEncryption(final NetworkManager networkManager, final SecretKey secretKey, final PublicKey publicKey, final S01PacketEncryptionRequest encryptionRequest) {
         networkManager.sendPacket(new C01PacketEncryptionResponse(secretKey, publicKey, encryptionRequest.getVerifyToken()), p_operationComplete_1_ -> networkManager.enableEncryption(secretKey));
     }

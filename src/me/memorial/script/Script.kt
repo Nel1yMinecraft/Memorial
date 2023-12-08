@@ -141,7 +141,7 @@ class Script(val scriptFile: File) : MinecraftInstance() {
      */
     private fun supportLegacyScripts() {
         if (getMagicComment("api_version") != "2") {
-            ClientUtils.getLogger().info("[ScriptAPI] Running script '${scriptFile.name}' with legacy support.")
+            me.memorial.utils.ClientUtils.loginfo("[ScriptAPI] Running script '${scriptFile.name}' with legacy support.")
             val legacyScript = Memorial::class.java.getResource("/assets/minecraft/liquidbounce/scriptapi/legacy.js").readText()
             scriptEngine.eval(legacyScript)
         }

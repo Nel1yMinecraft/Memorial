@@ -44,7 +44,7 @@ public abstract class Shader extends MinecraftInstance {
         ARBShaderObjects.glLinkProgramARB(program);
         ARBShaderObjects.glValidateProgramARB(program);
 
-        ClientUtils.getLogger().info("[Shader] Successfully loaded: " + fragmentShader);
+        me.memorial.utils.ClientUtils.loginfo("[Shader] Successfully loaded: " + fragmentShader);
     }
 
     public void startShader() {

@@ -52,7 +52,7 @@ public class AccountsConfig extends FileConfig {
 
         } catch (JsonSyntaxException | IllegalStateException ex) {
             //When the JSON Parse fail, the client try to load and update the old config
-            ClientUtils.getLogger().info("[FileManager] Try to load old Accounts config...");
+            me.memorial.utils.ClientUtils.loginfo("[FileManager] Try to load old Accounts config...");
             final List<String> accountList = new Gson().fromJson(new BufferedReader(new FileReader(getFile())), List.class);
 
             if (accountList == null)
@@ -70,11 +70,11 @@ public class AccountsConfig extends FileConfig {
                 else
                     accounts.add(new MinecraftAccount(information[0]));
             }
-            ClientUtils.getLogger().info("[FileManager] Loaded old Accounts config...");
+            me.memorial.utils.ClientUtils.loginfo("[FileManager] Loaded old Accounts config...");
 
             //Save the accounts into a new valid JSON file
             saveConfig();
-            ClientUtils.getLogger().info("[FileManager] Saved Accounts to new config...");
+            me.memorial.utils.ClientUtils.loginfo("[FileManager] Saved Accounts to new config...");
         }
 
     }

@@ -13,9 +13,9 @@ object ModuleManager {
 
 
     fun init() {
-        ClientUtils.getLogger().info("[ModuleManager] Loading modules...")
+        me.memorial.utils.ClientUtils.loginfo("[ModuleManager] Loading modules...")
         registerModule(Client())
-        ClientUtils.getLogger().info("[ModuleManager] Modules loaded: ${modules.size}")
+        me.memorial.utils.ClientUtils.loginfo("[ModuleManager] Modules loaded: ${modules.size}")
     }
 
 }

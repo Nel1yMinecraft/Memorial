@@ -47,7 +47,7 @@ public class Fonts {
     public static void loadFonts() {
         long l = System.currentTimeMillis();
 
-        ClientUtils.getLogger().info("Loading Fonts.");
+        me.memorial.utils.ClientUtils.loginfo("Loading Fonts.");
 
         font14 = new GameFontRenderer(getFont("sfui.ttf", 14));
         font18 = new GameFontRenderer(getFont("sfui.ttf", 18));
@@ -64,7 +64,7 @@ public class Fonts {
 
         fontBold180 = new GameFontRenderer(getFont("sfuibold.ttf", 180));
 
-        ClientUtils.getLogger().info("Loaded Fonts. (" + (System.currentTimeMillis() - l) + "ms)");
+        me.memorial.utils.ClientUtils.loginfo("Loaded Fonts. (" + (System.currentTimeMillis() - l) + "ms)");
     }
 
 

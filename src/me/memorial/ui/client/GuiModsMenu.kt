@@ -16,7 +16,7 @@ class GuiModsMenu(private val prevGui: GuiScreen) : GuiScreen() {
 
     override fun actionPerformed(button: GuiButton) {
         when (button.id) {
-            0 -> ClientUtils.getLogger().info("tf")
+            0 -> me.memorial.utils.ClientUtils.loginfo("tf")
             1 -> mc.displayGuiScreen(GuiScripts(this))
             2 -> mc.displayGuiScreen(prevGui)
         }

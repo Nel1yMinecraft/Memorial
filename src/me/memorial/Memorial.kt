@@ -1,5 +1,6 @@
 package me.memorial
 
+import dev.nelly.ui.GuiLogin
 import dev.nelly.viamcp.ViaMCP
 import me.memorial.cape.CapeAPI.registerCapeService
 import me.memorial.command.CommandManager
@@ -82,7 +83,7 @@ object Memorial {
             MinecraftInstance.mc.shutdown()
         }
 
-        ClientUtils.getLogger().info("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
+        ClientUtils.loginfo("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
 
         // Create file manager
         fileManager = FileManager()
@@ -153,10 +154,10 @@ object Memorial {
         GuiAltManager.loadGenerators()
 
         //guiMain = GuiMainMenu()
-        guiMain = MainMenu()
+        guiMain = GuiLogin()
 
         try {
-            ClientUtils.getLogger().info("Starting ViaMCP...")
+            ClientUtils.loginfo("Starting ViaMCP...")
             val viaMCP = ViaMCP.getInstance()
             viaMCP.start()
             viaMCP.initAsyncSlider(100, 100, 110, 20)

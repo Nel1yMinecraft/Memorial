@@ -33,12 +33,12 @@ class Notifications : Module() {
         var animeYTime = System.currentTimeMillis()
         var fadeState = IN
 
-        ClientUtils.getLogger().info("有操作好像不显示")
-         ClientUtils.getLogger().info("有操作好像不显示")
-         ClientUtils.getLogger().info("有操作好像不显示")
-         ClientUtils.getLogger().info("有操作好像不显示")
-         ClientUtils.getLogger().info("有操作好像不显示")
-         ClientUtils.getLogger().info("有操作好像不显示")
+        me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示")
 
 
          // Y-Axis Animation
@@ -87,13 +87,13 @@ class Notifications : Module() {
             END -> TODO()
         }
 
-         ClientUtils.getLogger().info("有操作好像不显示3")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示3")
 
 
          val transX = width - (width * pct) - width
         GL11.glTranslated(transX, transY, 0.0)
 
-         ClientUtils.getLogger().info("有操作好像不显示4")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示4")
 
          RenderUtils.drawRoundedCornerRect(
             0F + 3f,
@@ -103,19 +103,19 @@ class Notifications : Module() {
             2f,
             Color(0, 0, 0, 150).rgb
         )
-         ClientUtils.getLogger().info("有操作好像不显示5")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示5")
 
          // if (state) Color(0x60E092).rgb else Color(0xFF2F2F).rgb
         RenderUtils.drawRoundedCornerRect(3F, 0F, width + 5f, 27f - 5f, 2f, color.rgb)
-         ClientUtils.getLogger().info("有操作好像不显示6")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示6")
 
-         ClientUtils.getLogger().info("有操作好像不显示6 获取文本$text")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示6 获取文本$text")
 
          Fonts.font35.drawCenteredString("Module", 25F, 3F, -1)
-         ClientUtils.getLogger().info("有操作好像不显示7")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示7")
 
          Fonts.font30.drawCenteredString(text,30F, 12F, -1)
-         ClientUtils.getLogger().info("有操作好像不显示8")
+         me.memorial.utils.ClientUtils.loginfo("有操作好像不显示8")
 
      }
 
