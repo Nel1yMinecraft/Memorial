@@ -119,7 +119,7 @@ class ScaFull: Module() {
     private val smartDelay = BoolValue("SmartDelay", true)
 
     // AutoBlock
-    private val autoBlockMode = ListValue("AutoBlock", arrayOf("Spoof", "Switch", "Off"), "Spoof")
+    private val autoBlockMode = ListValue("AutoBlock", arrayOf("Spoof", "Switch","Packet", "Off"), "Spoof")
     private val stayAutoBlock = BoolValue("StayAutoBlock", false)
     private val swingValue = BoolValue("Swing", true)
     private val downValue = BoolValue("Down", false)

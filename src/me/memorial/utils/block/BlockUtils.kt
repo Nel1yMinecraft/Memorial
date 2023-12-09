@@ -1,9 +1,10 @@
 package me.memorial.utils.block
 
 import me.memorial.utils.MinecraftInstance
-import net.minecraft.block.Block
+import net.minecraft.block.*
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.init.Blocks
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.BlockPos
 import net.minecraft.util.MathHelper
@@ -15,6 +16,30 @@ object BlockUtils : MinecraftInstance() {
      */
     @JvmStatic
     fun getBlock(blockPos: BlockPos?): Block? = mc.theWorld?.getBlockState(blockPos)?.block
+
+    @JvmStatic
+    fun isValidBlock(block: Block, placing: Boolean): Boolean {
+        if (block is BlockCarpet
+                || block is BlockSnow
+                || block is BlockContainer
+                || block is BlockBasePressurePlate
+                || block.material.isLiquid
+        ) {
+            return false
+        }
+        return if (placing && (block is BlockSlab
+                        || block is BlockStairs
+                        || block is BlockLadder
+                        || block is BlockStainedGlassPane
+                        || block is BlockWall
+                        || block is BlockWeb
+                        || block is BlockCactus
+                        || block is BlockFalling
+                        || block === Blocks.glass_pane || block === Blocks.iron_bars)
+        ) {
+            false
+        } else block.material.isSolid || !block.isTranslucent || block.isFullBlock
+    }
 
     /**
      * Get material from [blockPos]

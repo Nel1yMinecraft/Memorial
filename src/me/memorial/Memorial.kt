@@ -142,7 +142,7 @@ object Memorial {
         ClientUtils.disableFastRender()
 
         // Load generators
-        GuiAltManager.loadGenerators()
+     //   GuiAltManager.loadGenerators()
 
         //guiMain = GuiMainMenu()
         guiMain = MainMenu()

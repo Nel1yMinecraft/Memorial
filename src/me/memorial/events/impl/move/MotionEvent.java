@@ -15,6 +15,7 @@ public class MotionEvent extends CancellableEvent {
     public double posX;
     public boolean onGround;
     public EventState state;
+
     public MotionEvent(double posX, double posY, double posZ, float yaw, float pitch, boolean onGround, EventState state) {
         this.posX = posX;
         this.posY = posY;
@@ -27,6 +28,7 @@ public class MotionEvent extends CancellableEvent {
 
     public MotionEvent(EventState state) {
         this.state = state;
+
     }
     public void setRotations(float yaw, float pitch) {
         this.yaw = yaw;
