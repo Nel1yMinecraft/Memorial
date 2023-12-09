@@ -144,7 +144,7 @@ object Memorial {
         GuiAltManager.loadGenerators()
 
         //guiMain = GuiMainMenu()
-        guiMain = GuiLogin()
+        guiMain = MainMenu()
 
         try {
             ClientUtils.loginfo("Starting ViaMCP...")

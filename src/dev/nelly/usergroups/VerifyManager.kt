@@ -23,7 +23,7 @@ object VerifyManager {
 
    // 获取Tokens
     fun getTokens(uuid: String = getUUID()): String {
-        return CaesarCipher.encrypt(uuid+InetAddress.getLocalHost()+getHWID())
+        return "Memorial-$uuid-"+CaesarCipher.encrypt("${InetAddress.getLocalHost()}-${getHWID()}")
     }
 
     // 获取秘钥
@@ -58,37 +58,19 @@ object VerifyManager {
         }
     }
 
-    //发送Get请求
-    fun sendGetRequest(url: String): String {
-        var g = ""
-        try {
-            g = HttpUtils.get(url)
-        } catch (e : Exception) {
-            e.printStackTrace()
-        }
-       return g
-    }
-
-    fun verify(): String {
-        var v = ""
-        if (sendGetRequest("https://xn--lmq31r56mnp1c.cc/${getUUID()}.txt").contains(getTokens())) {
-            v = "ililil"
-        }
-        if (!sendGetRequest("https://xn--lmq31r56mnp1c.cc/${getUUID()}.txt").contains(getTokens())) {
-            v = "ilililil"
-        }
-        return v
-    }
-
     fun verify2() {
-        if (verify().contains("ililil")) {
-            Memorial.showNotification("Memorial", "Hello ${getPermissions()}")
-            MinecraftInstance.mc.displayGuiScreen(MainMenu())
-        } else {
-            Memorial.showNotification("Memorial", " UUID: ${getUUID()} -- Tokens Copying")
-            Toolkit.getDefaultToolkit().systemClipboard.setContents(StringSelection(getTokens()), null)
-
+        try {
+            if (HttpUtils.get("https://xn--lmq31r56mnp1c.cc/user.dat.txt").contains(getTokens())) {
+                Memorial.showNotification("Memorial", "Hello ${getPermissions()}")
+                MinecraftInstance.mc.displayGuiScreen(MainMenu())
+            } else {
+                Memorial.showNotification("Memorial", " Username: ${getUUID()} -- Tokens Copying")
+                Toolkit.getDefaultToolkit().systemClipboard.setContents(StringSelection(getTokens()), null)
+            }
+        } catch (e : Exception) {
+         // e.printStackTrace()
         }
+
     }
 
 

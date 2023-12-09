@@ -7,6 +7,7 @@ import me.memorial.utils.render.RenderUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.client.renderer.texture.DynamicTexture
+import org.lwjgl.opengl.Display
 import java.awt.Color
 
 class GuiLogin : GuiScreen() {
@@ -22,7 +23,7 @@ class GuiLogin : GuiScreen() {
 
         // 创建输入框
         uuidInput = GuiTextField(0, font, width / 2 - 75, height / 2 - 10, 150, 20)
-        uuidInput.setMaxStringLength(128) // 设置最大字符长度
+        uuidInput.setMaxStringLength(20) // 设置最大字符长度
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
@@ -61,6 +62,7 @@ class GuiLogin : GuiScreen() {
         ) {
             // 点击按钮
             VerifyManager.verify2()
+            Display.setTitle("Memorial | ${VerifyManager.getPermissions()}[${VerifyManager.getUUID()}]")
         }
     }
 
