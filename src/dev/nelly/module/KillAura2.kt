@@ -28,7 +28,7 @@ import net.minecraft.util.EnumFacing
 class KillAura2 : Module() {
 
     //攻击距离
-    val rangeValue = DoubleValue("Range",3.0,3.0,0.1)
+    val rangeValue = DoubleValue("Range",3.0,8.0,0.1)
 
     //挥手
     private val swingValue = BoolValue("Swing",true)
