@@ -3,6 +3,7 @@ package dev.nelly.module
 import dev.nelly.viamcp.utils.AttackOrder
 import me.memorial.Memorial
 import me.memorial.events.EventTarget
+import me.memorial.events.impl.move.StrafeEvent
 import me.memorial.events.impl.player.AttackEvent
 import me.memorial.events.impl.player.UpdateEvent
 import me.memorial.module.Module
@@ -24,11 +25,12 @@ import net.minecraft.network.play.client.C07PacketPlayerDigging
 import net.minecraft.util.BlockPos
 import net.minecraft.util.EnumFacing
 
+
 @ModuleInfo("KillAura2","Nel1y",ModuleCategory.COMBAT)
 class KillAura2 : Module() {
 
     //攻击距离
-    val rangeValue = DoubleValue("Range",3.0,8.0,0.1)
+    val rangeValue = DoubleValue("Range",3.0,0.1,8.0)
 
     //挥手
     private val swingValue = BoolValue("Swing",true)
@@ -52,10 +54,19 @@ class KillAura2 : Module() {
         }
     }
 
+    private val movefixValue = BoolValue("MoveFix",true)
+
 
     var target: EntityLivingBase? = null
     var click = 0
     var blocking = false
+
+    @EventTarget
+    fun onStrafe(event: StrafeEvent) {
+        if (movefixValue.get() && target != null) {
+           // event.setYaw(yaw)
+        }
+    }
 
     @EventTarget
     fun onUpdate(event : UpdateEvent) {
@@ -74,19 +85,20 @@ class KillAura2 : Module() {
          */
 
 
-        for (entity in mc.theWorld.loadedEntityList) {
-
-            if (entity is EntityLivingBase && isEnemy(entity) && mc.thePlayer.getDistanceToEntityBox(entity) <= rangeValue.get()) {
+        mc.theWorld.loadedEntityList
+            .asSequence()
+            .filterIsInstance<EntityLivingBase>()
+            .filter { isEnemy(it) && mc.thePlayer.getDistanceToEntityBox(it) <= rangeValue.get() }
+            .forEach {
                 setRotation(
                     Rotation(
-                        (RotationUtils.getAngles(entity).yaw + Math.random() * 4f - 4f / 2).toFloat(),
-                        (RotationUtils.getAngles(entity).pitch + Math.random() * 4f - 4f / 2).toFloat()
+                        (RotationUtils.getAngles(it).yaw + Math.random() * 4f - 4f / 2).toFloat(),
+                        (RotationUtils.getAngles(it).pitch + Math.random() * 4f - 4f / 2).toFloat()
                     )
                 )
-                attackEntity(entity)
-
+                attackEntity(it)
             }
-        }
+
 
     }
 
