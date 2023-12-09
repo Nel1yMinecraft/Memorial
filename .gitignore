@@ -9,3 +9,4 @@ run/*
 .idea/workspace.xml
 *.dll
 .idea/misc.xml
+src.assets.*
