@@ -34,6 +34,19 @@ public final class InventoryUtils extends MinecraftInstance implements Listenabl
         return -1;
     }
 
+    public static void swap(int slot, int hSlot) {
+        mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId, slot, hSlot, 2, mc.thePlayer);
+    }
+
+
+    public static void click(int slot, int mouseButton, boolean shiftClick) {
+        mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId, slot, mouseButton, shiftClick ? 1 : 0, mc.thePlayer);
+    }
+
+    public static void drop(int slot) {
+        mc.playerController.windowClick(0, slot, 1, 4, mc.thePlayer);
+    }
+
     public static boolean hasSpaceHotbar() {
         for(int i = 36; i < 45; i++) {
             final ItemStack itemStack = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
