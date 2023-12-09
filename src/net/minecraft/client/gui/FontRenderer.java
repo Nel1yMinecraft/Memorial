@@ -3,6 +3,8 @@ package net.minecraft.client.gui;
 import com.ibm.icu.text.ArabicShaping;
 import com.ibm.icu.text.ArabicShapingException;
 import com.ibm.icu.text.Bidi;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +14,11 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 
+import fdpclient.utils.shadowRenderUtils;
 import me.memorial.Memorial;
 import me.memorial.events.impl.misc.TextEvent;
 import me.memorial.module.modules.client.Fonts;
+import me.memorial.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -327,6 +331,16 @@ public class FontRenderer implements IResourceManagerReloadListener
     public int drawString(String text, int x, int y, int color)
     {
         return this.drawString(text, (float) x, (float) y, color, false);
+    }
+    public int drawString(String text, float x, float y, int color,boolean rect,float height,boolean shadow,float radius) {
+        if (rect) {
+            RenderUtils.drawRoundedRect(x -2, y -2F, getStringWidth(text)+2F, height,radius, new Color(0,0,0,150));
+        }
+        if(shadow) {
+            shadowRenderUtils.drawGlowWithCustomAlpha(x -2, y -2F, getStringWidth(text)+2F, height,255F);
+        }
+        drawString(text, x, y, color, false);
+        return color;
     }
 
     public int drawString(String text, float x, float y, int color, boolean dropShadow)

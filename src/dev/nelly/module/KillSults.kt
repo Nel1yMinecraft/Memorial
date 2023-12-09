@@ -17,7 +17,7 @@ class KillSults : Module() {
     @EventTarget
     fun onUpdate(event: UpdateEvent) {
         if (target.health <= 0) {
-            kill += 1
+            ++kill
         }
     }
 

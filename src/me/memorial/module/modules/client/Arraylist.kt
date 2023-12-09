@@ -17,10 +17,10 @@ import java.awt.Color
 
 @ModuleInfo("Arraylist","test",ModuleCategory.CLIENT)
 class Arraylist : Module() {
-    val fontValue = FontValue("Fonts",Fonts.font35)
-    val shadowtext = BoolValue("ShadowText",true)
+    val fontValue = FontValue("Fonts",Fonts.MEDIUM_35)
     val rect = BoolValue("Rect",true)
-    val rectaplha = IntegerValue("RectAlpha",150,0,255)
+    val shadow = BoolValue("Shaddow",false)
+    val radius = FloatValue("Radius",6F,0F,10F)
     val X = FloatValue("X",2F,0F,200F)
     var yPosition = 50F
     @get:Getter
@@ -42,11 +42,7 @@ class Arraylist : Module() {
             height = font.getStringWidth(displayString).toFloat()
             x = X.get()
             y = yPosition
-            font.drawString(displayString, x, y, -1, shadowtext.get())
-
-            if(rect.get()) {
-                RenderUtils.drawRoundedRect(x, y, witdh, height,2F, Color(0, 0, 0, rectaplha.get()))
-            }
+            font.drawString(displayString, x, y, -1,rect.get(),font.FONT_HEIGHT.toFloat(),shadow.get(),radius.get())
 
             yPosition + font.FONT_HEIGHT + 2F
         }
