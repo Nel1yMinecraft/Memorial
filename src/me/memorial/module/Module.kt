@@ -7,6 +7,7 @@ import me.memorial.ui.font.Fonts
 import me.memorial.utils.ClientUtils
 import me.memorial.utils.MinecraftInstance
 import me.memorial.utils.render.RenderUtils
+import me.memorial.utils.timer.MSTimer
 import me.memorial.value.Value
 import org.lwjgl.input.Keyboard
 import java.awt.Color

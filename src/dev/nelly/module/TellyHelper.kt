@@ -17,12 +17,14 @@ class TellyHelper : Module() {
 
     val mode = ListValue("Mode", arrayOf("Scaffold","ScaFull"),"ScaFull")
     val autojump = BoolValue("AutoJump",true)
+    val antisprint = BoolValue("AntiSprint",true)
 
     @EventTarget
     fun onMotion(event : MotionEvent) {
 
-        if(autojump.get() && MovementUtils.isMoving() && mc.thePlayer.onGround && !mc.thePlayer.isSneaking && !mc.gameSettings.keyBindSneak.isKeyDown && !mc.gameSettings.keyBindJump.isKeyDown) {
+        if(autojump.get() && MovementUtils.isMoving() && mc.thePlayer.onGround && !mc.thePlayer.isSneaking && !mc.gameSettings.keyBindSneak.isKeyDown) {
             mc.thePlayer.jump()
+            mc.thePlayer.isSprinting = true
         }
 
         setscaffold(!mc.thePlayer.onGround)
@@ -37,8 +39,13 @@ class TellyHelper : Module() {
 
 
     fun setscaffold(state : Boolean) {
+        if(antisprint.get()) {
+            mc.thePlayer.isSprinting = !state
+        }
+
         if(mode.get().equals("ScaFull")) {
             Memorial.moduleManager.getModule(ScaFull::class.java)!!.state = state
+
         }
 
         if(mode.get().equals("Scaffold")) {

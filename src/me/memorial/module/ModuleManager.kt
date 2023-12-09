@@ -38,7 +38,7 @@ class ModuleManager : Listenable {
      * Register all modules
      */
     fun registerModules() {
-        me.memorial.utils.ClientUtils.loginfo("[ModuleManager] Loading modules...")
+        ClientUtils.loginfo("[ModuleManager] Loading modules...")
 
         registerModules(
             AutoArmor::class.java,
@@ -173,13 +173,14 @@ class ModuleManager : Listenable {
             Arraylist::class.java,
             Fonts::class.java,
             Text::class.java,
-            KillSults::class.java
+            KillSults::class.java,
+            GameInfo::class.java
         )
 
         registerModule(NoScoreboard)
         registerModule(Fucker)
 
-        me.memorial.utils.ClientUtils.loginfo("[ModuleManager] Loaded ${modules.size} modules.")
+        ClientUtils.loginfo("[ModuleManager] Loaded ${modules.size} modules.")
 
     }
 

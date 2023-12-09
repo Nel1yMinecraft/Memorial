@@ -7,6 +7,7 @@ import me.memorial.events.impl.misc.ClientShutdownEvent
 import me.memorial.events.EventManager
 import me.memorial.file.FileManager
 import me.memorial.module.ModuleManager
+import me.memorial.module.modules.client.test
 import me.memorial.script.ScriptManager
 import me.memorial.special.AntiForge
 import me.memorial.special.BungeeCordSpoof
@@ -154,6 +155,9 @@ object Memorial {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        me.memorial.modules.ModuleManager.init()
+        moduleManager.registerModules(test::class.java)
 
         // Set is starting status
         isStarting = false
