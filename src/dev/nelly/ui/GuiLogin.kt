@@ -1,7 +1,6 @@
 package dev.nelly.ui
 
-import me.memorial.Memorial
-import me.memorial.ui.client.lunar.ui.MainMenu
+import dev.nelly.usergroups.VerifyManager
 import me.memorial.ui.font.Fonts
 import me.memorial.ui.font.GameFontRenderer
 import me.memorial.utils.render.RenderUtils
@@ -11,8 +10,12 @@ import net.minecraft.client.renderer.texture.DynamicTexture
 import java.awt.Color
 
 class GuiLogin : GuiScreen() {
-    private lateinit var uuidInput: GuiTextField
     private val font: GameFontRenderer = Fonts.font35
+
+    companion object {
+      lateinit var uuidInput: GuiTextField
+    }
+
 
     override fun initGui() {
         super.initGui()
@@ -57,8 +60,7 @@ class GuiLogin : GuiScreen() {
             mouseY >= height / 2F + 20F && mouseY <= height / 2F + 40F
         ) {
             // 点击按钮
-            Memorial.showNotification("Memorial", "验证成功")
-            mc.displayGuiScreen(MainMenu())
+            VerifyManager.verify2()
         }
     }
 
