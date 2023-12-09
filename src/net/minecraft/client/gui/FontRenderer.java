@@ -319,13 +319,8 @@ public class FontRenderer implements IResourceManagerReloadListener
         }
     }
 
-    public int drawStringWithShadow(String text, float x, float y, int color)
-    {
-        if(Fonts.Companion.getFont()) {
-            return me.memorial.ui.font.Fonts.font35.drawStringWithShadow(text,x,y,color);
-        } else {
-            return this.drawString(text, x, y, color, true);
-        }
+    public int drawStringWithShadow(String text, float x, float y, int color) {
+        return this.drawString(text, x, y, color, true);
     }
 
     public int drawString(String text, int x, int y, int color)
@@ -343,13 +338,16 @@ public class FontRenderer implements IResourceManagerReloadListener
         return color;
     }
 
-    public int drawString(String text, float x, float y, int color, boolean dropShadow)
-    {
+    // 平滑+抗锯齿
+    public int drawString(String text, float x, float y, int color, boolean dropShadow) {
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glEnable(GL11.GL_POLYGON_SMOOTH);
+        GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+        GL11.glHint(GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_NICEST);
 
         this.enableAlpha();
 
-        if (this.blend)
-        {
+        if (this.blend) {
             GlStateManager.getBlendState(this.oldBlendState);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(770, 771);
@@ -358,24 +356,23 @@ public class FontRenderer implements IResourceManagerReloadListener
         this.resetStyles();
         int i;
 
-        if (dropShadow)
-        {
+        if (dropShadow) {
             i = this.renderString(text, x + 1.0F, y + 1.0F, color, true);
             i = Math.max(i, this.renderString(text, x, y, color, false));
-        }
-        else
-        {
+        } else {
             i = this.renderString(text, x, y, color, false);
         }
 
-        if (this.blend)
-        {
+        if (this.blend) {
             GlStateManager.setBlendState(this.oldBlendState);
         }
 
-        return i;
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glDisable(GL11.GL_POLYGON_SMOOTH);
 
+        return i;
     }
+
 
     private String bidiReorder(String text)
     {

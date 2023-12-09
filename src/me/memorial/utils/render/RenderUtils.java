@@ -1077,4 +1077,75 @@ public final class RenderUtils extends MinecraftInstance {
         if (popPush) glPopMatrix();
     }
 
+    // nelly
+    public static void drawRect(float x, float y, float witdh, float height, float radius, Color color) {
+        drawRect((int) x, y, witdh, height, radius, color);
+    }
+
+    public static void drawRect(int left, int top, int right, int bottom, int radius, Color color) {
+        if (left < right) {
+            int i = left;
+            left = right;
+            right = i;
+        }
+
+        if (top < bottom) {
+            int j = top;
+            top = bottom;
+            bottom = j;
+        }
+
+        float alpha = (float) (color.getRGB() >> 24 & 255) / 255.0F;
+        float red = (float) (color.getRGB() >> 16 & 255) / 255.0F;
+        float green = (float) (color.getRGB() >> 8 & 255) / 255.0F;
+        float blue = (float) (color.getBlue() & 255) / 255.0F;
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.color(red, green, blue, alpha);
+
+        // Top-left corner
+        drawQuarterCircle(worldrenderer, left + radius, top + radius, radius, 180, 270);
+
+        // Top-right corner
+        drawQuarterCircle(worldrenderer, right - radius, top + radius, radius, 270, 360);
+
+        // Bottom-right corner
+        drawQuarterCircle(worldrenderer, right - radius, bottom - radius, radius, 0, 90);
+
+        // Bottom-left corner
+        drawQuarterCircle(worldrenderer, left + radius, bottom - radius, radius, 90, 180);
+
+        // Top and bottom edges
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(left + radius, top, 0.0D).endVertex();
+        worldrenderer.pos(right - radius, top, 0.0D).endVertex();
+        worldrenderer.pos(right - radius, bottom, 0.0D).endVertex();
+        worldrenderer.pos(left + radius, bottom, 0.0D).endVertex();
+        tessellator.draw();
+
+        // Left and right edges
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos(left, top + radius, 0.0D).endVertex();
+        worldrenderer.pos(right, top + radius, 0.0D).endVertex();
+        worldrenderer.pos(right, bottom - radius, 0.0D).endVertex();
+        worldrenderer.pos(left, bottom - radius, 0.0D).endVertex();
+        tessellator.draw();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    private static void drawQuarterCircle(WorldRenderer worldrenderer, int x, int y, int radius, int startAngle, int endAngle) {
+        for (int angle = startAngle; angle <= endAngle; angle++) {
+            double xPos = x + Math.sin(Math.toRadians(angle)) * radius;
+            double yPos = y + Math.cos(Math.toRadians(angle)) * radius;
+            worldrenderer.pos(xPos, yPos, 0.0D).endVertex();
+        }
+    }
+
 }

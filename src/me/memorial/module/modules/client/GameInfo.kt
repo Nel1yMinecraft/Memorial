@@ -16,12 +16,12 @@ import java.awt.Color
 @ModuleInfo("GameInfo","Memorial",ModuleCategory.CLIENT)
 class GameInfo: Module() {
 
-    val mode = ListValue("ModeValue", arrayOf("Normal","String"),"Normal")
-    val X = FloatValue("X",2F,0F,500F)
-    val Y = FloatValue("Y",2F,0F,500F)
-    val radius = FloatValue("Radius",2F,0F,10F)
-    val aplha = IntegerValue("RectAplha",150,0,255)
-    val font = FontValue("Fonts",Fonts.MEDIUM_35)
+    val mode = ListValue("ModeValue", arrayOf("Normal", "String"), "Normal")
+    val X = FloatValue("X", 2F, 0F, 500F)
+    val Y = FloatValue("Y", 2F, 0F, 500F)
+    val radius = FloatValue("Radius", 2F, 0F, 10F)
+    val aplha = IntegerValue("RectAplha", 150, 0, 255)
+    val font = FontValue("Fonts", Fonts.MEDIUM_35)
     val x = X.get()
     val y = Y.get()
     var witdh = 0F
@@ -29,14 +29,14 @@ class GameInfo: Module() {
     val fonts = font.get()
 
     @EventTarget
-    fun onRender2D(event : Render2DEvent) {
+    fun onRender2D(event: Render2DEvent) {
 
-            if(mode.get().equals("Nomral"))  {
-                witdh = 30F
-                height = 40F
-                RenderUtils.drawRoundedRect(x,y,witdh,height,radius.get(), Color(0,0,0,aplha.get()))
-            }
+        if (mode.get().contains("Normal")) {
+            witdh = 30F
+            height = 40F
+            RenderUtils.drawRoundedRect(x, y, witdh, height, radius.get(), Color(0, 0, 0, aplha.get()))
         }
+    }
 
 
 }

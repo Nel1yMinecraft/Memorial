@@ -174,7 +174,8 @@ class ModuleManager : Listenable {
             Fonts::class.java,
             Text::class.java,
             KillSults::class.java,
-            GameInfo::class.java
+            GameInfo::class.java,
+            Stuck::class.java
         )
 
         registerModule(NoScoreboard)
