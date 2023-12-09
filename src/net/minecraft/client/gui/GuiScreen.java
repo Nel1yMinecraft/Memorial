@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import dev.nelly.InputFix;
 import me.memorial.Memorial;
 import me.memorial.module.modules.misc.ComponentOnHover;
 import me.memorial.module.modules.render.HUD;
@@ -563,7 +564,7 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
     public void handleKeyboardInput() throws IOException
     {
-        if (Keyboard.getEventKeyState())
+        if (InputFix.INSTANCE.inputPatch())
         {
             this.keyTyped(Keyboard.getEventCharacter(), Keyboard.getEventKey());
         }

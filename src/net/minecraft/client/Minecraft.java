@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
+import dev.nelly.InputFix;
 import dev.nelly.usergroups.VerifyManager;
 import dev.nelly.viamcp.utils.AttackOrder;
 import me.memorial.events.*;
@@ -1806,9 +1807,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             while (Keyboard.next())
             {
                 int k = Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey();
-                KeyBinding.setKeyBindState(k, Keyboard.getEventKeyState());
+                KeyBinding.setKeyBindState(k, InputFix.INSTANCE.inputPatch());
 
-                if (Keyboard.getEventKeyState())
+                if (InputFix.INSTANCE.inputPatch())
                 {
                     KeyBinding.onTick(k);
                 }
@@ -1832,7 +1833,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
                 this.dispatchKeypresses();
 
-                if (Keyboard.getEventKeyState()) {
+                if (InputFix.INSTANCE.inputPatch()) {
                     if (k == 62 && this.entityRenderer != null) {
                         this.entityRenderer.switchUseShader();
                     }
@@ -2971,7 +2972,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         {
             if (!(this.currentScreen instanceof GuiControls) || ((GuiControls)this.currentScreen).time <= getSystemTime() - 20L)
             {
-                if (Keyboard.getEventKeyState())
+                if (InputFix.INSTANCE.inputPatch())
                 {
                     if (i == this.gameSettings.keyBindStreamStartStop.getKeyCode())
                     {
