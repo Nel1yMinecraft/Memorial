@@ -11,7 +11,9 @@ import dev.nelly.hyt.Protocol
 import dev.nelly.module.*
 import dev.nelly.sk1d.module.AntiFakePlayer
 import dev.nelly.sk1d.module.AutoSkyWars
+import dev.nelly.module.ClickSounds
 import dev.nelly.sk1d.module.JumpCircle
+import dev.nelly.skin.CustomSkin
 import me.memorial.module.modules.client.*
 import me.memorial.module.modules.client.Text
 import me.memorial.module.modules.combat.*
@@ -175,7 +177,9 @@ class ModuleManager : Listenable {
             Text::class.java,
             KillSults::class.java,
             GameInfo::class.java,
-            Stuck::class.java
+            Stuck::class.java,
+            ClickSounds::class.java,
+            CustomSkin::class.java
         )
 
         registerModule(NoScoreboard)

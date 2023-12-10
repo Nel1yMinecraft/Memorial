@@ -54,7 +54,7 @@ public class Protocol extends Module {
                         this.method_6786(packetBuffer2);
                         mc.thePlayer.sendQueue.addToSendQueue(new C17PacketCustomPayload("germmod-netease", packetBuffer2));
                         Yaml yaml = new Yaml();
-                        Map<String, Object> objectMap = (Map)yaml.load(field_955);
+                        Map objectMap = yaml.load(field_955);
                         System.out.println(field_955);
                         if (objectMap != null) {
                             PacketBuffer packetBuffer3 = new PacketBuffer(Unpooled.buffer().writeInt(13));
@@ -93,11 +93,11 @@ public class Protocol extends Module {
             return "";
         } else {
             StringBuilder sb = new StringBuilder();
-            Map<String, Object> newMap = (Map)objectMap.get(field_3285);
+            Map newMap = (Map)objectMap.get(field_3285);
             if (newMap == null) {
                 return "";
             } else {
-                Map<String, Object> newMap2 = null;
+                Map newMap2 = null;
                 String omg = "";
 
                 String s;
@@ -107,7 +107,7 @@ public class Protocol extends Module {
                 }
 
                 sb.append(omg).append("$");
-                Map<String, Object> scrollableParts = (Map)newMap2.get("scrollableParts");
+                Map scrollableParts = (Map)newMap2.get("scrollableParts");
                 Map<String, Object> newMap4 = null;
                 Iterator var8 = scrollableParts.keySet().iterator();
                 if (var8.hasNext()) {

@@ -9,7 +9,7 @@ import me.memorial.utils.ClientUtils
 import net.minecraft.client.gui.FontRenderer
 import java.util.*
 
-abstract class Value<T>(val name: String, protected var value: T, var canDisplay: () -> Boolean) {
+abstract class Value<T>(val name: String, var value: T, var canDisplay: () -> Boolean) {
 
     val displayable: Boolean
         get() = displayableFunc()
